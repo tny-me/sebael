@@ -667,187 +667,194 @@
   .audio-card:nth-child(8) { animation-delay: 0.4s; }
   .audio-card:nth-child(n+9) { animation-delay: 0.45s; }
 
-  /* ── FULL PLAYER ─────────────────── */
+  /* ── FULL PLAYER (móvil) ────────── */
+  @media (min-width: 768px) { .player-full { display: none !important; } }
+
   .player-full {
     position: fixed;
     inset: 0;
     z-index: 400;
-    background: var(--bg);
-    display: flex;
-    flex-direction: column;
+    overflow: hidden;
     transform: translateY(100%);
     transition: transform 0.44s cubic-bezier(0.32, 0.72, 0, 1);
-    padding-top: max(env(safe-area-inset-top), 16px);
-    padding-bottom: max(env(safe-area-inset-bottom), 16px);
-    overflow: hidden;
   }
   .player-full.open { transform: translateY(0); }
 
-  .pf-bg {
+  /* Imagen de fondo full-screen */
+  .pf-bg-img {
     position: absolute;
     inset: 0;
-    height: 55%;
-    pointer-events: none;
-    opacity: 0.18;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
     transition: background 0.4s;
   }
 
-  .pf-header {
+  /* Gradiente: transparente arriba → oscuro abajo */
+  .pf-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.08) 0%,
+      rgba(0,0,0,0.10) 38%,
+      rgba(0,0,0,0.62) 58%,
+      rgba(0,0,0,0.82) 100%
+    );
+  }
+
+  /* Blur adicional solo en el tercio inferior */
+  .pf-overlay::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 0 0;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* Contenido sobre todo */
+  .pf-content {
     position: relative;
     z-index: 1;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 20px 14px;
+    flex-direction: column;
+    height: 100%;
+    padding-top: max(env(safe-area-inset-top), 18px);
+    padding-bottom: max(env(safe-area-inset-bottom), 24px);
   }
 
-  .pf-down-btn {
-    width: 38px;
-    height: 38px;
+  .pf-header {
+    padding: 8px 20px;
+  }
+
+  .pf-back-btn {
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--text-muted);
+    color: white;
   }
-  .pf-down-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .pf-back-btn svg { width: 20px; height: 20px; fill: none; stroke: white; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
-  .pf-header-label {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
+  .pf-spacer { flex: 1; }
 
-  .pf-cover-wrap {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 36px;
-    min-height: 0;
-  }
-
-  .pf-cover-art {
-    width: 100%;
-    max-width: min(72vw, 340px);
-    aspect-ratio: 1;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-    background: var(--surface2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-  }
-  .pf-cover-art img { width: 100%; height: 100%; object-fit: cover; }
-
-  .pf-info {
-    position: relative;
-    z-index: 1;
-    padding: 22px 32px 4px;
+  /* Zona inferior con controles */
+  .pf-bottom {
+    padding: 0 28px 4px;
   }
 
   .pf-title {
     font-family: var(--font-serif);
-    font-size: 24px;
+    font-size: 26px;
     font-weight: 700;
-    color: var(--text);
+    color: #fff;
     line-height: 1.15;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
   }
 
   .pf-book {
     font-size: 13px;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.65);
     font-weight: 400;
-    letter-spacing: 0.04em;
+    margin-bottom: 28px;
   }
 
-  .pf-progress-wrap {
+  /* Slider con thumb circular */
+  .pf-slider-wrap { margin-bottom: 8px; }
+
+  .pf-slider {
     position: relative;
-    z-index: 1;
-    padding: 20px 32px 6px;
-  }
-
-  .pf-progress-bar {
     width: 100%;
-    height: 4px;
-    background: var(--surface3);
-    border-radius: 4px;
+    height: 3px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
     cursor: pointer;
-    margin-bottom: 8px;
-    position: relative;
   }
 
-  .pf-progress-fill {
+  .pf-slider-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--gold-dim), var(--gold));
-    border-radius: 4px;
+    background: #fff;
+    border-radius: 3px;
     width: 0%;
+    position: relative;
     pointer-events: none;
     transition: width 0.3s linear;
+  }
+
+  .pf-slider-fill::after {
+    content: '';
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
   }
 
   .pf-times {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
-    color: var(--text-dim);
+    color: rgba(255,255,255,0.55);
+    margin-top: 14px;
+    margin-bottom: 28px;
     font-variant-numeric: tabular-nums;
   }
 
   .pf-controls {
-    position: relative;
-    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 28px;
-    padding: 18px 32px 20px;
+    margin-bottom: 12px;
   }
 
   .pf-ctrl-skip {
-    width: 50px;
-    height: 50px;
+    width: 56px;
+    height: 56px;
     border-radius: 50%;
-    background: transparent;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: var(--text-muted);
+    color: white;
   }
   .pf-ctrl-skip svg { width: 26px; height: 26px; fill: currentColor; }
 
   .pf-ctrl-play {
-    width: 68px;
-    height: 68px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
-    background: var(--gold);
+    background: #fff;
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    color: #FAF7EF;
-    box-shadow: 0 8px 28px rgba(155,111,47,0.38);
-    transition: transform 0.15s, background 0.2s;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+    transition: transform 0.12s;
   }
-  .pf-ctrl-play:active { transform: scale(0.95); }
-  .pf-ctrl-play svg { width: 26px; height: 26px; fill: currentColor; }
+  .pf-ctrl-play:active { transform: scale(0.94); }
+  .pf-ctrl-play svg { width: 28px; height: 28px; fill: #1C1810; }
   .pf-ctrl-play.paused svg.pause-icon { display: none; }
   .pf-ctrl-play:not(.paused) svg.play-icon { display: none; }
 
-  /* mini player info area clickable */
+  /* tap zone mini player */
   .player-tap-zone { cursor: pointer; display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; overflow: hidden; }
 </style>
 </head>
@@ -956,43 +963,42 @@
   </div>
 </div>
 
-<!-- FULL PLAYER -->
+<!-- FULL PLAYER (solo móvil) -->
 <div class="player-full" id="playerFull">
-  <div class="pf-bg" id="pfBg"></div>
-  <div class="pf-header">
-    <button class="pf-down-btn" onclick="closeFullPlayer()" aria-label="Minimizar">
-      <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
-    </button>
-    <span class="pf-header-label">Reproduciendo</span>
-    <div style="width:38px"></div>
-  </div>
-  <div class="pf-cover-wrap">
-    <div class="pf-cover-art" id="pfCoverArt"></div>
-  </div>
-  <div class="pf-info">
-    <div class="pf-title" id="pfTitle">—</div>
-    <div class="pf-book" id="pfBook"></div>
-  </div>
-  <div class="pf-progress-wrap">
-    <div class="pf-progress-bar" id="pfProgressBar">
-      <div class="pf-progress-fill" id="pfProgressFill"></div>
+  <div class="pf-bg-img" id="pfBgImg"></div>
+  <div class="pf-overlay"></div>
+  <div class="pf-content">
+    <div class="pf-header">
+      <button class="pf-back-btn" onclick="closeFullPlayer()" aria-label="Minimizar">
+        <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
     </div>
-    <div class="pf-times">
-      <span id="pfTimeCurrent">0:00</span>
-      <span id="pfTimeDuration">—</span>
+    <div class="pf-spacer"></div>
+    <div class="pf-bottom">
+      <div class="pf-title" id="pfTitle">—</div>
+      <div class="pf-book" id="pfBook"></div>
+      <div class="pf-slider-wrap">
+        <div class="pf-slider" id="pfSlider">
+          <div class="pf-slider-fill" id="pfSliderFill"></div>
+        </div>
+      </div>
+      <div class="pf-times">
+        <span id="pfTimeCurrent">0:00</span>
+        <span id="pfTimeDuration">—</span>
+      </div>
+      <div class="pf-controls">
+        <button class="pf-ctrl-skip" onclick="skipBack()">
+          <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+        </button>
+        <button class="pf-ctrl-play paused" id="pfPlayBtn" onclick="togglePlay()">
+          <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button class="pf-ctrl-skip" onclick="skipForward()">
+          <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="pf-controls">
-    <button class="pf-ctrl-skip" onclick="skipBack()" title="15s atrás">
-      <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
-    </button>
-    <button class="pf-ctrl-play paused" id="pfPlayBtn" onclick="togglePlay()">
-      <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-      <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-    </button>
-    <button class="pf-ctrl-skip" onclick="skipForward()" title="15s adelante">
-      <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
-    </button>
   </div>
 </div>
 
@@ -1146,7 +1152,7 @@ audioEl.addEventListener('timeupdate', () => {
   if (!audioEl.duration) return;
   const pct = (audioEl.currentTime / audioEl.duration * 100) + '%';
   document.getElementById('progressFill').style.width = pct;
-  document.getElementById('pfProgressFill').style.width = pct;
+  document.getElementById('pfSliderFill').style.width = pct;
   document.getElementById('playerTime').textContent = `${fmtTime(audioEl.currentTime)} / ${fmtTime(audioEl.duration)}`;
   document.getElementById('pfTimeCurrent').textContent = fmtTime(audioEl.currentTime);
   document.getElementById('pfTimeDuration').textContent = fmtTime(audioEl.duration);
@@ -1172,12 +1178,12 @@ audioEl.addEventListener('ended', () => {
   document.getElementById('pfPlayBtn').classList.add('paused');
   document.getElementById('waveAnim').classList.add('paused');
   document.getElementById('progressFill').style.width = '0%';
-  document.getElementById('pfProgressFill').style.width = '0%';
+  document.getElementById('pfSliderFill').style.width = '0%';
   document.getElementById('playerTime').textContent = '';
 });
 
-// ── Full player seek
-document.getElementById('pfProgressBar').addEventListener('click', e => {
+// ── Full player seek (tap en slider)
+document.getElementById('pfSlider').addEventListener('click', e => {
   if (!current || !audioEl.duration) return;
   const rect = e.currentTarget.getBoundingClientRect();
   audioEl.currentTime = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * audioEl.duration;
@@ -1185,16 +1191,16 @@ document.getElementById('pfProgressBar').addEventListener('click', e => {
 
 // ── Full player functions
 function syncFullPlayer(s) {
-  document.getElementById('pfCoverArt').innerHTML = s.cover
-    ? `<img src="${s.cover}" alt="${s.title}">`
-    : `<span style="color:var(--gold-dim);">${s.emoji}</span>`;
-  document.getElementById('pfBg').style.background = `radial-gradient(ellipse at 50% 0%, ${s.color} 0%, transparent 80%)`;
+  const bg = s.cover
+    ? `url('${s.cover}') center top / cover no-repeat`
+    : `linear-gradient(160deg, ${s.color} 0%, #FAF7EF 100%)`;
+  document.getElementById('pfBgImg').style.background = bg;
   document.getElementById('pfTitle').textContent = s.title;
   document.getElementById('pfBook').textContent = s.book;
 }
 
 function openFullPlayer() {
-  if (!current) return;
+  if (!current || window.innerWidth >= 768) return;
   document.getElementById('playerFull').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
