@@ -673,6 +673,9 @@
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
+<!-- AUDIO ENGINE -->
+<audio id="audioEl" preload="metadata"></audio>
+
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
@@ -770,22 +773,26 @@
 
 <script>
 const STORIES = [
-  { id:1, title:'En el principio', book:'Génesis 1', cat:'Génesis', dur:'18:42', emoji:'✦', color:'#EDE3C4', desc:'La creación del mundo en siete días.' },
-  { id:2, title:'El jardín del Edén', book:'Génesis 2–3', cat:'Génesis', dur:'22:10', emoji:'🌿', color:'#C8E6C9', desc:'La historia de Adán y Eva.' },
-  { id:3, title:'El arca de Noé', book:'Génesis 6–9', cat:'Génesis', dur:'34:05', emoji:'⛵', color:'#BBDEFB', desc:'El diluvio y la alianza con Dios.' },
-  { id:4, title:'El éxodo', book:'Éxodo 12–14', cat:'Éxodo', dur:'41:18', emoji:'🔥', color:'#FFE0B2', desc:'Moisés guía al pueblo hacia la libertad.' },
-  { id:5, title:'Salmo 23', book:'Salmos 23', cat:'Salmos', dur:'04:30', emoji:'☁️', color:'#E3E8F5', desc:'El Señor es mi pastor.' },
-  { id:6, title:'Salmo 91', book:'Salmos 91', cat:'Salmos', dur:'06:12', emoji:'⚔️', color:'#FFCCBC', desc:'Al abrigo del Altísimo.' },
-  { id:7, title:'La sabiduría eterna', book:'Proverbios 8', cat:'Proverbios', dur:'12:48', emoji:'📜', color:'#FFF9C4', desc:'La voz de la sabiduría clama.' },
-  { id:8, title:'El valle de los huesos', book:'Ezequiel 37', cat:'Profetas', dur:'14:20', emoji:'💨', color:'#B2DFDB', desc:'Visión de la resurrección del pueblo.' },
-  { id:9, title:'La natividad', book:'Lucas 2', cat:'Evangelios', dur:'15:33', emoji:'⭐', color:'#D4E8FF', desc:'El nacimiento del Mesías en Belén.' },
-  { id:10, title:'El sermón del monte', book:'Mateo 5–7', cat:'Evangelios', dur:'28:47', emoji:'🏔️', color:'#DCF0DC', desc:'Las bienaventuranzas y la nueva ley.' },
-  { id:11, title:'La última cena', book:'Juan 13', cat:'Evangelios', dur:'19:05', emoji:'🍞', color:'#F5E6D0', desc:'Las últimas palabras del Maestro.' },
-  { id:12, title:'La resurrección', book:'Juan 20', cat:'Evangelios', dur:'16:22', emoji:'☀️', color:'#FFFDE7', desc:'El primer día de la semana, el sepulcro vacío.' },
-  { id:13, title:'Las visiones de Patmos', book:'Apocalipsis 1', cat:'Apocalipsis', dur:'24:14', emoji:'👁️', color:'#E1BEE7', desc:'Juan recibe la revelación en la isla.' },
-  { id:14, title:'La mujer y el dragón', book:'Apocalipsis 12', cat:'Apocalipsis', dur:'18:56', emoji:'🐉', color:'#FFCCBC', desc:'La gran señal en el cielo.' },
-  { id:15, title:'El rey de reyes', book:'Apocalipsis 19', cat:'Apocalipsis', dur:'21:00', emoji:'👑', color:'#FFF9C4', desc:'El jinete sobre el caballo blanco.' },
-  { id:16, title:'La nueva Jerusalén', book:'Apocalipsis 21–22', cat:'Apocalipsis', dur:'26:38', emoji:'✨', color:'#DDEEFF', desc:'El nuevo cielo y la nueva tierra.' },
+  { id:1,  title:'En el principio',        book:'Génesis 1',       cat:'Génesis',    dur:'18:42', emoji:'✦',  color:'#EDE3C4', desc:'La creación del mundo en siete días.' },
+  { id:2,  title:'El jardín del Edén',     book:'Génesis 2–3',     cat:'Génesis',    dur:'22:10', emoji:'🌿', color:'#C8E6C9', desc:'La historia de Adán y Eva.' },
+  { id:3,  title:'El arca de Noé',         book:'Génesis 6–9',     cat:'Génesis',    dur:'34:05', emoji:'⛵', color:'#BBDEFB', desc:'El diluvio y la alianza con Dios.' },
+  { id:4,  title:'El éxodo',               book:'Éxodo 12–14',     cat:'Éxodo',      dur:'41:18', emoji:'🔥', color:'#FFE0B2', desc:'Moisés guía al pueblo hacia la libertad.' },
+  { id:5,  title:'Salmo 23',               book:'Salmos 23',       cat:'Salmos',     dur:'04:30', emoji:'☁️', color:'#E3E8F5', desc:'El Señor es mi pastor.' },
+  { id:6,  title:'Salmo 91',               book:'Salmos 91',       cat:'Salmos',     dur:'06:12', emoji:'⚔️', color:'#FFCCBC', desc:'Al abrigo del Altísimo.' },
+  { id:7,  title:'La sabiduría eterna',    book:'Proverbios 8',    cat:'Proverbios', dur:'12:48', emoji:'📜', color:'#FFF9C4', desc:'La voz de la sabiduría clama.' },
+  { id:8,  title:'El valle de los huesos', book:'Ezequiel 37',     cat:'Profetas',   dur:'14:20', emoji:'💨', color:'#B2DFDB', desc:'Visión de la resurrección del pueblo.' },
+  { id:9,  title:'La natividad',           book:'Lucas 2',         cat:'Evangelios', dur:'15:33', emoji:'⭐', color:'#D4E8FF', desc:'El nacimiento del Mesías en Belén.' },
+  { id:10, title:'El sermón del monte',    book:'Mateo 5–7',       cat:'Evangelios', dur:'28:47', emoji:'🏔️', color:'#DCF0DC', desc:'Las bienaventuranzas y la nueva ley.' },
+  { id:11, title:'La última cena',         book:'Juan 13',         cat:'Evangelios', dur:'19:05', emoji:'🍞', color:'#F5E6D0', desc:'Las últimas palabras del Maestro.' },
+  { id:12, title:'La resurrección',        book:'Juan 20',         cat:'Evangelios', dur:'16:22', emoji:'☀️', color:'#FFFDE7', desc:'El primer día de la semana, el sepulcro vacío.' },
+  { id:13, title:'Las visiones de Patmos', book:'Apocalipsis 1',   cat:'Apocalipsis',dur:'24:14', emoji:'👁️', color:'#E1BEE7', desc:'Juan recibe la revelación en la isla.' },
+  { id:14, title:'La mujer y el dragón',   book:'Apocalipsis 12',  cat:'Apocalipsis',dur:'18:56', emoji:'🐉', color:'#FFCCBC', desc:'La gran señal en el cielo.' },
+  { id:15, title:'El rey de reyes',        book:'Apocalipsis 19',  cat:'Apocalipsis',dur:'21:00', emoji:'👑', color:'#FFF9C4', desc:'El jinete sobre el caballo blanco.' },
+  { id:16, title:'La nueva Jerusalén',     book:'Apocalipsis 21–22',cat:'Apocalipsis',dur:'26:38',emoji:'✨', color:'#DDEEFF', desc:'El nuevo cielo y la nueva tierra.' },
+  { id:17, title:'La valentía de David',   book:'1 Samuel 17',     cat:'Profetas',   dur:'',      emoji:'⚔️', color:'#EDE3C4',
+    audio:'https://github.com/tny-me/sebael/releases/download/v1.0/La.Valentia.de.David.m4a',
+    cover:'https://raw.githubusercontent.com/tny-me/sebael/main/Portada_la%20valentia%20de%20David.png',
+    desc:'El joven pastor que venció al gigante Goliat.' },
 ];
 
 const VERSES = [
@@ -796,33 +803,31 @@ const VERSES = [
   { text: 'Confía en el Señor con todo tu corazón.', ref: 'Proverbios 3:5' },
 ];
 
+const audioEl = document.getElementById('audioEl');
 let current = null;
 let playing = false;
-let progress = 0;
-let interval = null;
 let activeFilter = 'Todos';
-
-function rand(seed, min, max) {
-  let x = Math.sin(seed) * 10000;
-  return min + Math.floor((x - Math.floor(x)) * (max - min + 1));
-}
 
 function buildFeatured() {
   const wrap = document.getElementById('featuredScroll');
-  const picks = [0,4,9,11,15];
-  picks.forEach((i,j) => {
+  wrap.innerHTML = '';
+  const picks = [16, 0, 4, 9, 11];
+  picks.forEach(i => {
     const s = STORIES[i];
     const card = document.createElement('div');
     card.className = 'feat-card';
     card.onclick = () => playSong(s);
     const isActive = current && current.id === s.id && playing;
+    const art = s.cover
+      ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div class="feat-cover-art" style="background:${s.color};">${s.emoji}</div>`;
     card.innerHTML = `
       <div class="feat-cover">
-        <div class="feat-cover-art" style="background:${s.color};">${s.emoji}</div>
+        ${art}
         ${isActive ? `<div class="feat-playing-badge">▶ Reproduciendo</div>` : ''}
       </div>
       <div class="feat-title">${s.title}</div>
-      <div class="feat-meta">${s.book} · ${s.dur}</div>
+      <div class="feat-meta">${s.book}${s.dur ? ' · ' + s.dur : ''}</div>
     `;
     wrap.appendChild(card);
   });
@@ -838,14 +843,17 @@ function buildGrid(filter) {
     card.className = 'audio-card' + (isActive ? ' card-active' : '');
     card.setAttribute('data-id', s.id);
     card.onclick = () => playSong(s);
+    const art = s.cover
+      ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div class="card-art" style="background:${s.color};">${s.emoji}</div>`;
     card.innerHTML = `
       <div class="card-cover">
-        <div class="card-art" style="background:${s.color};">${s.emoji}</div>
+        ${art}
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="card-title">${s.title}</div>
       <div class="card-book">${s.book}</div>
-      <div class="card-duration">${s.dur}</div>
+      <div class="card-duration">${s.dur || (s.audio ? '▶ Disponible' : 'Próximamente')}</div>
     `;
     grid.appendChild(card);
   });
@@ -859,66 +867,80 @@ function filterCat(cat, btn) {
 }
 
 function playSong(s) {
+  if (!s.audio) { showToast('Próximamente'); return; }
+
   current = s;
-  progress = 0;
   playing = true;
 
-  document.getElementById('playerThumb').innerHTML = `<span style="font-size:22px;color:var(--gold-dim);background:${s.color};width:100%;height:100%;display:flex;align-items:center;justify-content:center;">${s.emoji}</span>`;
+  const thumb = document.getElementById('playerThumb');
+  thumb.innerHTML = s.cover
+    ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;">`
+    : `<span style="font-size:22px;color:var(--gold-dim);background:${s.color};width:100%;height:100%;display:flex;align-items:center;justify-content:center;">${s.emoji}</span>`;
+
   document.getElementById('playerTitle').textContent = s.title;
   document.getElementById('playerBook').textContent = s.book;
-  document.getElementById('playerTime').textContent = '0:00 / ' + s.dur;
+  document.getElementById('playerTime').textContent = '';
 
-  const btn = document.getElementById('playBtn');
-  btn.classList.remove('paused');
-  document.getElementById('waveAnim').classList.remove('paused');
-
-  clearInterval(interval);
-  const [mm,ss] = s.dur.split(':').map(Number);
-  const totalSec = mm * 60 + ss;
-
-  interval = setInterval(() => {
-    if (!playing) return;
-    progress += 1 / totalSec * 100;
-    if (progress >= 100) { progress = 0; clearInterval(interval); }
-    document.getElementById('progressFill').style.width = progress + '%';
-
-    const elapsed = Math.floor(progress / 100 * totalSec);
-    const em = Math.floor(elapsed / 60);
-    const es = elapsed % 60;
-    document.getElementById('playerTime').textContent = `${em}:${es.toString().padStart(2,'0')} / ${s.dur}`;
-  }, 1000);
+  audioEl.src = s.audio;
+  audioEl.play().catch(() => showToast('Error al reproducir'));
 
   buildGrid(activeFilter);
+  buildFeatured();
   showToast(`▶ ${s.title}`);
 }
 
 function togglePlay() {
   if (!current) { showToast('Elige una historia primero'); return; }
-  playing = !playing;
-  const btn = document.getElementById('playBtn');
-  btn.classList.toggle('paused', !playing);
-  document.getElementById('waveAnim').classList.toggle('paused', !playing);
+  audioEl.paused ? audioEl.play() : audioEl.pause();
 }
 
 function skipBack() {
   if (!current) return;
-  progress = Math.max(0, progress - 2.5);
-  document.getElementById('progressFill').style.width = progress + '%';
+  audioEl.currentTime = Math.max(0, audioEl.currentTime - 15);
 }
 
 function skipForward() {
   if (!current) return;
-  progress = Math.min(100, progress + 2.5);
-  document.getElementById('progressFill').style.width = progress + '%';
+  audioEl.currentTime = Math.min(audioEl.duration || 0, audioEl.currentTime + 15);
 }
 
 function seekAudio(e) {
-  if (!current) return;
+  if (!current || !audioEl.duration) return;
   const bar = document.getElementById('progressBar');
   const rect = bar.getBoundingClientRect();
-  progress = Math.max(0, Math.min(100, (e.clientX - rect.left) / rect.width * 100));
-  document.getElementById('progressFill').style.width = progress + '%';
+  audioEl.currentTime = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width)) * audioEl.duration;
 }
+
+function fmtTime(t) {
+  if (!t || isNaN(t)) return '0:00';
+  return `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, '0')}`;
+}
+
+audioEl.addEventListener('timeupdate', () => {
+  if (!audioEl.duration) return;
+  document.getElementById('progressFill').style.width = (audioEl.currentTime / audioEl.duration * 100) + '%';
+  document.getElementById('playerTime').textContent = `${fmtTime(audioEl.currentTime)} / ${fmtTime(audioEl.duration)}`;
+});
+
+audioEl.addEventListener('play', () => {
+  playing = true;
+  document.getElementById('playBtn').classList.remove('paused');
+  document.getElementById('waveAnim').classList.remove('paused');
+});
+
+audioEl.addEventListener('pause', () => {
+  playing = false;
+  document.getElementById('playBtn').classList.add('paused');
+  document.getElementById('waveAnim').classList.add('paused');
+});
+
+audioEl.addEventListener('ended', () => {
+  playing = false;
+  document.getElementById('playBtn').classList.add('paused');
+  document.getElementById('waveAnim').classList.add('paused');
+  document.getElementById('progressFill').style.width = '0%';
+  document.getElementById('playerTime').textContent = '';
+});
 
 function showToast(msg) {
   const t = document.getElementById('toast');
