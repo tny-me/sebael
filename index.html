@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0A090E">
+<meta name="theme-color" content="#FAF7EF">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Sebael">
 <meta name="description" content="Sebael — Crónicas Bíblicas. Audiolibros sagrados para el alma.">
 <title>Sebael — Crónicas Bíblicas</title>
@@ -15,27 +15,27 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
-    --bg: #0A090E;
-    --surface: #13121A;
-    --surface2: #1C1B26;
-    --surface3: #252433;
-    --gold: #C49A3C;
-    --gold-light: #E8C97A;
-    --gold-dim: #6B5220;
-    --text: #F0EDE4;
-    --text-muted: #8A8478;
-    --text-dim: #4A4840;
-    --border: rgba(196,154,60,0.12);
-    --border-hover: rgba(196,154,60,0.28);
+    --bg: #FAF7EF;
+    --surface: #FFFFFF;
+    --surface2: #F2EDE0;
+    --surface3: #E8E0CE;
+    --gold: #9B6F2F;
+    --gold-light: #C49A3C;
+    --gold-dim: #D4B47A;
+    --text: #1C1810;
+    --text-muted: #6B6052;
+    --text-dim: #A09278;
+    --border: rgba(155,111,47,0.16);
+    --border-hover: rgba(155,111,47,0.36);
     --radius: 14px;
     --radius-sm: 8px;
     --player-h: 90px;
-    --font-serif: 'Cormorant Garamond', Georgia, serif;
-    --font-sans: 'Outfit', sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,7 +46,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: var(--font-sans);
-    font-weight: 300;
+    font-weight: 400;
     min-height: 100vh;
     overflow-x: hidden;
     padding-bottom: calc(var(--player-h) + env(safe-area-inset-bottom));
@@ -60,7 +60,7 @@
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;
-    opacity: 0.5;
+    opacity: 0.2;
   }
 
   /* ── TOPBAR ─────────────────────────── */
@@ -73,7 +73,7 @@
     justify-content: space-between;
     padding: 0 24px;
     height: 64px;
-    background: rgba(10,9,14,0.88);
+    background: rgba(250,247,239,0.94);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border-bottom: 0.5px solid var(--border);
@@ -88,9 +88,9 @@
   .logo-name {
     font-family: var(--font-serif);
     font-size: 26px;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    color: var(--gold-light);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--gold);
   }
 
   .logo-sub {
@@ -157,7 +157,7 @@
     transform: translateX(-50%);
     width: 500px;
     height: 300px;
-    background: radial-gradient(ellipse at 50% 30%, rgba(196,154,60,0.12) 0%, transparent 70%);
+    background: radial-gradient(ellipse at 50% 30%, rgba(155,111,47,0.07) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -172,9 +172,9 @@
   .hero-title {
     font-family: var(--font-serif);
     font-size: clamp(36px, 6vw, 58px);
-    font-weight: 300;
-    line-height: 1.12;
-    letter-spacing: -0.01em;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     color: var(--text);
     margin-bottom: 14px;
   }
@@ -186,7 +186,7 @@
 
   .hero-desc {
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--text-muted);
     max-width: 480px;
     line-height: 1.6;
@@ -273,7 +273,7 @@
   .feat-title {
     font-family: var(--font-serif);
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text);
     line-height: 1.2;
     margin-bottom: 3px;
@@ -376,12 +376,12 @@
     transition: opacity 0.2s, transform 0.2s;
     box-shadow: 0 4px 16px rgba(196,154,60,0.4);
   }
-  .card-play-btn svg { width: 14px; height: 14px; fill: #0A090E; margin-left: 2px; }
+  .card-play-btn svg { width: 14px; height: 14px; fill: #FAF7EF; margin-left: 2px; }
 
   .card-title {
     font-family: var(--font-serif);
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text);
     line-height: 1.2;
     margin-bottom: 4px;
@@ -412,7 +412,7 @@
     left: 0;
     right: 0;
     z-index: 200;
-    background: rgba(19,18,26,0.95);
+    background: rgba(250,247,239,0.97);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-top: 0.5px solid var(--border);
@@ -467,7 +467,7 @@
   .player-title {
     font-family: var(--font-serif);
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: var(--text);
     white-space: nowrap;
     overflow: hidden;
@@ -521,7 +521,7 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.15s, background 0.2s;
-    color: #0A090E;
+    color: #FAF7EF;
   }
   .ctrl-play:hover { transform: scale(1.05); background: var(--gold-light); }
   .ctrl-play svg { width: 18px; height: 18px; fill: currentColor; }
@@ -588,7 +588,7 @@
   .verse-text {
     font-family: var(--font-serif);
     font-size: 20px;
-    font-weight: 300;
+    font-weight: 500;
     font-style: italic;
     color: var(--text);
     line-height: 1.5;
@@ -648,7 +648,7 @@
   /* ── SCROLLBAR ──────────────────────── */
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 4px; }
 
   /* ── ANIMATIONS ─────────────────────── */
   @keyframes fadeUp {
@@ -770,22 +770,22 @@
 
 <script>
 const STORIES = [
-  { id:1, title:'En el principio', book:'Génesis 1', cat:'Génesis', dur:'18:42', emoji:'✦', color:'#2a1f0e', desc:'La creación del mundo en siete días.' },
-  { id:2, title:'El jardín del Edén', book:'Génesis 2–3', cat:'Génesis', dur:'22:10', emoji:'🌿', color:'#0e2017', desc:'La historia de Adán y Eva.' },
-  { id:3, title:'El arca de Noé', book:'Génesis 6–9', cat:'Génesis', dur:'34:05', emoji:'⛵', color:'#0e1a2a', desc:'El diluvio y la alianza con Dios.' },
-  { id:4, title:'El éxodo', book:'Éxodo 12–14', cat:'Éxodo', dur:'41:18', emoji:'🔥', color:'#2a1205', desc:'Moisés guía al pueblo hacia la libertad.' },
-  { id:5, title:'Salmo 23', book:'Salmos 23', cat:'Salmos', dur:'04:30', emoji:'☁️', color:'#1a1a2a', desc:'El Señor es mi pastor.' },
-  { id:6, title:'Salmo 91', book:'Salmos 91', cat:'Salmos', dur:'06:12', emoji:'⚔️', color:'#1e0a0a', desc:'Al abrigo del Altísimo.' },
-  { id:7, title:'La sabiduría eterna', book:'Proverbios 8', cat:'Proverbios', dur:'12:48', emoji:'📜', color:'#1a1408', desc:'La voz de la sabiduría clama.' },
-  { id:8, title:'El valle de los huesos', book:'Ezequiel 37', cat:'Profetas', dur:'14:20', emoji:'💨', color:'#0a1a1a', desc:'Visión de la resurrección del pueblo.' },
-  { id:9, title:'La natividad', book:'Lucas 2', cat:'Evangelios', dur:'15:33', emoji:'⭐', color:'#0e1a2a', desc:'El nacimiento del Mesías en Belén.' },
-  { id:10, title:'El sermón del monte', book:'Mateo 5–7', cat:'Evangelios', dur:'28:47', emoji:'🏔️', color:'#101a10', desc:'Las bienaventuranzas y la nueva ley.' },
-  { id:11, title:'La última cena', book:'Juan 13', cat:'Evangelios', dur:'19:05', emoji:'🍞', color:'#1a0e0e', desc:'Las últimas palabras del Maestro.' },
-  { id:12, title:'La resurrección', book:'Juan 20', cat:'Evangelios', dur:'16:22', emoji:'☀️', color:'#1a1800', desc:'El primer día de la semana, el sepulcro vacío.' },
-  { id:13, title:'Las visiones de Patmos', book:'Apocalipsis 1', cat:'Apocalipsis', dur:'24:14', emoji:'👁️', color:'#150a1e', desc:'Juan recibe la revelación en la isla.' },
-  { id:14, title:'La mujer y el dragón', book:'Apocalipsis 12', cat:'Apocalipsis', dur:'18:56', emoji:'🐉', color:'#1e0a0a', desc:'La gran señal en el cielo.' },
-  { id:15, title:'El rey de reyes', book:'Apocalipsis 19', cat:'Apocalipsis', dur:'21:00', emoji:'👑', color:'#1a1200', desc:'El jinete sobre el caballo blanco.' },
-  { id:16, title:'La nueva Jerusalén', book:'Apocalipsis 21–22', cat:'Apocalipsis', dur:'26:38', emoji:'✨', color:'#0a1520', desc:'El nuevo cielo y la nueva tierra.' },
+  { id:1, title:'En el principio', book:'Génesis 1', cat:'Génesis', dur:'18:42', emoji:'✦', color:'#EDE3C4', desc:'La creación del mundo en siete días.' },
+  { id:2, title:'El jardín del Edén', book:'Génesis 2–3', cat:'Génesis', dur:'22:10', emoji:'🌿', color:'#C8E6C9', desc:'La historia de Adán y Eva.' },
+  { id:3, title:'El arca de Noé', book:'Génesis 6–9', cat:'Génesis', dur:'34:05', emoji:'⛵', color:'#BBDEFB', desc:'El diluvio y la alianza con Dios.' },
+  { id:4, title:'El éxodo', book:'Éxodo 12–14', cat:'Éxodo', dur:'41:18', emoji:'🔥', color:'#FFE0B2', desc:'Moisés guía al pueblo hacia la libertad.' },
+  { id:5, title:'Salmo 23', book:'Salmos 23', cat:'Salmos', dur:'04:30', emoji:'☁️', color:'#E3E8F5', desc:'El Señor es mi pastor.' },
+  { id:6, title:'Salmo 91', book:'Salmos 91', cat:'Salmos', dur:'06:12', emoji:'⚔️', color:'#FFCCBC', desc:'Al abrigo del Altísimo.' },
+  { id:7, title:'La sabiduría eterna', book:'Proverbios 8', cat:'Proverbios', dur:'12:48', emoji:'📜', color:'#FFF9C4', desc:'La voz de la sabiduría clama.' },
+  { id:8, title:'El valle de los huesos', book:'Ezequiel 37', cat:'Profetas', dur:'14:20', emoji:'💨', color:'#B2DFDB', desc:'Visión de la resurrección del pueblo.' },
+  { id:9, title:'La natividad', book:'Lucas 2', cat:'Evangelios', dur:'15:33', emoji:'⭐', color:'#D4E8FF', desc:'El nacimiento del Mesías en Belén.' },
+  { id:10, title:'El sermón del monte', book:'Mateo 5–7', cat:'Evangelios', dur:'28:47', emoji:'🏔️', color:'#DCF0DC', desc:'Las bienaventuranzas y la nueva ley.' },
+  { id:11, title:'La última cena', book:'Juan 13', cat:'Evangelios', dur:'19:05', emoji:'🍞', color:'#F5E6D0', desc:'Las últimas palabras del Maestro.' },
+  { id:12, title:'La resurrección', book:'Juan 20', cat:'Evangelios', dur:'16:22', emoji:'☀️', color:'#FFFDE7', desc:'El primer día de la semana, el sepulcro vacío.' },
+  { id:13, title:'Las visiones de Patmos', book:'Apocalipsis 1', cat:'Apocalipsis', dur:'24:14', emoji:'👁️', color:'#E1BEE7', desc:'Juan recibe la revelación en la isla.' },
+  { id:14, title:'La mujer y el dragón', book:'Apocalipsis 12', cat:'Apocalipsis', dur:'18:56', emoji:'🐉', color:'#FFCCBC', desc:'La gran señal en el cielo.' },
+  { id:15, title:'El rey de reyes', book:'Apocalipsis 19', cat:'Apocalipsis', dur:'21:00', emoji:'👑', color:'#FFF9C4', desc:'El jinete sobre el caballo blanco.' },
+  { id:16, title:'La nueva Jerusalén', book:'Apocalipsis 21–22', cat:'Apocalipsis', dur:'26:38', emoji:'✨', color:'#DDEEFF', desc:'El nuevo cielo y la nueva tierra.' },
 ];
 
 const VERSES = [
@@ -960,12 +960,12 @@ const manifest = {
   description: 'Audiolibros bíblicos sagrados',
   start_url: '/',
   display: 'standalone',
-  background_color: '#0A090E',
-  theme_color: '#0A090E',
+  background_color: '#FAF7EF',
+  theme_color: '#FAF7EF',
   orientation: 'portrait',
   icons: [
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%230A090E'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='96' font-family='Georgia' fill='%23C49A3C'%3E✦%3C/text%3E%3C/svg%3E", sizes: '192x192', type: 'image/svg+xml' },
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%230A090E'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='260' font-family='Georgia' fill='%23C49A3C'%3E✦%3C/text%3E%3C/svg%3E", sizes: '512x512', type: 'image/svg+xml' }
+    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23FAF7EF'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='96' font-family='Georgia' fill='%239B6F2F'%3E✦%3C/text%3E%3C/svg%3E", sizes: '192x192', type: 'image/svg+xml' },
+    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23FAF7EF'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='260' font-family='Georgia' fill='%239B6F2F'%3E✦%3C/text%3E%3C/svg%3E", sizes: '512x512', type: 'image/svg+xml' }
   ]
 };
 const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
