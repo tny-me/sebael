@@ -12,6 +12,8 @@
 
 <!-- PWA Manifest inline via JS blob -->
 <link rel="manifest" id="manifest-link">
+<link rel="icon" type="image/png" href="images/Icono app y favicon.png">
+<link rel="apple-touch-icon" href="images/Icono app y favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -881,7 +883,7 @@
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
-    <img src="images/logo.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <img src="images/Logosebael.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span class="logo-fallback">Sebael</span>
   </div>
   <div class="topbar-actions">
@@ -936,7 +938,7 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <img src="images/logo.png" alt="Sebael" class="footer-logo" onerror="this.style.display='none'">
+  <img src="images/Logosebael.png" alt="Sebael" class="footer-logo" onerror="this.style.display='none'">
   <p class="footer-text">Sebael — Crónicas Bíblicas</p>
   <p class="footer-sub">© 2026 Sebael. Todos los derechos reservados.</p>
 </footer>
@@ -1292,8 +1294,8 @@ const manifest = {
   theme_color: '#C07820',
   orientation: 'portrait',
   icons: [
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23FAF7EF'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='96' font-family='Georgia' fill='%239B6F2F'%3E✦%3C/text%3E%3C/svg%3E", sizes: '192x192', type: 'image/svg+xml' },
-    { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='100' fill='%23FAF7EF'/%3E%3Ctext x='256' y='340' text-anchor='middle' font-size='260' font-family='Georgia' fill='%239B6F2F'%3E✦%3C/text%3E%3C/svg%3E", sizes: '512x512', type: 'image/svg+xml' }
+    { src: 'https://raw.githubusercontent.com/tny-me/sebael/main/images/Icono%20app%20y%20favicon.png', sizes: '192x192', type: 'image/png' },
+    { src: 'https://raw.githubusercontent.com/tny-me/sebael/main/images/Icono%20app%20y%20favicon.png', sizes: '512x512', type: 'image/png' }
   ]
 };
 const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
