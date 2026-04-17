@@ -1200,8 +1200,6 @@ function playSong(s) {
   document.getElementById('playerTime').textContent = '';
 
   audioEl.src = s.audio;
-  audioEl.load();
-  // Llamar play() sincrónicamente dentro del gesto del usuario (requerido por iOS Safari)
   audioEl.play().catch(e => {
     const code = audioEl.error ? audioEl.error.code : 0;
     const msgs = { 1:'Abortado', 2:'Error de red', 3:'Error al decodificar', 4:'Formato no soportado' };
