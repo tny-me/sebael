@@ -1113,20 +1113,6 @@ let current = null;
 let playing = false;
 let activeFilter = 'Todos';
 
-// Blob cache — evita el redirect de GitHub Releases que falla en iOS PWA
-const blobCache = {};
-function ensureBlob(s) {
-  if (blobCache[s.id]) return Promise.resolve(blobCache[s.id]);
-  return fetch(s.audio)
-    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.blob(); })
-    .then(b => { blobCache[s.id] = URL.createObjectURL(b); return blobCache[s.id]; });
-}
-// Precargar todos los audios al primer toque (antes de que el usuario presione play)
-function startPreload() {
-  STORIES.filter(s => s.audio).forEach(s => ensureBlob(s).catch(() => {}));
-}
-document.addEventListener('touchstart', startPreload, { once: true, passive: true });
-document.addEventListener('mousedown', startPreload, { once: true });
 
 function isNew(s) {
   if (!s.addedAt) return false;
@@ -1218,24 +1204,12 @@ function playSong(s) {
   document.getElementById('playerBook').textContent = s.book;
   document.getElementById('playerTime').textContent = '';
 
-  function doPlay(url) {
-    audioEl.src = url;
-    audioEl.play().catch(e => {
-      const code = audioEl.error ? audioEl.error.code : 0;
-      const msgs = { 1:'Abortado', 2:'Error de red', 3:'Error al decodificar', 4:'Formato no soportado' };
-      showToast('⚠ ' + (msgs[code] || e.name));
-    });
-  }
-
-  if (blobCache[s.id]) {
-    doPlay(blobCache[s.id]);
-  } else {
-    // Descargar como blob para evitar el redirect de GitHub en iOS
-    showToast('⏳ Cargando…');
-    ensureBlob(s)
-      .then(url => doPlay(url))
-      .catch(() => doPlay(s.audio)); // fallback a URL directa
-  }
+  audioEl.src = s.audio;
+  audioEl.play().catch(e => {
+    const code = audioEl.error ? audioEl.error.code : 0;
+    const msgs = { 1:'Abortado', 2:'Error de red', 3:'Error al decodificar', 4:'Formato no soportado' };
+    showToast('⚠ ' + (msgs[code] || e.name));
+  });
 
   syncFullPlayer(s);
   buildGrid(activeFilter);
