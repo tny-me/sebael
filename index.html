@@ -10,13 +10,15 @@
 <meta name="description" content="Sebael — Crónicas Bíblicas. Audiolibros sagrados para el alma.">
 <title>Sebael — Crónicas Bíblicas</title>
 
-<!-- PWA Manifest inline via JS blob -->
-<link rel="manifest" id="manifest-link">
-<link rel="icon" type="image/png" href="images/Icono app y favicon.png">
-<link rel="apple-touch-icon" href="images/Icono app y favicon.png">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" href="images/Icono%20app%20y%20favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/Icono%20app%20y%20favicon.png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://ia600806.us.archive.org">
+<link rel="preconnect" href="https://ia601502.us.archive.org">
+<link rel="preconnect" href="https://ia800707.us.archive.org">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -1366,23 +1368,15 @@ function handleInstall() {
   }
 }
 
-// PWA Manifest
-const manifest = {
-  name: 'Sebael — Crónicas Bíblicas',
-  short_name: 'Sebael',
-  description: 'Audiolibros bíblicos sagrados',
-  start_url: '/',
-  display: 'standalone',
-  background_color: '#F4FAFB',
-  theme_color: '#C07820',
-  orientation: 'portrait',
-  icons: [
-    { src: 'https://raw.githubusercontent.com/tny-me/sebael/main/images/Icono%20app%20y%20favicon.png', sizes: '192x192', type: 'image/png' },
-    { src: 'https://raw.githubusercontent.com/tny-me/sebael/main/images/Icono%20app%20y%20favicon.png', sizes: '512x512', type: 'image/png' }
-  ]
-};
-const blob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
-document.getElementById('manifest-link').href = URL.createObjectURL(blob);
+// Precargar metadatos de audio para arranque más rápido
+setTimeout(() => {
+  STORIES.forEach(s => {
+    if (!s.audio) return;
+    const a = new Audio();
+    a.preload = 'metadata';
+    a.src = s.audio;
+  });
+}, 1500);
 
 // Service Worker (inline)
 if ('serviceWorker' in navigator) {
