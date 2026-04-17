@@ -47,6 +47,7 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { -webkit-tap-highlight-color: transparent; }
 
   html { scroll-behavior: smooth; }
 
@@ -57,8 +58,19 @@
     font-weight: 400;
     min-height: 100vh;
     overflow-x: hidden;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: calc(var(--player-h) + env(safe-area-inset-bottom));
   }
+
+  button, .audio-card, .feat-card, .cat-pill { user-select: none; -webkit-user-select: none; }
+
+  /* Active feedback nativo */
+  .audio-card:active .card-cover { transform: scale(0.97); transition: transform 0.08s; }
+  .feat-card:active .feat-cover  { transform: scale(0.97); transition: transform 0.08s; }
+  .cat-pill:active   { opacity: 0.65; }
+  .ctrl-btn:active   { opacity: 0.6; }
+  .icon-btn:active   { opacity: 0.6; }
 
 
   /* ── TOPBAR ─────────────────────────── */
@@ -1043,6 +1055,9 @@
       <button class="ctrl-btn" onclick="skipForward()" title="15s adelante">
         <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
       </button>
+      <button class="ctrl-btn" onclick="shareStory()" title="Compartir">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      </button>
     </div>
   </div>
 </div>
@@ -1052,9 +1067,12 @@
   <div class="pf-bg-img" id="pfBgImg"></div>
   <div class="pf-overlay"></div>
   <div class="pf-content">
-    <div class="pf-header">
+    <div class="pf-header" style="display:flex;justify-content:space-between;align-items:center;">
       <button class="pf-back-btn" onclick="closeFullPlayer()" aria-label="Minimizar">
         <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="pf-back-btn" onclick="shareStory()" aria-label="Compartir">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
     </div>
     <div class="pf-spacer"></div>
@@ -1119,6 +1137,12 @@ let current = null;
 let playing = false;
 let activeFilter = 'Todos';
 
+// Cargar duraciones y posiciones guardadas
+STORIES.forEach(s => {
+  const dur = localStorage.getItem('dur_' + s.id);
+  if (dur) s.dur = dur;
+});
+
 
 function isNew(s) {
   if (!s.addedAt) return false;
@@ -1141,6 +1165,7 @@ function buildFeatured() {
   STORIES.forEach(s => {
     const card = document.createElement('div');
     card.className = 'feat-card';
+    card.setAttribute('data-id', s.id);
     card.onclick = () => playSong(s);
     const isActive = current && current.id === s.id && playing;
     const art = s.cover
@@ -1155,7 +1180,7 @@ function buildFeatured() {
       </div>
       <div class="feat-title">${s.title}</div>
       <div class="feat-meta">${s.book}</div>
-      <div class="feat-dur">${headphoneIcon}${s.dur || 'Disponible'}</div>
+      <div class="feat-dur">${headphoneIcon}<span class="feat-dur-val">${s.dur || '—'}</span></div>
     `;
     wrap.appendChild(card);
   });
@@ -1182,7 +1207,7 @@ function buildGrid(filter) {
       </div>
       <div class="card-title">${s.title}</div>
       <div class="card-book">${s.book}</div>
-      <div class="card-duration">${headphoneIcon}${s.dur || (s.audio ? 'Disponible' : 'Próximamente')}</div>
+      <div class="card-duration">${headphoneIcon}<span class="card-dur-val">${s.dur || (s.audio ? '—' : 'Próximamente')}</span></div>
     `;
     grid.appendChild(card);
   });
@@ -1250,6 +1275,7 @@ function fmtTime(t) {
   return `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, '0')}`;
 }
 
+let _saveTimer;
 audioEl.addEventListener('timeupdate', () => {
   if (!audioEl.duration) return;
   const pct = (audioEl.currentTime / audioEl.duration * 100) + '%';
@@ -1258,6 +1284,28 @@ audioEl.addEventListener('timeupdate', () => {
   document.getElementById('playerTime').textContent = `${fmtTime(audioEl.currentTime)} / ${fmtTime(audioEl.duration)}`;
   document.getElementById('pfTimeCurrent').textContent = fmtTime(audioEl.currentTime);
   document.getElementById('pfTimeDuration').textContent = fmtTime(audioEl.duration);
+  // Guardar posición cada 5s
+  clearTimeout(_saveTimer);
+  _saveTimer = setTimeout(() => {
+    if (current && audioEl.currentTime > 5)
+      localStorage.setItem('pos_' + current.id, audioEl.currentTime);
+  }, 5000);
+});
+
+audioEl.addEventListener('loadedmetadata', () => {
+  if (!current || !audioEl.duration) return;
+  // Guardar y mostrar duración real
+  const dur = fmtTime(audioEl.duration);
+  current.dur = dur;
+  localStorage.setItem('dur_' + current.id, dur);
+  document.querySelectorAll(`.audio-card[data-id="${current.id}"] .card-dur-val,
+    .feat-card[data-id="${current.id}"] .feat-dur-val`).forEach(el => el.textContent = dur);
+  // Continuar donde quedó
+  const saved = parseFloat(localStorage.getItem('pos_' + current.id) || 0);
+  if (saved > 5 && saved < audioEl.duration - 10) {
+    audioEl.currentTime = saved;
+    showToast('▶ Continuando desde ' + fmtTime(saved));
+  }
 });
 
 audioEl.addEventListener('play', () => {
@@ -1282,7 +1330,20 @@ audioEl.addEventListener('ended', () => {
   document.getElementById('progressFill').style.width = '0%';
   document.getElementById('pfSliderFill').style.width = '0%';
   document.getElementById('playerTime').textContent = '';
+  if (current) localStorage.removeItem('pos_' + current.id);
 });
+
+function shareStory() {
+  if (!current) return;
+  const data = { title: current.title + ' — Sebael', text: current.desc, url: location.href };
+  if (navigator.share) {
+    navigator.share(data).catch(() => {});
+  } else {
+    navigator.clipboard?.writeText(location.href)
+      .then(() => showToast('🔗 Enlace copiado'))
+      .catch(() => showToast(location.href));
+  }
+}
 
 // ── Full player seek (tap en slider)
 document.getElementById('pfSlider').addEventListener('click', e => {
