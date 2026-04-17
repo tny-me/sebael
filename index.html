@@ -77,21 +77,31 @@
     justify-content: space-between;
     padding: 0 24px;
     height: 64px;
-    background: rgba(255,255,255,0.96);
+    background: rgba(122,192,212,0.97);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    border-bottom: 0.5px solid var(--border);
+    border-bottom: 0.5px solid rgba(90,173,160,0.25);
   }
 
   .logo { display: flex; align-items: center; }
-  .logo-img { height: 48px; width: auto; display: block; }
-  .logo-fallback { display: none; font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: var(--gold); }
+  .logo-img { height: 64px; width: auto; display: block; }
+  .logo-fallback { display: none; font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: #fff; }
 
   .topbar-actions {
     display: flex;
     align-items: center;
     gap: 8px;
   }
+
+  .topbar .icon-btn {
+    background: rgba(255,255,255,0.22);
+    border-color: rgba(255,255,255,0.30);
+    color: #fff;
+  }
+  .topbar .icon-btn:hover { background: rgba(255,255,255,0.35); border-color: rgba(255,255,255,0.5); color: #fff; }
+  .topbar .install-btn { background: rgba(255,255,255,0.22); color: #fff; border-color: rgba(255,255,255,0.35); }
+  .topbar .install-btn:hover { background: rgba(255,255,255,0.35); }
+  .topbar .install-btn span { color: #fff; }
 
   .icon-btn {
     width: 38px;
@@ -1131,7 +1141,19 @@ function playSong(s) {
 
   audioEl.src = s.audio;
   audioEl.load();
-  audioEl.play().catch(e => showToast('⚠ ' + (e.name === 'NotSupportedError' ? 'Formato no soportado' : e.name === 'NotAllowedError' ? 'Bloqueado por el navegador' : 'Error: ' + e.message)));
+
+  const onCanPlay = () => {
+    audioEl.removeEventListener('error', onError);
+    audioEl.play().catch(e => showToast('⚠ ' + e.name));
+  };
+  const onError = () => {
+    audioEl.removeEventListener('canplay', onCanPlay);
+    const code = audioEl.error ? audioEl.error.code : '?';
+    const msgs = { 1:'Abortado', 2:'Error de red', 3:'Error al decodificar', 4:'Formato no soportado' };
+    showToast('⚠ ' + (msgs[code] || 'Error ' + code));
+  };
+  audioEl.addEventListener('canplay', onCanPlay, { once: true });
+  audioEl.addEventListener('error', onError, { once: true });
 
   syncFullPlayer(s);
   buildGrid(activeFilter);
