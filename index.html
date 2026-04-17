@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#FAF7EF">
+<meta name="theme-color" content="#F4FAFB">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Sebael">
@@ -19,18 +19,20 @@
 
 <style>
   :root {
-    --bg: #FAF7EF;
+    --bg: #F4FAFB;
     --surface: #FFFFFF;
-    --surface2: #F2EDE0;
-    --surface3: #E8E0CE;
-    --gold: #9B6F2F;
-    --gold-light: #C49A3C;
-    --gold-dim: #D4B47A;
-    --text: #1C1810;
-    --text-muted: #6B6052;
-    --text-dim: #A09278;
-    --border: rgba(155,111,47,0.16);
-    --border-hover: rgba(155,111,47,0.36);
+    --surface2: #E6F3F7;
+    --surface3: #D0E8EE;
+    --gold: #C07820;
+    --gold-light: #D4943A;
+    --gold-dim: #E8C07A;
+    --sky: #7AC0D4;
+    --teal: #5AADA0;
+    --text: #2A1A08;
+    --text-muted: #6A5238;
+    --text-dim: #9E8260;
+    --border: rgba(192,120,32,0.14);
+    --border-hover: rgba(192,120,32,0.30);
     --radius: 14px;
     --radius-sm: 8px;
     --player-h: 90px;
@@ -73,33 +75,14 @@
     justify-content: space-between;
     padding: 0 24px;
     height: 64px;
-    background: rgba(250,247,239,0.94);
+    background: rgba(244,250,251,0.94);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border-bottom: 0.5px solid var(--border);
   }
 
-  .logo {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-  }
-
-  .logo-name {
-    font-family: var(--font-serif);
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    color: var(--gold);
-  }
-
-  .logo-sub {
-    font-size: 10px;
-    font-weight: 400;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
+  .logo { display: flex; align-items: center; }
+  .logo-img { height: 44px; width: auto; display: block; }
 
   .topbar-actions {
     display: flex;
@@ -157,7 +140,7 @@
     transform: translateX(-50%);
     width: 500px;
     height: 300px;
-    background: radial-gradient(ellipse at 50% 30%, rgba(155,111,47,0.07) 0%, transparent 70%);
+    background: radial-gradient(ellipse at 50% 30%, rgba(122,192,212,0.18) 0%, transparent 70%);
     pointer-events: none;
   }
 
@@ -376,7 +359,7 @@
     transition: opacity 0.2s, transform 0.2s;
     box-shadow: 0 4px 16px rgba(196,154,60,0.4);
   }
-  .card-play-btn svg { width: 14px; height: 14px; fill: #FAF7EF; margin-left: 2px; }
+  .card-play-btn svg { width: 14px; height: 14px; fill: #F4FAFB; margin-left: 2px; }
 
   .card-title {
     font-family: var(--font-serif);
@@ -412,7 +395,7 @@
     left: 0;
     right: 0;
     z-index: 200;
-    background: rgba(250,247,239,0.97);
+    background: rgba(244,250,251,0.97);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
     border-top: 0.5px solid var(--border);
@@ -521,7 +504,7 @@
     justify-content: center;
     cursor: pointer;
     transition: transform 0.15s, background 0.2s;
-    color: #FAF7EF;
+    color: #F4FAFB;
   }
   .ctrl-play:hover { transform: scale(1.05); background: var(--gold-light); }
   .ctrl-play svg { width: 18px; height: 18px; fill: currentColor; }
@@ -856,6 +839,34 @@
 
   /* tap zone mini player */
   .player-tap-zone { cursor: pointer; display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; overflow: hidden; }
+
+  /* ── BADGE NUEVO ─────────────────── */
+  .badge-new {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--teal);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 40px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(90,173,160,0.35);
+  }
+
+  /* ── FOOTER ─────────────────────── */
+  .footer {
+    text-align: center;
+    padding: 36px 24px 24px;
+    border-top: 0.5px solid var(--border);
+    margin-top: 8px;
+  }
+  .footer-logo { height: 48px; width: auto; margin: 0 auto 12px; display: block; opacity: 0.85; }
+  .footer-text { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
+  .footer-sub { font-size: 11px; color: var(--text-dim); }
 </style>
 </head>
 <body>
@@ -869,8 +880,7 @@
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
-    <span class="logo-name">Sebael</span>
-    <span class="logo-sub">Crónicas Bíblicas</span>
+    <img src="images/logo.png" alt="Sebael" class="logo-img">
   </div>
   <div class="topbar-actions">
     <button class="icon-btn" title="Buscar" onclick="showToast('Búsqueda próximamente')">
@@ -908,14 +918,7 @@
 <!-- CATEGORIES -->
 <div class="cats-wrap">
   <div class="cats-row" id="catsRow">
-    <button class="cat-pill active" onclick="filterCat('Todos', this)">Todos</button>
-    <button class="cat-pill" onclick="filterCat('Génesis', this)">Génesis</button>
-    <button class="cat-pill" onclick="filterCat('Éxodo', this)">Éxodo</button>
-    <button class="cat-pill" onclick="filterCat('Salmos', this)">Salmos</button>
-    <button class="cat-pill" onclick="filterCat('Proverbios', this)">Proverbios</button>
-    <button class="cat-pill" onclick="filterCat('Profetas', this)">Profetas</button>
-    <button class="cat-pill" onclick="filterCat('Evangelios', this)">Evangelios</button>
-    <button class="cat-pill" onclick="filterCat('Apocalipsis', this)">Apocalipsis</button>
+    <!-- generado por JS -->
   </div>
 </div>
 
@@ -928,6 +931,13 @@
     <!-- populated by JS -->
   </div>
 </div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <img src="images/logo.png" alt="Sebael" class="footer-logo">
+  <p class="footer-text">Sebael — Crónicas Bíblicas</p>
+  <p class="footer-sub">© 2026 Sebael. Todos los derechos reservados.</p>
+</footer>
 
 <!-- PLAYER -->
 <div class="player" id="player">
@@ -1004,27 +1014,11 @@
 
 <script>
 const STORIES = [
-  { id:1,  title:'En el principio',        book:'Génesis 1',       cat:'Génesis',    dur:'18:42', emoji:'✦',  color:'#EDE3C4', desc:'La creación del mundo en siete días.' },
-  { id:2,  title:'El jardín del Edén',     book:'Génesis 2–3',     cat:'Génesis',    dur:'22:10', emoji:'🌿', color:'#C8E6C9', desc:'La historia de Adán y Eva.' },
-  { id:3,  title:'El arca de Noé',         book:'Génesis 6–9',     cat:'Génesis',    dur:'34:05', emoji:'⛵', color:'#BBDEFB', desc:'El diluvio y la alianza con Dios.' },
-  { id:4,  title:'El éxodo',               book:'Éxodo 12–14',     cat:'Éxodo',      dur:'41:18', emoji:'🔥', color:'#FFE0B2', desc:'Moisés guía al pueblo hacia la libertad.' },
-  { id:5,  title:'Salmo 23',               book:'Salmos 23',       cat:'Salmos',     dur:'04:30', emoji:'☁️', color:'#E3E8F5', desc:'El Señor es mi pastor.' },
-  { id:6,  title:'Salmo 91',               book:'Salmos 91',       cat:'Salmos',     dur:'06:12', emoji:'⚔️', color:'#FFCCBC', desc:'Al abrigo del Altísimo.' },
-  { id:7,  title:'La sabiduría eterna',    book:'Proverbios 8',    cat:'Proverbios', dur:'12:48', emoji:'📜', color:'#FFF9C4', desc:'La voz de la sabiduría clama.' },
-  { id:8,  title:'El valle de los huesos', book:'Ezequiel 37',     cat:'Profetas',   dur:'14:20', emoji:'💨', color:'#B2DFDB', desc:'Visión de la resurrección del pueblo.' },
-  { id:9,  title:'La natividad',           book:'Lucas 2',         cat:'Evangelios', dur:'15:33', emoji:'⭐', color:'#D4E8FF', desc:'El nacimiento del Mesías en Belén.' },
-  { id:10, title:'El sermón del monte',    book:'Mateo 5–7',       cat:'Evangelios', dur:'28:47', emoji:'🏔️', color:'#DCF0DC', desc:'Las bienaventuranzas y la nueva ley.' },
-  { id:11, title:'La última cena',         book:'Juan 13',         cat:'Evangelios', dur:'19:05', emoji:'🍞', color:'#F5E6D0', desc:'Las últimas palabras del Maestro.' },
-  { id:12, title:'La resurrección',        book:'Juan 20',         cat:'Evangelios', dur:'16:22', emoji:'☀️', color:'#FFFDE7', desc:'El primer día de la semana, el sepulcro vacío.' },
-  { id:13, title:'Las visiones de Patmos', book:'Apocalipsis 1',   cat:'Apocalipsis',dur:'24:14', emoji:'👁️', color:'#E1BEE7', desc:'Juan recibe la revelación en la isla.' },
-  { id:14, title:'La mujer y el dragón',   book:'Apocalipsis 12',  cat:'Apocalipsis',dur:'18:56', emoji:'🐉', color:'#FFCCBC', desc:'La gran señal en el cielo.' },
-  { id:15, title:'El rey de reyes',        book:'Apocalipsis 19',  cat:'Apocalipsis',dur:'21:00', emoji:'👑', color:'#FFF9C4', desc:'El jinete sobre el caballo blanco.' },
-  { id:16, title:'La nueva Jerusalén',     book:'Apocalipsis 21–22',cat:'Apocalipsis',dur:'26:38',emoji:'✨', color:'#DDEEFF', desc:'El nuevo cielo y la nueva tierra.' },
-  { id:17, title:'La valentía de David',        book:'1 Samuel 17',     cat:'Profetas',   dur:'',      emoji:'⚔️', color:'#EDE3C4',
+  { id:1, title:'La valentía de David',          book:'1 Samuel 17',   cat:'Profetas', dur:'', emoji:'⚔️', color:'#EDE3C4', addedAt:'2026-04-15',
     audio:'https://github.com/tny-me/sebael/releases/download/v1.0/La.Valentia.de.David.m4a',
     cover:'https://raw.githubusercontent.com/tny-me/sebael/main/Portada_la%20valentia%20de%20David.png',
     desc:'El joven pastor que venció al gigante Goliat.' },
-  { id:18, title:'David, el niño que confió en Dios', book:'1 Samuel 16–17', cat:'Profetas',   dur:'',      emoji:'🐑', color:'#C8E6C9',
+  { id:2, title:'David, el niño que confió en Dios', book:'1 Samuel 16–17', cat:'Profetas', dur:'', emoji:'🐑', color:'#C8E6C9', addedAt:'2026-04-17',
     audio:'https://github.com/tny-me/sebael/releases/download/V1.1/David.el.nino.que.confio.en.Dios.mp3',
     cover:'https://raw.githubusercontent.com/tny-me/sebael/main/images/David%20el%20ni%C3%B1o%20que%20confio%20en%20Dios.png',
     desc:'La historia del pastorcito que Dios eligió para ser rey.' },
@@ -1043,10 +1037,23 @@ let current = null;
 let playing = false;
 let activeFilter = 'Todos';
 
+function isNew(s) {
+  if (!s.addedAt) return false;
+  return (Date.now() - new Date(s.addedAt)) / 86400000 <= 30;
+}
+
+function buildCats() {
+  const row = document.getElementById('catsRow');
+  const cats = ['Todos', ...new Set(STORIES.map(s => s.cat))];
+  row.innerHTML = cats.map((c, i) =>
+    `<button class="cat-pill${i === 0 ? ' active' : ''}" onclick="filterCat('${c}', this)">${c}</button>`
+  ).join('');
+}
+
 function buildFeatured() {
   const wrap = document.getElementById('featuredScroll');
   wrap.innerHTML = '';
-  const picks = [16, 0, 4, 9, 11];
+  const picks = STORIES.map((_, i) => i);
   picks.forEach(i => {
     const s = STORIES[i];
     const card = document.createElement('div');
@@ -1059,6 +1066,7 @@ function buildFeatured() {
     card.innerHTML = `
       <div class="feat-cover">
         ${art}
+        ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
         ${isActive ? `<div class="feat-playing-badge">▶ Reproduciendo</div>` : ''}
       </div>
       <div class="feat-title">${s.title}</div>
@@ -1084,6 +1092,7 @@ function buildGrid(filter) {
     card.innerHTML = `
       <div class="card-cover">
         ${art}
+        ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
         <div class="card-play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
       <div class="card-title">${s.title}</div>
@@ -1197,7 +1206,7 @@ document.getElementById('pfSlider').addEventListener('click', e => {
 function syncFullPlayer(s) {
   const bg = s.cover
     ? `url('${s.cover}') center top / cover no-repeat`
-    : `linear-gradient(160deg, ${s.color} 0%, #FAF7EF 100%)`;
+    : `linear-gradient(160deg, ${s.color} 0%, #F4FAFB 100%)`;
   document.getElementById('pfBgImg').style.background = bg;
   document.getElementById('pfTitle').textContent = s.title;
   document.getElementById('pfBook').textContent = s.book;
@@ -1277,8 +1286,8 @@ const manifest = {
   description: 'Audiolibros bíblicos sagrados',
   start_url: '/',
   display: 'standalone',
-  background_color: '#FAF7EF',
-  theme_color: '#FAF7EF',
+  background_color: '#F4FAFB',
+  theme_color: '#C07820',
   orientation: 'portrait',
   icons: [
     { src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='40' fill='%23FAF7EF'/%3E%3Ctext x='96' y='130' text-anchor='middle' font-size='96' font-family='Georgia' fill='%239B6F2F'%3E✦%3C/text%3E%3C/svg%3E", sizes: '192x192', type: 'image/svg+xml' },
@@ -1305,6 +1314,7 @@ if ('serviceWorker' in navigator) {
 }
 
 // Init
+buildCats();
 buildFeatured();
 buildGrid('Todos');
 setInterval(rotateVerse, 12000);
