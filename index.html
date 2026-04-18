@@ -61,7 +61,7 @@
     overflow-x: hidden;
     overscroll-behavior: none;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: calc(var(--player-h) + var(--tabnav-h) + env(safe-area-inset-bottom));
+    padding-bottom: calc(var(--tabnav-h) + env(safe-area-inset-bottom));
   }
 
   button, .audio-card, .feat-card, .cat-pill { user-select: none; -webkit-user-select: none; }
@@ -528,30 +528,33 @@
   .card-active .card-title { color: var(--gold-light); }
 
   /* ── AUDIO PLAYER ───────────────────── */
+  /* Mobile: chip flotante bajo el header, oculto hasta reproducir */
   .player {
     position: fixed;
-    bottom: calc(var(--tabnav-h) + env(safe-area-inset-bottom));
-    left: 0;
-    right: 0;
+    top: calc(64px + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-12px);
+    width: calc(100% - 28px);
+    max-width: 400px;
     z-index: 200;
-    background: rgba(245,240,232,0.97);
+    background: rgba(248,243,236,0.97);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
-    border-top: 1px solid rgba(140,110,70,0.16);
-    padding-bottom: 0;
-    box-shadow: 0 -4px 24px rgba(28,18,8,0.10);
+    border: 0.5px solid rgba(140,110,70,0.22);
+    border-radius: 50px;
+    box-shadow: 0 8px 32px rgba(28,18,8,0.18), 0 2px 8px rgba(28,18,8,0.08);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.32,0.72,0,1);
   }
-  @media (min-width: 768px) {
-    .player { bottom: 0; padding-bottom: env(safe-area-inset-bottom); }
+  .player.player-active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
   }
 
-  .player-progress {
-    width: 100%;
-    height: 2px;
-    background: var(--surface3);
-    cursor: pointer;
-    position: relative;
-  }
+  /* Barra de progreso: oculta en chip móvil */
+  .player-progress { display: none; }
 
   .player-fill {
     height: 100%;
@@ -561,17 +564,18 @@
     pointer-events: none;
   }
 
+  /* Chip interior: compacto */
   .player-inner {
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 14px 20px;
-    height: calc(var(--player-h) - 2px);
+    gap: 10px;
+    padding: 7px 10px 7px 7px;
+    height: auto;
   }
 
   .player-thumb {
-    width: 48px;
-    height: 48px;
+    width: 38px;
+    height: 38px;
     border-radius: 10px;
     background: var(--surface2);
     border: 0.5px solid var(--border);
@@ -580,7 +584,7 @@
     align-items: center;
     justify-content: center;
     font-family: var(--font-serif);
-    font-size: 22px;
+    font-size: 18px;
     color: var(--gold-dim);
     overflow: hidden;
   }
@@ -592,7 +596,7 @@
 
   .player-title {
     font-family: 'Poppins', var(--font-sans);
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--text);
     white-space: nowrap;
@@ -600,25 +604,18 @@
     text-overflow: ellipsis;
   }
 
-  .player-book {
-    font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.04em;
-    margin-top: 2px;
-  }
-
-  .player-time {
-    font-size: 10px;
-    color: var(--text-dim);
-    font-variant-numeric: tabular-nums;
-    margin-top: 3px;
-  }
+  /* Book y tiempo: ocultos en chip móvil */
+  .player-book { display: none; }
+  .player-time  { display: none; }
 
   .player-controls {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
   }
+
+  /* Botones de skip/share: ocultos en chip */
+  .ctrl-btn { display: none; }
 
   .ctrl-btn {
     width: 36px;
@@ -655,12 +652,13 @@
   .ctrl-play:not(.paused) svg.play-icon { display: none; }
 
   .wave-anim {
-    display: flex;
+    display: none; /* oculto en chip móvil */
     align-items: center;
     gap: 2px;
     height: 18px;
     flex-shrink: 0;
   }
+  @media (min-width: 768px) { .wave-anim { display: flex; } }
   .wave-anim span {
     display: block;
     width: 3px;
@@ -729,13 +727,6 @@
     font-weight: 500;
   }
 
-  /* ── EMPTY PLAYER STATE ─────────────── */
-  .player-empty {
-    font-size: 13px;
-    color: var(--text-dim);
-    font-style: italic;
-    font-family: var(--font-serif);
-  }
 
   /* ── TOAST ──────────────────────────── */
   .toast {
@@ -764,6 +755,32 @@
   }
   @media (min-width: 768px) {
     body { padding-bottom: calc(var(--player-h) + env(safe-area-inset-bottom)); }
+
+    /* Desktop: barra inferior tradicional */
+    .player {
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      transform: none;
+      width: auto;
+      max-width: none;
+      border-radius: 0;
+      border: none;
+      border-top: 1px solid rgba(140,110,70,0.16);
+      padding-bottom: env(safe-area-inset-bottom);
+      opacity: 1;
+      pointer-events: auto;
+      transition: none;
+      box-shadow: 0 -4px 24px rgba(28,18,8,0.10);
+    }
+    .player-progress { display: block; width: 100%; height: 2px; background: var(--surface3); cursor: pointer; position: relative; }
+    .player-inner { padding: 14px 20px; height: calc(var(--player-h) - 2px); gap: 14px; }
+    .player-thumb { width: 48px; height: 48px; border-radius: 10px; font-size: 22px; }
+    .player-title { font-size: 14px; }
+    .player-book { display: block; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; margin-top: 2px; }
+    .player-time  { display: block; font-size: 10px; color: var(--text-dim); font-variant-numeric: tabular-nums; margin-top: 3px; }
+    .ctrl-btn { display: flex; }
   }
   @media (min-width: 900px) {
     .hero { padding: 64px 48px 52px; }
@@ -1121,9 +1138,7 @@
     <div class="player-tap-zone" onclick="openFullPlayer()">
       <div class="player-thumb" id="playerThumb">♪</div>
       <div class="player-info">
-        <div class="player-title" id="playerTitle">
-          <span class="player-empty">Selecciona una historia</span>
-        </div>
+        <div class="player-title" id="playerTitle"></div>
         <div class="player-book" id="playerBook"></div>
         <div class="player-time" id="playerTime"></div>
       </div>
@@ -1340,6 +1355,8 @@ function playSong(s) {
   document.getElementById('playerTitle').textContent = s.title;
   document.getElementById('playerBook').textContent = s.book;
   document.getElementById('playerTime').textContent = '';
+
+  document.getElementById('player').classList.add('player-active');
 
   audioEl.src = s.audio;
   audioEl.play().catch(e => {
