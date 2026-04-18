@@ -327,7 +327,7 @@
     z-index: 150;
     display: flex;
     align-items: stretch;
-    height: var(--tabnav-h);
+    height: calc(var(--tabnav-h) + env(safe-area-inset-bottom));
     padding-bottom: env(safe-area-inset-bottom);
     background: rgba(255,255,255,0.97);
     backdrop-filter: blur(20px);
@@ -537,12 +537,12 @@
     width: calc(100% - 28px);
     max-width: 400px;
     z-index: 200;
-    background: rgba(248,243,236,0.97);
+    background: rgba(90, 186, 210, 0.97);
     backdrop-filter: blur(28px);
     -webkit-backdrop-filter: blur(28px);
-    border: 0.5px solid rgba(140,110,70,0.22);
+    border: 0.5px solid rgba(255,255,255,0.28);
     border-radius: 50px;
-    box-shadow: 0 8px 32px rgba(28,18,8,0.18), 0 2px 8px rgba(28,18,8,0.08);
+    box-shadow: 0 8px 32px rgba(28,80,120,0.22), 0 2px 8px rgba(28,80,120,0.10);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.32,0.72,0,1);
@@ -598,7 +598,7 @@
     font-family: 'Poppins', var(--font-sans);
     font-size: 13px;
     font-weight: 600;
-    color: var(--text);
+    color: #fff;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -614,16 +614,14 @@
     gap: 4px;
   }
 
-  /* Botones de skip/share: ocultos en chip */
-  .ctrl-btn { display: none; }
-
+  /* Botones skip/share: ocultos en chip móvil */
   .ctrl-btn {
     width: 36px;
     height: 36px;
     border-radius: 50%;
     background: transparent;
     border: none;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     cursor: pointer;
@@ -633,23 +631,44 @@
   .ctrl-btn:hover { color: var(--text); }
   .ctrl-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
+  /* Play/pause: estilo chip (blanco sobre azul) */
   .ctrl-play {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: var(--gold);
+    background: rgba(255,255,255,0.28);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     transition: transform 0.15s, background 0.2s;
-    color: #F4FAFB;
+    color: #fff;
   }
-  .ctrl-play:hover { transform: scale(1.05); background: var(--gold-light); }
-  .ctrl-play svg { width: 18px; height: 18px; fill: currentColor; }
+  .ctrl-play:hover { transform: scale(1.05); background: rgba(255,255,255,0.42); }
+  .ctrl-play svg { width: 17px; height: 17px; fill: currentColor; }
   .ctrl-play.paused svg.pause-icon { display: none; }
   .ctrl-play:not(.paused) svg.play-icon { display: none; }
+
+  /* Botón cerrar chip */
+  .player-close {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    flex-shrink: 0;
+    margin-left: 2px;
+    transition: background 0.15s;
+  }
+  .player-close:hover { background: rgba(255,255,255,0.35); }
+  .player-close:active { opacity: 0.7; }
+  .player-close svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
 
   .wave-anim {
     display: none; /* oculto en chip móvil */
@@ -731,9 +750,10 @@
   /* ── TOAST ──────────────────────────── */
   .toast {
     position: fixed;
-    top: 78px;
+    bottom: calc(var(--tabnav-h) + env(safe-area-inset-bottom) + 14px);
+    top: auto;
     left: 50%;
-    transform: translateX(-50%) translateY(-10px);
+    transform: translateX(-50%) translateY(8px);
     background: var(--surface3);
     border: 0.5px solid var(--border-hover);
     color: var(--gold-light);
@@ -777,10 +797,15 @@
     .player-progress { display: block; width: 100%; height: 2px; background: var(--surface3); cursor: pointer; position: relative; }
     .player-inner { padding: 14px 20px; height: calc(var(--player-h) - 2px); gap: 14px; }
     .player-thumb { width: 48px; height: 48px; border-radius: 10px; font-size: 22px; }
-    .player-title { font-size: 14px; }
+    .player-title { font-size: 14px; color: var(--text); }
     .player-book { display: block; font-size: 11px; color: var(--text-muted); letter-spacing: 0.04em; margin-top: 2px; }
     .player-time  { display: block; font-size: 10px; color: var(--text-dim); font-variant-numeric: tabular-nums; margin-top: 3px; }
     .ctrl-btn { display: flex; }
+    .ctrl-play { width: 44px; height: 44px; background: var(--gold); color: #F4FAFB; }
+    .ctrl-play:hover { background: var(--gold-light); }
+    .ctrl-play svg { width: 18px; height: 18px; }
+    .player-close { display: none; }
+    .toast { bottom: calc(var(--player-h) + env(safe-area-inset-bottom) + 14px); }
   }
   @media (min-width: 900px) {
     .hero { padding: 64px 48px 52px; }
@@ -1161,6 +1186,9 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
     </div>
+    <button class="player-close" onclick="hidePlayer()" title="Cerrar">
+      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
 </div>
 
@@ -1497,6 +1525,11 @@ function closeFullPlayer() {
   pf.style.transform = '';
   pf.classList.remove('open');
   document.body.style.overflow = '';
+}
+
+function hidePlayer() {
+  document.getElementById('player').classList.remove('player-active');
+  closeFullPlayer();
 }
 
 // ── Swipe down to close
