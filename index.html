@@ -545,7 +545,7 @@
     box-shadow: 0 8px 32px rgba(28,80,120,0.22), 0 2px 8px rgba(28,80,120,0.10);
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.32,0.72,0,1);
+    transition: opacity 0.32s ease, transform 0.36s cubic-bezier(0.32,0.72,0,1), max-width 0.32s cubic-bezier(0.32,0.72,0,1);
   }
   .player.player-active {
     opacity: 1;
@@ -650,7 +650,12 @@
   .ctrl-play.paused svg.pause-icon { display: none; }
   .ctrl-play:not(.paused) svg.play-icon { display: none; }
 
-  /* Botón cerrar chip */
+  /* Chip minimizado: solo portada + play */
+  .player.player-mini { max-width: 106px; }
+  .player.player-mini .player-info,
+  .player.player-mini .player-close { display: none !important; }
+
+  /* Botón minimizar chip */
   .player-close {
     width: 26px;
     height: 26px;
@@ -1186,8 +1191,8 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
     </div>
-    <button class="player-close" onclick="hidePlayer()" title="Cerrar">
-      <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    <button class="player-close" onclick="minimizePlayer()" title="Minimizar">
+      <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
     </button>
   </div>
 </div>
@@ -1514,6 +1519,11 @@ function syncFullPlayer(s) {
 }
 
 function openFullPlayer() {
+  const p = document.getElementById('player');
+  if (p.classList.contains('player-mini')) {
+    p.classList.remove('player-mini');
+    return;
+  }
   if (!current || window.innerWidth >= 768) return;
   document.getElementById('playerFull').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1527,9 +1537,8 @@ function closeFullPlayer() {
   document.body.style.overflow = '';
 }
 
-function hidePlayer() {
-  document.getElementById('player').classList.remove('player-active');
-  closeFullPlayer();
+function minimizePlayer() {
+  document.getElementById('player').classList.add('player-mini');
 }
 
 // ── Swipe down to close
