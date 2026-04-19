@@ -833,7 +833,98 @@
     .audio-grid { grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
   }
 
-  /* ── SCROLLBAR ──────────────────────── */
+  /* ── SPEED & SLEEP (full player) ─── */
+  .pf-extras {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4px;
+    margin-bottom: 20px;
+  }
+
+  .pf-sleep-countdown {
+    display: none;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+    font-variant-numeric: tabular-nums;
+  }
+  .pf-sleep-countdown.visible { display: flex; }
+  .pf-sleep-countdown svg { width: 13px; height: 13px; fill: none; stroke: rgba(255,255,255,0.65); stroke-width: 1.8; }
+
+  .pf-ctrl-speed {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    transition: background 0.15s;
+  }
+  .pf-ctrl-speed:active { background: rgba(255,255,255,0.28); }
+  .pf-ctrl-speed.speed-active { background: rgba(255,255,255,0.30); outline: 1.5px solid rgba(255,255,255,0.5); }
+
+  .pf-ctrl-sleep {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.85);
+    font-family: var(--font-sans);
+    font-size: 9px;
+    font-weight: 600;
+    transition: background 0.15s;
+  }
+  .pf-ctrl-sleep:active { background: rgba(255,255,255,0.28); }
+  .pf-ctrl-sleep.sleep-active { background: rgba(255,255,255,0.28); outline: 1.5px solid rgba(255,255,255,0.5); }
+  .pf-ctrl-sleep svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .pf-ctrl-sleep .sleep-min { font-variant-numeric: tabular-nums; line-height: 1; }
+
+  /* Sleep countdown en chip móvil */
+  .player-sleep-row {
+    display: none;
+    align-items: center;
+    gap: 3px;
+    font-size: 10px;
+    color: rgba(255,255,255,0.7);
+    margin-top: 1px;
+    font-variant-numeric: tabular-nums;
+  }
+  .player-sleep-row.visible { display: flex; }
+  .player-sleep-row svg { width: 10px; height: 10px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+
+  /* Speed y sleep en desktop player */
+  .ctrl-btn.ctrl-speed {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text-muted);
+    width: 36px;
+  }
+  .ctrl-btn.ctrl-speed.speed-active { color: var(--teal); }
+  .ctrl-btn.ctrl-sleep svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; }
+  .ctrl-btn.ctrl-sleep.sleep-active { color: var(--teal); }
   ::-webkit-scrollbar { width: 4px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--text-dim); border-radius: 4px; }
@@ -1172,6 +1263,10 @@
       <div class="player-thumb" id="playerThumb">♪</div>
       <div class="player-info">
         <div class="player-title" id="playerTitle"></div>
+        <div class="player-sleep-row" id="playerSleepRow">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span id="playerSleepTime"></span>
+        </div>
         <div class="player-book" id="playerBook"></div>
         <div class="player-time" id="playerTime"></div>
       </div>
@@ -1193,6 +1288,10 @@
       <button class="ctrl-btn" onclick="shareStory()" title="Compartir">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
+      <button class="ctrl-btn ctrl-speed" id="desktopSpeedBtn" onclick="cycleSpeed()" title="Velocidad">1×</button>
+      <button class="ctrl-btn ctrl-sleep" id="desktopSleepBtn" onclick="cycleSleep()" title="Temporizador">
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
     </div>
     <button class="player-close" onclick="minimizePlayer()" title="Minimizar">
       <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -1209,6 +1308,10 @@
       <button class="pf-back-btn" onclick="closeFullPlayer()" aria-label="Minimizar">
         <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
+      <div class="pf-sleep-countdown" id="pfSleepCountdown">
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span id="pfSleepTime">—</span>
+      </div>
       <button class="pf-back-btn" onclick="shareStory()" aria-label="Compartir">
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
@@ -1227,6 +1330,7 @@
         <span id="pfTimeDuration">—</span>
       </div>
       <div class="pf-controls">
+        <button class="pf-ctrl-speed" id="pfSpeedBtn" onclick="cycleSpeed()">1×</button>
         <button class="pf-ctrl-skip" onclick="skipBack()">
           <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
         </button>
@@ -1236,6 +1340,10 @@
         </button>
         <button class="pf-ctrl-skip" onclick="skipForward()">
           <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+        </button>
+        <button class="pf-ctrl-sleep" id="pfSleepBtn" onclick="cycleSleep()">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <span class="sleep-min" id="pfSleepMin"></span>
         </button>
       </div>
     </div>
@@ -1564,6 +1672,104 @@ function minimizePlayer() {
   });
 })();
 
+// ── VELOCIDAD ──────────────────────────
+const SPEEDS = [1, 1.25, 1.5, 0.75];
+let speedIdx = parseInt(localStorage.getItem('speedIdx') || 0);
+
+function cycleSpeed() {
+  speedIdx = (speedIdx + 1) % SPEEDS.length;
+  applySpeed();
+  localStorage.setItem('speedIdx', speedIdx);
+}
+
+function applySpeed() {
+  const s = SPEEDS[speedIdx];
+  audioEl.playbackRate = s;
+  const label = s === 1 ? '1×' : s + '×';
+  const isModified = s !== 1;
+  document.querySelectorAll('#pfSpeedBtn, #desktopSpeedBtn').forEach(el => {
+    el.textContent = label;
+    el.classList.toggle('speed-active', isModified);
+  });
+}
+
+// ── SLEEP TIMER ────────────────────────
+const SLEEP_OPTS = [15, 30, 45]; // minutos; off = no timer
+let sleepInterval = null;
+let sleepRemaining = 0;
+
+function cycleSleep() {
+  if (sleepInterval) {
+    // Ya está activo → cancelar
+    clearInterval(sleepInterval);
+    sleepInterval = null;
+    sleepRemaining = 0;
+    updateSleepUI(0);
+    showToast('Temporizador cancelado');
+    return;
+  }
+  // Elegir siguiente opción (ciclo)
+  const key = 'sleepOptIdx';
+  const idx = ((parseInt(localStorage.getItem(key) || -1) + 1) % SLEEP_OPTS.length);
+  localStorage.setItem(key, idx);
+  const mins = SLEEP_OPTS[idx];
+  sleepRemaining = mins * 60;
+  updateSleepUI(sleepRemaining);
+  sleepInterval = setInterval(() => {
+    sleepRemaining--;
+    updateSleepUI(sleepRemaining);
+    if (sleepRemaining <= 0) {
+      clearInterval(sleepInterval);
+      sleepInterval = null;
+      fadeAndPause();
+    }
+  }, 1000);
+  showToast(`🌙 Apagando en ${mins} min`);
+}
+
+function updateSleepUI(secs) {
+  const active = secs > 0;
+  const label = active ? fmtTime(secs) : '';
+  const minsLeft = active ? Math.ceil(secs / 60) + ' min' : '';
+
+  // Full player header countdown
+  const pfCountdown = document.getElementById('pfSleepCountdown');
+  const pfTime = document.getElementById('pfSleepTime');
+  pfCountdown.classList.toggle('visible', active);
+  if (pfTime) pfTime.textContent = label;
+
+  // Full player sleep button label
+  const pfMin = document.getElementById('pfSleepMin');
+  if (pfMin) pfMin.textContent = active ? minsLeft : '';
+  document.getElementById('pfSleepBtn')?.classList.toggle('sleep-active', active);
+
+  // Desktop sleep button
+  document.getElementById('desktopSleepBtn')?.classList.toggle('sleep-active', active);
+
+  // Chip sleep row
+  const row = document.getElementById('playerSleepRow');
+  const chipTime = document.getElementById('playerSleepTime');
+  row?.classList.toggle('visible', active);
+  if (chipTime) chipTime.textContent = label;
+}
+
+function fadeAndPause() {
+  const steps = 25;
+  let step = 0;
+  const orig = audioEl.volume;
+  const iv = setInterval(() => {
+    step++;
+    audioEl.volume = Math.max(0, orig * (1 - step / steps));
+    if (step >= steps) {
+      clearInterval(iv);
+      audioEl.pause();
+      audioEl.volume = orig;
+      updateSleepUI(0);
+      showToast('🌙 Buenas noches');
+    }
+  }, 80);
+}
+
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -1631,9 +1837,13 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
 }
 
+// Restaurar velocidad guardada
+audioEl.addEventListener('play', () => { audioEl.playbackRate = SPEEDS[speedIdx]; });
+
 // Init
 buildFeatured('Todos');
 buildGrid('Todos');
+applySpeed();
 setInterval(rotateVerse, 12000);
 </script>
 </body>
