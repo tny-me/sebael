@@ -1293,6 +1293,225 @@
   .footer-logo { height: 56px; width: auto; margin: 0 auto 12px; display: block; }
   .footer-text { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
   .footer-sub { font-size: 11px; color: var(--text-dim); }
+
+  /* ── ADMIN PANEL ─────────────────────── */
+  .adm-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .adm-overlay.open { opacity: 1; pointer-events: auto; }
+  .adm-sheet {
+    width: 100%;
+    max-width: 560px;
+    max-height: 92vh;
+    background: #fff;
+    border-radius: 22px 22px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(40px);
+    transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.22);
+  }
+  .adm-overlay.open .adm-sheet { transform: translateY(0); }
+
+  .adm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid #f0ece4;
+    flex-shrink: 0;
+  }
+  .adm-title { font-family: var(--font-serif); font-size: 18px; font-weight: 700; color: var(--text); }
+  .adm-close {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: #f4f0ea; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; color: #666;
+  }
+  .adm-close:hover { background: #ebe5db; }
+  .adm-close svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; }
+
+  .adm-body { overflow-y: auto; flex: 1; padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+
+  .adm-pin-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 20px 0; }
+  .adm-pin-icon { font-size: 38px; }
+  .adm-pin-label { font-size: 15px; color: var(--text-muted); font-weight: 500; }
+  .adm-pin-input {
+    width: 180px; text-align: center; font-size: 22px; letter-spacing: 0.35em;
+    padding: 10px 16px; border: 1.5px solid #d4c9b8; border-radius: 12px;
+    background: #faf8f4; font-family: var(--font-sans); color: var(--text);
+    outline: none; transition: border-color 0.2s;
+  }
+  .adm-pin-input:focus { border-color: var(--sky); }
+  .adm-pin-btn {
+    padding: 11px 32px; background: linear-gradient(135deg, var(--sky) 0%, var(--teal) 100%);
+    color: #fff; border: none; border-radius: 50px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .adm-pin-btn:hover { opacity: 0.88; }
+
+  .adm-section-title {
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600; margin-bottom: 6px;
+  }
+
+  .adm-token-row { display: flex; gap: 8px; align-items: stretch; }
+  .adm-token-input {
+    flex: 1; padding: 10px 14px; border: 1.5px solid #d4c9b8; border-radius: 10px;
+    background: #faf8f4; font-size: 13px; font-family: var(--font-sans); color: var(--text);
+    outline: none; transition: border-color 0.2s;
+  }
+  .adm-token-input:focus { border-color: var(--sky); }
+  .adm-token-save {
+    padding: 0 16px; background: var(--sky); color: #fff; border: none;
+    border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer;
+    white-space: nowrap;
+  }
+  .adm-token-save:hover { background: var(--teal); }
+
+  .adm-ep-list { display: flex; flex-direction: column; gap: 8px; }
+  .adm-ep-item {
+    display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+    background: #faf8f4; border-radius: 12px; border: 1px solid #ede7db;
+  }
+  .adm-ep-thumb {
+    width: 44px; height: 44px; border-radius: 8px; object-fit: cover;
+    background: #e8e0d0; flex-shrink: 0; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; font-size: 20px;
+  }
+  .adm-ep-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .adm-ep-info { flex: 1; min-width: 0; }
+  .adm-ep-title { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .adm-ep-book { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .adm-ep-actions { display: flex; gap: 6px; flex-shrink: 0; }
+  .adm-ep-btn {
+    width: 30px; height: 30px; border-radius: 8px; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; transition: background 0.15s;
+  }
+  .adm-ep-btn.edit { background: #e8f4f8; color: var(--sky); }
+  .adm-ep-btn.edit:hover { background: #cce8f4; }
+  .adm-ep-btn.del { background: #fde8e8; color: #c0392b; }
+  .adm-ep-btn.del:hover { background: #f8cccc; }
+  .adm-ep-btn svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  .adm-add-btn {
+    width: 100%; padding: 12px; border: 1.5px dashed #b5a990; border-radius: 12px;
+    background: transparent; color: var(--text-muted); font-size: 14px; font-weight: 500;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s, color 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .adm-add-btn:hover { background: #f4f0ea; border-color: var(--gold-dim); color: var(--gold); }
+
+  .adm-publish-btn {
+    width: 100%; padding: 14px; border-radius: 50px; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--sky) 0%, var(--teal) 100%);
+    color: #fff; font-size: 15px; font-weight: 700; letter-spacing: 0.02em;
+    box-shadow: 0 6px 22px rgba(90,173,160,0.38);
+    transition: opacity 0.2s, transform 0.15s;
+  }
+  .adm-publish-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .adm-publish-btn:active { transform: translateY(0); }
+  .adm-publish-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  .adm-hint {
+    font-size: 11px; color: var(--text-dim); text-align: center; line-height: 1.5;
+  }
+  .adm-hint a { color: var(--sky); }
+
+  /* Form overlay */
+  .adm-form-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9100;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  .adm-form-overlay.open { opacity: 1; pointer-events: auto; }
+  .adm-form-sheet {
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    background: #fff;
+    border-radius: 22px 22px 0 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(60px);
+    transition: transform 0.35s cubic-bezier(0.32,0.72,0,1);
+    box-shadow: 0 -8px 40px rgba(0,0,0,0.28);
+  }
+  .adm-form-overlay.open .adm-form-sheet { transform: translateY(0); }
+  .adm-form-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px 12px; border-bottom: 1px solid #f0ece4; flex-shrink: 0;
+  }
+  .adm-form-title { font-family: var(--font-serif); font-size: 16px; font-weight: 700; color: var(--text); }
+  .adm-form-body { overflow-y: auto; flex: 1; padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+
+  .adm-field { display: flex; flex-direction: column; gap: 5px; }
+  .adm-field label { font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.12em; text-transform: uppercase; }
+  .adm-field input, .adm-field select, .adm-field textarea {
+    padding: 10px 13px; border: 1.5px solid #d4c9b8; border-radius: 10px;
+    background: #faf8f4; font-size: 13px; font-family: var(--font-sans); color: var(--text);
+    outline: none; transition: border-color 0.2s; width: 100%;
+  }
+  .adm-field input:focus, .adm-field select:focus, .adm-field textarea:focus { border-color: var(--sky); }
+  .adm-field textarea { resize: vertical; min-height: 60px; }
+  .adm-field select { appearance: none; -webkit-appearance: none; cursor: pointer; }
+
+  .adm-cover-preview {
+    width: 80px; height: 80px; border-radius: 10px; overflow: hidden;
+    background: #ede7db; flex-shrink: 0; display: flex; align-items: center;
+    justify-content: center; font-size: 28px; border: 1px solid #d4c9b8;
+  }
+  .adm-cover-preview img { width: 100%; height: 100%; object-fit: cover; }
+  .adm-cover-row { display: flex; gap: 10px; align-items: flex-start; }
+  .adm-cover-url { flex: 1; }
+
+  .adm-form-footer {
+    padding: 14px 20px; border-top: 1px solid #f0ece4; display: flex; gap: 10px; flex-shrink: 0;
+  }
+  .adm-form-cancel {
+    flex: 1; padding: 12px; border-radius: 50px; border: 1.5px solid #d4c9b8;
+    background: transparent; color: var(--text-muted); font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .adm-form-cancel:hover { background: #f4f0ea; }
+  .adm-form-save {
+    flex: 2; padding: 12px; border-radius: 50px; border: none;
+    background: linear-gradient(135deg, var(--sky) 0%, var(--teal) 100%);
+    color: #fff; font-size: 14px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(90,173,160,0.32);
+  }
+  .adm-form-save:hover { opacity: 0.88; }
+
+  .adm-drag-handle {
+    width: 36px; height: 4px; border-radius: 2px; background: #ccc;
+    margin: 10px auto 0; flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    .adm-sheet, .adm-form-sheet { border-radius: 22px; margin: auto; max-height: 85vh; }
+    .adm-overlay, .adm-form-overlay { align-items: center; }
+  }
 </style>
 </head>
 <body>
@@ -1512,8 +1731,146 @@
   </div>
 </div>
 
+<!-- ══ ADMIN PANEL ══════════════════════════════════════════ -->
+<div class="adm-overlay" id="admOverlay">
+  <div class="adm-sheet">
+    <div class="adm-drag-handle"></div>
+    <div class="adm-header">
+      <span class="adm-title">Panel de episodios</span>
+      <button class="adm-close" onclick="closeAdmin()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="adm-body">
+
+      <!-- PIN screen -->
+      <div id="admPinStep">
+        <div class="adm-pin-wrap">
+          <div class="adm-pin-icon">🔒</div>
+          <div class="adm-pin-label">Ingresa tu PIN de administrador</div>
+          <input type="password" class="adm-pin-input" id="admPinInput" maxlength="8"
+            placeholder="••••" inputmode="numeric"
+            onkeydown="if(event.key==='Enter') admCheckPin()">
+          <button class="adm-pin-btn" onclick="admCheckPin()">Entrar</button>
+        </div>
+      </div>
+
+      <!-- Main admin (hidden until PIN) -->
+      <div id="admMain" style="display:none; flex-direction:column; gap:16px;">
+
+        <!-- GitHub Token -->
+        <div>
+          <div class="adm-section-title">GitHub Token</div>
+          <div class="adm-token-row">
+            <input type="password" class="adm-token-input" id="admToken"
+              placeholder="ghp_xxxxxxxxxxxx" autocomplete="off">
+            <button class="adm-token-save" onclick="admSaveToken()">Guardar</button>
+          </div>
+          <div class="adm-hint" style="margin-top:6px;">
+            Necesario para publicar. <a href="https://github.com/settings/tokens" target="_blank">Crear token</a> con permiso <code>contents:write</code>.
+          </div>
+        </div>
+
+        <!-- Episode list -->
+        <div>
+          <div class="adm-section-title">Episodios (<span id="admEpCount">0</span>)</div>
+          <div class="adm-ep-list" id="admEpList"></div>
+          <button class="adm-add-btn" style="margin-top:10px" onclick="admOpenForm(null)">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Nuevo episodio
+          </button>
+        </div>
+
+        <!-- Publish -->
+        <button class="adm-publish-btn" id="admPublishBtn" onclick="admPublish()">
+          Publicar cambios
+        </button>
+        <div class="adm-hint">Los cambios se publican en GitHub Pages (~1 min).</div>
+
+        <!-- Change PIN -->
+        <div>
+          <div class="adm-section-title">Cambiar PIN</div>
+          <div class="adm-token-row">
+            <input type="password" class="adm-token-input" id="admNewPin"
+              placeholder="Nuevo PIN (4–8 dígitos)" inputmode="numeric" maxlength="8">
+            <button class="adm-token-save" onclick="admChangePin()">Cambiar</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EPISODE FORM -->
+<div class="adm-form-overlay" id="admFormOverlay">
+  <div class="adm-form-sheet">
+    <div class="adm-drag-handle"></div>
+    <div class="adm-form-header">
+      <span class="adm-form-title" id="admFormTitle">Nuevo episodio</span>
+      <button class="adm-close" onclick="admCloseForm()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="adm-form-body">
+      <input type="hidden" id="fId">
+
+      <div class="adm-field">
+        <label>Título</label>
+        <input id="fTitle" type="text" placeholder="La valentía de David">
+      </div>
+      <div class="adm-field">
+        <label>Referencia bíblica</label>
+        <input id="fBook" type="text" placeholder="1 Samuel 17">
+      </div>
+      <div class="adm-field">
+        <label>Categoría</label>
+        <select id="fCat">
+          <option>Cuentos para dormir</option>
+          <option>Historias épicas</option>
+          <option>Profetas</option>
+          <option>Nuevo Testamento</option>
+          <option>Salmos</option>
+        </select>
+      </div>
+      <div class="adm-field">
+        <label>URL del audio</label>
+        <input id="fAudio" type="url" placeholder="https://…">
+      </div>
+      <div class="adm-field">
+        <label>Portada (URL de imagen)</label>
+        <div class="adm-cover-row">
+          <div class="adm-cover-preview" id="fCoverPreview">🖼</div>
+          <div class="adm-cover-url adm-field" style="gap:5px; margin:0; flex:1">
+            <input id="fCover" type="url" placeholder="https://…" oninput="admPreviewCover()">
+          </div>
+        </div>
+      </div>
+      <div class="adm-field">
+        <label>Descripción</label>
+        <textarea id="fDesc" placeholder="Breve descripción del episodio…"></textarea>
+      </div>
+      <div class="adm-field">
+        <label>Emoji (sin portada)</label>
+        <input id="fEmoji" type="text" placeholder="⚔️" maxlength="4">
+      </div>
+      <div class="adm-field">
+        <label>Fecha de publicación</label>
+        <input id="fDate" type="date">
+      </div>
+    </div>
+    <div class="adm-form-footer">
+      <button class="adm-form-cancel" onclick="admCloseForm()">Cancelar</button>
+      <button class="adm-form-save" onclick="admSaveEpisode()">Guardar episodio</button>
+    </div>
+  </div>
+</div>
+
 <script>
-const STORIES = [
+let STORIES = [];
+let _admDraft = [];
+
+const STORIES_HARDCODED = [
   { id:1, title:'La valentía de David',          book:'1 Samuel 17',   cat:'Cuentos para dormir', dur:'', emoji:'⚔️', color:'#EDE3C4', addedAt:'2026-04-15',
     audio:'https://github.com/tny-me/sebael/releases/download/v1.0/La.Valentia.de.David.m4a',
     cover:'https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_la%20valentia%20de%20David.jpg',
@@ -1553,11 +1910,12 @@ let current = null;
 let playing = false;
 let activeFilter = 'Todos';
 
-// Cargar duraciones y posiciones guardadas
-STORIES.forEach(s => {
-  const dur = localStorage.getItem('dur_' + s.id);
-  if (dur) s.dur = dur;
-});
+function loadStoredDurations() {
+  STORIES.forEach(s => {
+    const dur = localStorage.getItem('dur_' + s.id);
+    if (dur) s.dur = dur;
+  });
+}
 
 
 function isNew(s) {
@@ -2044,11 +2402,244 @@ if ('serviceWorker' in navigator) {
 // Restaurar velocidad guardada
 audioEl.addEventListener('play', () => { audioEl.playbackRate = SPEEDS[speedIdx]; });
 
-// Init
-buildFeatured('Todos');
-buildGrid('Todos');
-applySpeed();
-setInterval(rotateVerse, 12000);
+// ── ADMIN PANEL ──────────────────────────────────────────────────────────────
+
+const ADM_REPO = 'tny-me/sebael';
+const ADM_FILE = 'episodes.json';
+const ADM_API  = `https://api.github.com/repos/${ADM_REPO}/contents/${ADM_FILE}`;
+let _admLoggedIn = false;
+let _logoTaps = 0;
+let _logoTapTimer = null;
+
+function checkAdminParam() {
+  if (new URLSearchParams(location.search).has('admin')) openAdmin();
+}
+
+document.querySelector('.logo').addEventListener('click', () => {
+  _logoTaps++;
+  clearTimeout(_logoTapTimer);
+  _logoTapTimer = setTimeout(() => { _logoTaps = 0; }, 1800);
+  if (_logoTaps >= 5) { _logoTaps = 0; openAdmin(); }
+});
+
+function openAdmin() {
+  document.getElementById('admOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  _admLoggedIn = false;
+  document.getElementById('admPinStep').style.display = '';
+  document.getElementById('admMain').style.display = 'none';
+  document.getElementById('admPinInput').value = '';
+  setTimeout(() => document.getElementById('admPinInput').focus(), 350);
+}
+
+function closeAdmin() {
+  document.getElementById('admOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  admCloseForm();
+}
+
+function admCheckPin() {
+  const stored  = localStorage.getItem('admPin') || '1234';
+  const entered = document.getElementById('admPinInput').value.trim();
+  if (entered === stored) {
+    document.getElementById('admPinStep').style.display = 'none';
+    const main = document.getElementById('admMain');
+    main.style.display = 'flex';
+    main.style.flexDirection = 'column';
+    main.style.gap = '16px';
+    _admLoggedIn = true;
+    const tok = localStorage.getItem('admToken') || '';
+    document.getElementById('admToken').value = tok;
+    _admDraft = STORIES.map(s => ({ ...s }));
+    admRenderList();
+  } else {
+    document.getElementById('admPinInput').value = '';
+    document.getElementById('admPinInput').placeholder = 'PIN incorrecto…';
+    setTimeout(() => document.getElementById('admPinInput').placeholder = '••••', 1800);
+  }
+}
+
+function admSaveToken() {
+  const t = document.getElementById('admToken').value.trim();
+  if (t) { localStorage.setItem('admToken', t); showToast('Token guardado'); }
+}
+
+function admChangePin() {
+  const np = document.getElementById('admNewPin').value.trim();
+  if (np.length < 4) { showToast('El PIN debe tener al menos 4 dígitos'); return; }
+  localStorage.setItem('admPin', np);
+  document.getElementById('admNewPin').value = '';
+  showToast('PIN actualizado');
+}
+
+function admRenderList() {
+  const list = document.getElementById('admEpList');
+  document.getElementById('admEpCount').textContent = _admDraft.length;
+  list.innerHTML = '';
+  _admDraft.forEach((s, idx) => {
+    const item = document.createElement('div');
+    item.className = 'adm-ep-item';
+    item.innerHTML = `
+      <div class="adm-ep-thumb">${s.cover ? `<img src="${s.cover}" loading="lazy">` : (s.emoji || '♪')}</div>
+      <div class="adm-ep-info">
+        <div class="adm-ep-title">${s.title}</div>
+        <div class="adm-ep-book">${s.book} · ${s.cat}</div>
+      </div>
+      <div class="adm-ep-actions">
+        <button class="adm-ep-btn edit" onclick="admOpenForm(${idx})">
+          <svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        </button>
+        <button class="adm-ep-btn del" onclick="admDeleteEp(${idx})">
+          <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+        </button>
+      </div>
+    `;
+    list.appendChild(item);
+  });
+}
+
+function admDeleteEp(idx) {
+  if (!confirm(`¿Eliminar "${_admDraft[idx].title}"?`)) return;
+  _admDraft.splice(idx, 1);
+  admRenderList();
+  showToast('Episodio eliminado (pendiente de publicar)');
+}
+
+function admOpenForm(idx) {
+  const overlay = document.getElementById('admFormOverlay');
+  const isNew   = idx === null;
+  document.getElementById('admFormTitle').textContent = isNew ? 'Nuevo episodio' : 'Editar episodio';
+
+  const s = isNew
+    ? { id: Date.now(), title:'', book:'', cat:'Cuentos para dormir', audio:'', cover:'', desc:'', emoji:'', addedAt: new Date().toISOString().slice(0,10), color:'#EDE3C4' }
+    : _admDraft[idx];
+
+  document.getElementById('fId').value    = isNew ? '' : s.id;
+  document.getElementById('fTitle').value = s.title   || '';
+  document.getElementById('fBook').value  = s.book    || '';
+  document.getElementById('fCat').value   = s.cat     || 'Cuentos para dormir';
+  document.getElementById('fAudio').value = s.audio   || '';
+  document.getElementById('fCover').value = s.cover   || '';
+  document.getElementById('fDesc').value  = s.desc    || '';
+  document.getElementById('fEmoji').value = s.emoji   || '';
+  document.getElementById('fDate').value  = s.addedAt || new Date().toISOString().slice(0,10);
+  admPreviewCover();
+
+  overlay.dataset.editIdx = isNew ? '' : String(idx);
+  overlay.classList.add('open');
+}
+
+function admCloseForm() {
+  document.getElementById('admFormOverlay').classList.remove('open');
+}
+
+function admPreviewCover() {
+  const url  = document.getElementById('fCover').value.trim();
+  const prev = document.getElementById('fCoverPreview');
+  prev.innerHTML = url
+    ? `<img src="${url}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;" onerror="this.parentElement.textContent='🖼'">`
+    : '🖼';
+}
+
+function admSaveEpisode() {
+  const overlay = document.getElementById('admFormOverlay');
+  const editIdx = overlay.dataset.editIdx;
+  const isNew   = editIdx === '';
+
+  const ep = {
+    id:      isNew ? Date.now() : (parseInt(document.getElementById('fId').value) || Date.now()),
+    title:   document.getElementById('fTitle').value.trim(),
+    book:    document.getElementById('fBook').value.trim(),
+    cat:     document.getElementById('fCat').value,
+    audio:   document.getElementById('fAudio').value.trim(),
+    cover:   document.getElementById('fCover').value.trim(),
+    desc:    document.getElementById('fDesc').value.trim(),
+    emoji:   document.getElementById('fEmoji').value.trim() || '♪',
+    color:   '#EDE3C4',
+    dur:     '',
+    addedAt: document.getElementById('fDate').value || new Date().toISOString().slice(0,10),
+  };
+
+  if (!ep.title) { showToast('El título es obligatorio'); return; }
+
+  if (isNew) {
+    _admDraft.push(ep);
+  } else {
+    _admDraft[parseInt(editIdx)] = ep;
+  }
+
+  admCloseForm();
+  admRenderList();
+  showToast(isNew ? 'Episodio añadido' : 'Episodio actualizado');
+}
+
+async function admPublish() {
+  const token = localStorage.getItem('admToken') || '';
+  if (!token) { showToast('Guarda tu GitHub Token primero'); return; }
+
+  const btn = document.getElementById('admPublishBtn');
+  btn.disabled = true;
+  btn.textContent = 'Publicando…';
+
+  try {
+    const getRes = await fetch(ADM_API, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!getRes.ok) throw new Error(`Error al leer episodes.json: ${getRes.status}`);
+    const { sha } = await getRes.json();
+
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(_admDraft, null, 2))));
+
+    const putRes = await fetch(ADM_API, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: `episodios: actualizar lista (${_admDraft.length} episodios)`,
+        content,
+        sha,
+      }),
+    });
+
+    if (!putRes.ok) {
+      const err = await putRes.json().catch(() => ({}));
+      throw new Error(err.message || `HTTP ${putRes.status}`);
+    }
+
+    STORIES.length = 0;
+    _admDraft.forEach(ep => STORIES.push(ep));
+    loadStoredDurations();
+    buildCats();
+    buildFeatured('Todos');
+    buildGrid('Todos');
+
+    showToast('Publicado. GitHub Pages actualiza en ~1 min');
+    closeAdmin();
+  } catch (e) {
+    showToast('Error: ' + e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Publicar cambios';
+  }
+}
+
+// ── Init ────────────────────────────────────────────────────────────────────
+
+function initApp(episodes) {
+  STORIES.length = 0;
+  episodes.forEach(ep => STORIES.push(ep));
+  loadStoredDurations();
+  buildCats();
+  buildFeatured('Todos');
+  buildGrid('Todos');
+  applySpeed();
+  setInterval(rotateVerse, 12000);
+  checkAdminParam();
+}
+
+fetch('episodes.json?v=' + Date.now())
+  .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+  .then(data => initApp(data))
+  .catch(() => initApp(STORIES_HARDCODED));
 </script>
 </body>
 </html>
