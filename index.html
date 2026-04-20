@@ -227,22 +227,30 @@
     flex-shrink: 0;
     width: 148px;
     cursor: pointer;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid rgba(0,0,0,0.09);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .feat-card:hover {
+    box-shadow: 0 10px 32px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07);
+    transform: translateY(-4px);
   }
 
   .feat-cover {
     width: 100%;
     aspect-ratio: 1;
-    border-radius: var(--radius);
+    border-radius: 0;
     background: var(--surface2);
     overflow: hidden;
     position: relative;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.07), inset 0 0 0 1px rgba(0,0,0,0.12);
-    transition: box-shadow 0.25s, transform 0.25s;
+    margin-bottom: 0;
   }
-  .feat-card:hover .feat-cover {
-    box-shadow: 0 14px 40px rgba(0,0,0,0.20), 0 2px 8px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(0,0,0,0.12);
-    transform: translateY(-4px);
+
+  .feat-info {
+    padding: 8px 10px 10px;
   }
 
   .feat-cover-art {
@@ -434,22 +442,30 @@
   .audio-card {
     cursor: pointer;
     position: relative;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid rgba(0,0,0,0.09);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .audio-card:hover {
+    box-shadow: 0 10px 32px rgba(0,0,0,0.13), 0 2px 6px rgba(0,0,0,0.07);
+    transform: translateY(-4px);
   }
 
   .card-cover {
     width: 100%;
     aspect-ratio: 1;
-    border-radius: var(--radius);
+    border-radius: 0;
     background: var(--surface2);
     overflow: hidden;
     position: relative;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.07), inset 0 0 0 1px rgba(0,0,0,0.12);
-    transition: box-shadow 0.25s, transform 0.25s;
+    margin-bottom: 0;
   }
-  .audio-card:hover .card-cover {
-    box-shadow: 0 14px 40px rgba(0,0,0,0.20), 0 2px 8px rgba(0,0,0,0.08), inset 0 0 0 1px rgba(0,0,0,0.12);
-    transform: translateY(-5px);
+
+  .card-info {
+    padding: 10px 11px 12px;
   }
 
   .card-art {
@@ -521,9 +537,9 @@
   }
   .card-duration svg { width: 11px; height: 11px; fill: currentColor; opacity: 0.75; }
 
-  .card-active .card-cover {
-    outline: 2.5px solid var(--gold-dim);
-    outline-offset: 2px;
+  .card-active {
+    border-color: var(--gold-dim);
+    box-shadow: 0 2px 10px rgba(192,120,32,0.18), 0 0 0 2px var(--gold-dim);
   }
   .card-active .card-title { color: var(--gold-light); }
 
@@ -1477,9 +1493,11 @@ function buildFeatured(filter) {
         ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
         ${isActive ? `<div class="feat-playing-badge">▶ Reproduciendo</div>` : ''}
       </div>
-      <div class="feat-title">${s.title}</div>
-      <div class="feat-meta">${s.book}</div>
-      <div class="feat-dur">${headphoneIcon}<span class="feat-dur-val">${s.dur || '—'}</span></div>
+      <div class="feat-info">
+        <div class="feat-title">${s.title}</div>
+        <div class="feat-meta">${s.book}</div>
+        <div class="feat-dur">${headphoneIcon}<span class="feat-dur-val">${s.dur || '—'}</span></div>
+      </div>
     `;
     wrap.appendChild(card);
   });
@@ -1511,9 +1529,11 @@ function buildGrid(filter) {
         <div class="card-play-overlay"><div class="card-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
         ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
       </div>
-      <div class="card-title">${s.title}</div>
-      <div class="card-book">${s.book}</div>
-      <div class="card-duration">${headphoneIcon}<span class="card-dur-val">${s.dur || (s.audio ? '—' : 'Próximamente')}</span></div>
+      <div class="card-info">
+        <div class="card-title">${s.title}</div>
+        <div class="card-book">${s.book}</div>
+        <div class="card-duration">${headphoneIcon}<span class="card-dur-val">${s.dur || (s.audio ? '—' : 'Próximamente')}</span></div>
+      </div>
     `;
     grid.appendChild(card);
   });
