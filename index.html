@@ -1100,9 +1100,7 @@
   .audio-card:nth-child(8) { animation-delay: 0.4s; }
   .audio-card:nth-child(n+9) { animation-delay: 0.45s; }
 
-  /* ── FULL PLAYER — Spotify style (móvil) ── */
-  @media (min-width: 768px) { .player-full { display: none !important; } }
-
+  /* ── FULL PLAYER — Spotify style (móvil) + panel derecho (desktop) ── */
   .player-full {
     position: fixed;
     inset: 0;
@@ -1113,6 +1111,82 @@
     background: #0e0e12;
   }
   .player-full.open { transform: translateY(0); }
+
+  @media (min-width: 768px) {
+    .player-full {
+      inset: auto;
+      top: 0;
+      right: 0;
+      width: 360px;
+      height: 100vh;
+      transform: translateX(100%);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      box-shadow: -12px 0 48px rgba(0,0,0,0.5);
+    }
+    .player-full.open { transform: translateX(0); }
+    .player-full .pf-content { overflow-y: auto; }
+    .player-full .pf-artwork {
+      width: min(52vw, 220px);
+      height: min(52vw, 220px);
+    }
+    /* Contenido se contrae cuando el panel está abierto */
+    body.right-panel-open {
+      padding-right: 360px;
+    }
+    /* Barra inferior se ajusta cuando panel derecho está abierto */
+    body.right-panel-open .player,
+    body.right-panel-open .player.player-active {
+      right: 360px;
+    }
+  }
+
+  /* ── SEARCH BAR (solo desktop) ────────── */
+  .search-bar-wrap { display: none; }
+
+  @media (min-width: 768px) {
+    .search-bar-wrap {
+      display: flex;
+      align-items: center;
+      padding: 28px 32px 0;
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 480px;
+      height: 46px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0 18px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .search-bar:focus-within {
+      border-color: var(--accent2);
+      background: var(--surface3);
+    }
+    .search-bar svg {
+      width: 16px; height: 16px;
+      stroke: var(--text-dim); fill: none;
+      stroke-width: 2; stroke-linecap: round;
+      flex-shrink: 0; transition: stroke 0.2s;
+    }
+    .search-bar:focus-within svg { stroke: var(--accent2); }
+    .search-bar input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: var(--text); font-family: var(--font-sans); font-size: 14px;
+    }
+    .search-bar input::placeholder { color: var(--text-dim); }
+    .search-clear {
+      width: 22px; height: 22px; border-radius: 50%; border: none;
+      background: rgba(255,255,255,0.12); color: var(--text-muted);
+      display: none; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; font-size: 14px; line-height: 1;
+    }
+    .search-bar input:not(:placeholder-shown) ~ .search-clear { display: flex; }
+    .search-clear:hover { background: rgba(255,255,255,0.22); }
+  }
 
   /* Fondo desenfocado (muy oscuro) */
   .pf-bg-img {
@@ -1686,6 +1760,15 @@
 <!-- AUDIO ENGINE -->
 <audio id="audioEl" preload="metadata"></audio>
 
+<!-- SEARCH BAR (desktop canvas top) -->
+<div class="search-bar-wrap">
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Buscar episodios…" oninput="searchEpisodes(this.value)">
+    <button class="search-clear" onclick="clearSearch()" title="Limpiar">✕</button>
+  </div>
+</div>
+
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
@@ -2226,6 +2309,7 @@ function playSong(s) {
   buildGrid(activeFilter);
   buildFeatured();
   showToast(`▶ ${s.title}`);
+  if (window.innerWidth >= 768) openFullPlayer();
 }
 
 function togglePlay() {
@@ -2386,9 +2470,13 @@ function openFullPlayer() {
     p.classList.remove('player-mini');
     return;
   }
-  if (!current || window.innerWidth >= 768) return;
+  if (!current) return;
   document.getElementById('playerFull').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  if (window.innerWidth >= 768) {
+    document.body.classList.add('right-panel-open');
+  } else {
+    document.body.style.overflow = 'hidden';
+  }
 }
 
 function closeFullPlayer() {
@@ -2396,6 +2484,7 @@ function closeFullPlayer() {
   pf.style.transition = '';
   pf.style.transform = '';
   pf.classList.remove('open');
+  document.body.classList.remove('right-panel-open');
   document.body.style.overflow = '';
 }
 
@@ -2809,6 +2898,65 @@ async function admPublish() {
     btn.disabled = false;
     btn.textContent = 'Publicar cambios';
   }
+}
+
+// ── Search ───────────────────────────────────────────────────────────────────
+
+function searchEpisodes(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) {
+    buildGrid(activeFilter);
+    buildFeatured(activeFilter);
+    return;
+  }
+  const results = STORIES.filter(s =>
+    s.title.toLowerCase().includes(q) ||
+    s.book.toLowerCase().includes(q) ||
+    (s.desc || '').toLowerCase().includes(q) ||
+    (s.cat || '').toLowerCase().includes(q)
+  );
+  const grid = document.getElementById('audioGrid');
+  grid.innerHTML = '';
+  if (!results.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <svg viewBox="0 0 24 24"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/></svg>
+      <p>Sin resultados</p><span>No se encontraron episodios para "${query}"</span>
+    </div>`;
+    return;
+  }
+  results.forEach(s => {
+    const card = document.createElement('div');
+    const isActive = current && current.id === s.id;
+    card.className = 'audio-card' + (isActive ? ' card-active' : '');
+    card.setAttribute('data-id', s.id);
+    card.onclick = () => playSong(s);
+    const art = s.cover
+      ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div class="card-art" style="background:${s.color};">${s.emoji}</div>`;
+    const pos = parseFloat(localStorage.getItem('pos_' + s.id) || 0);
+    const dur = parseFloat(localStorage.getItem('dur_' + s.id) || 0);
+    const pct = dur > 0 ? Math.min(100, pos / dur * 100).toFixed(1) : 0;
+    card.innerHTML = `
+      <div class="card-cover">
+        ${art}
+        <div class="card-play-overlay"><div class="card-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
+      </div>
+      <div class="card-info">
+        <div class="card-title">${s.title}</div>
+        <div class="card-book">${s.book}</div>
+        <div class="card-duration">${headphoneIcon}<span class="card-dur-val">${s.dur || (s.audio ? '—' : 'Próximamente')}</span></div>
+        ${pct > 0 ? `<div class="card-progress"><div class="card-progress-fill" style="width:${pct}%"></div></div>` : ''}
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+
+function clearSearch() {
+  const input = document.getElementById('searchInput');
+  if (input) { input.value = ''; }
+  buildGrid(activeFilter);
+  buildFeatured(activeFilter);
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
