@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "title": "La valentía de David",
+    "book": "1 Samuel 17",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "⚔️",
+    "color": "#EDE3C4",
+    "addedAt": "2026-04-15",
+    "audio": "https://github.com/tny-me/sebael/releases/download/v1.0/La.Valentia.de.David.m4a",
+    "cover": "https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_la%20valentia%20de%20David.jpg",
+    "desc": "El joven pastor que venció al gigante Goliat."
+  },
+  {
+    "id": 2,
+    "title": "David, el niño que confió en Dios",
+    "book": "1 Samuel 16–17",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🐑",
+    "color": "#C8E6C9",
+    "addedAt": "2026-04-17",
+    "audio": "https://ia600806.us.archive.org/9/items/david-el-nino-que-confio-en-dios/David%20el%20ni%C3%B1o%20que%20confio%20en%20Dios.mp3",
+    "cover": "https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_david%20el%20ni%C3%B1o%20que%20confio%20en%20dios.jpg",
+    "desc": "La historia del pastorcito que Dios eligió para ser rey."
+  },
+  {
+    "id": 3,
+    "title": "José y el sueño que nunca murió",
+    "book": "Génesis 37–50",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🌾",
+    "color": "#FFF3CD",
+    "addedAt": "2026-04-17",
+    "audio": "https://ia601502.us.archive.org/22/items/jose-y-el-sueno-que-nunca-murio/Jose%20y%20el%20sue%C3%B1o%20que%20nunca%20murio.m4a",
+    "cover": "https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_jose%20y%20el%20sue%C3%B1o%20que%20nunca%20murio.jpg",
+    "desc": "De la fosa al palacio: la historia de José y la fidelidad de Dios."
+  },
+  {
+    "id": 4,
+    "title": "Daniel y el foso de los leones",
+    "book": "Daniel 6",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🦁",
+    "color": "#D4E6F1",
+    "addedAt": "2026-04-17",
+    "audio": "https://ia800707.us.archive.org/29/items/daniel-y-el-foso-de-los-leones/Daniel%20y%20el%20foso%20de%20los%20leones.mp3",
+    "cover": "https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_daniel%20y%20el%20foso%20de%20leones.jpg",
+    "desc": "La fe de Daniel que venció al miedo y a los leones."
+  },
+  {
+    "id": 5,
+    "title": "Noé y el arcoíris de Dios",
+    "book": "Génesis 6–9",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🌈",
+    "color": "#D5ECD4",
+    "addedAt": "2026-04-18",
+    "audio": "https://dn710301.ca.archive.org/0/items/noe-y-el-arcoiris-de-dios/No%C3%A9%20y%20el%20arcoiris%20de%20Dios.mp3",
+    "cover": "https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_noe%20y%20el%20arcoiris%20de%20dios.png",
+    "desc": "La historia del hombre que confió en Dios cuando nadie más lo hacía."
+  },
+  {
+    "id": 6,
+    "title": "Moisés y el mar que se abrió",
+    "book": "Éxodo 14",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🌊",
+    "color": "#D6EAF8",
+    "addedAt": "2026-04-18",
+    "audio": "https://dn711103.ca.archive.org/0/items/eleven-labs-moises-y-el-mar-que-se-abrio/ElevenLabs_Mois%C3%A9s_y_el_mar_que_se_abrio.mp3",
+    "cover": "https://raw.githubusercontent.com/tny-me/sebael/main/images/Portada_moises%20y%20el%20mar%20que%20se%20abrio.jpg",
+    "desc": "El milagro más grande del Éxodo: el mar Rojo se abre ante el pueblo de Dios."
+  }
+]
