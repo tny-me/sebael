@@ -1150,30 +1150,118 @@
     font-variant-numeric: tabular-nums;
   }
 
-  /* Controles secundarios: skip + speed + sleep */
+  /* Controles secundarios — cuadrícula 2×2 */
   .pf-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
     padding: 0 28px;
+    margin-bottom: 22px;
   }
 
-  .pf-ctrl-skip {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
+  .pf-ctrl-skip,
+  .pf-ctrl-speed,
+  .pf-ctrl-sleep {
+    width: 100%;
+    height: 52px;
+    border-radius: 14px;
     background: rgba(255,255,255,0.10);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 8px;
     cursor: pointer;
-    color: white;
+    color: rgba(255,255,255,0.90);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 500;
     transition: background 0.15s;
+    letter-spacing: 0.01em;
   }
-  .pf-ctrl-skip:active { background: rgba(255,255,255,0.20); }
-  .pf-ctrl-skip svg { width: 22px; height: 22px; fill: currentColor; }
+  .pf-ctrl-skip:active,
+  .pf-ctrl-speed:active,
+  .pf-ctrl-sleep:active { background: rgba(255,255,255,0.20); }
+  .pf-ctrl-skip svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
+  .pf-ctrl-speed { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+  .pf-ctrl-speed.speed-active { background: rgba(122,192,212,0.28); color: #7AC0D4; }
+  .pf-ctrl-sleep svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; flex-shrink: 0; }
+  .pf-ctrl-sleep.sleep-active { background: rgba(122,192,212,0.28); color: #7AC0D4; }
+
+  /* ── A CONTINUACIÓN ─────────────────── */
+  .pf-next {
+    margin: 0 28px;
+    border-top: 0.5px solid rgba(255,255,255,0.14);
+    padding-top: 16px;
+  }
+
+  .pf-next-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.40);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .pf-next-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.07);
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    width: 100%;
+    text-align: left;
+  }
+  .pf-next-card:active { background: rgba(255,255,255,0.14); }
+
+  .pf-next-thumb {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .pf-next-thumb-emoji {
+    width: 46px;
+    height: 46px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+
+  .pf-next-info { flex: 1; min-width: 0; }
+
+  .pf-next-title {
+    font-family: 'Poppins', var(--font-sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+
+  .pf-next-book {
+    font-size: 11px;
+    color: rgba(255,255,255,0.50);
+  }
+
+  .pf-next-arrow {
+    color: rgba(255,255,255,0.50);
+    flex-shrink: 0;
+  }
+  .pf-next-arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
   /* tap zone mini player */
   .player-tap-zone { cursor: pointer; display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; overflow: hidden; }
@@ -1391,18 +1479,33 @@
       <span id="pfTimeDuration">—</span>
     </div>
 
-    <!-- Controles secundarios -->
+    <!-- Controles secundarios 2×2 -->
     <div class="pf-controls">
-      <button class="pf-ctrl-speed" id="pfSpeedBtn" onclick="cycleSpeed()">1×</button>
       <button class="pf-ctrl-skip" onclick="skipBack()">
         <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+        −15s
       </button>
       <button class="pf-ctrl-skip" onclick="skipForward()">
         <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+        +15s
       </button>
+      <button class="pf-ctrl-speed" id="pfSpeedBtn" onclick="cycleSpeed()">1×</button>
       <button class="pf-ctrl-sleep" id="pfSleepBtn" onclick="cycleSleep()">
         <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span class="sleep-min" id="pfSleepMin"></span>
+        <span id="pfSleepMin">Apagar</span>
+      </button>
+    </div>
+
+    <!-- A continuación -->
+    <div class="pf-next" id="pfNextSection" style="display:none">
+      <p class="pf-next-label">A continuación</p>
+      <button class="pf-next-card" id="pfNextCard" onclick="playNextStory()">
+        <div class="pf-next-thumb-emoji" id="pfNextThumbWrap"></div>
+        <div class="pf-next-info">
+          <div class="pf-next-title" id="pfNextTitle"></div>
+          <div class="pf-next-book" id="pfNextBook"></div>
+        </div>
+        <div class="pf-next-arrow"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></div>
       </button>
     </div>
 
@@ -1699,6 +1802,35 @@ function syncFullPlayer(s) {
     artwork.innerHTML = `<span>${s.emoji}</span>`;
     artwork.style.background = s.color;
   }
+
+  syncNextUp(s);
+}
+
+function syncNextUp(s) {
+  const idx = STORIES.findIndex(st => st.id === s.id);
+  const next = STORIES[idx + 1];
+  const section = document.getElementById('pfNextSection');
+  if (!next) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  document.getElementById('pfNextTitle').textContent = next.title;
+  document.getElementById('pfNextBook').textContent = next.book;
+  const wrap = document.getElementById('pfNextThumbWrap');
+  if (next.cover) {
+    wrap.innerHTML = `<img src="${next.cover}" style="width:46px;height:46px;object-fit:cover;border-radius:8px;">`;
+    wrap.style.background = '';
+  } else {
+    wrap.textContent = next.emoji;
+    wrap.style.background = next.color;
+  }
+}
+
+function playNextStory() {
+  const idx = STORIES.findIndex(st => st.id === current.id);
+  const next = STORIES[idx + 1];
+  if (!next) return;
+  closeFullPlayer();
+  playSong(next);
+  setTimeout(openFullPlayer, 80);
 }
 
 function openFullPlayer() {
