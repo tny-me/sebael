@@ -237,11 +237,12 @@
     overflow: hidden;
     position: relative;
     margin-bottom: 10px;
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.07);
+    border: 0.5px solid rgba(0,0,0,0.07);
     transition: box-shadow 0.25s, transform 0.25s;
   }
   .feat-card:hover .feat-cover {
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.20), 0 2px 8px rgba(0,0,0,0.08);
     transform: translateY(-4px);
   }
 
@@ -444,11 +445,12 @@
     overflow: hidden;
     position: relative;
     margin-bottom: 12px;
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 4px 18px rgba(0,0,0,0.14), 0 1px 4px rgba(0,0,0,0.07);
+    border: 0.5px solid rgba(0,0,0,0.07);
     transition: box-shadow 0.25s, transform 0.25s;
   }
   .audio-card:hover .card-cover {
-    box-shadow: var(--shadow-hover);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.20), 0 2px 8px rgba(0,0,0,0.08);
     transform: translateY(-5px);
   }
 
@@ -946,7 +948,7 @@
   .audio-card:nth-child(8) { animation-delay: 0.4s; }
   .audio-card:nth-child(n+9) { animation-delay: 0.45s; }
 
-  /* ── FULL PLAYER (móvil) ────────── */
+  /* ── FULL PLAYER — Spotify style (móvil) ── */
   @media (min-width: 768px) { .player-full { display: none !important; } }
 
   .player-full {
@@ -956,104 +958,118 @@
     overflow: hidden;
     transform: translateY(100%);
     transition: transform 0.44s cubic-bezier(0.32, 0.72, 0, 1);
+    background: #0e0e12;
   }
   .player-full.open { transform: translateY(0); }
 
-  /* Imagen de fondo full-screen */
+  /* Fondo desenfocado (muy oscuro) */
   .pf-bg-img {
     position: absolute;
-    inset: 0;
+    inset: -15%;
     background-size: cover;
-    background-position: center top;
+    background-position: center;
     background-repeat: no-repeat;
-    transition: background 0.4s;
+    filter: blur(48px) brightness(0.22) saturate(1.6);
+    transition: background 0.5s;
   }
 
-  /* Gradiente: transparente arriba → oscuro abajo */
   .pf-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.08) 0%,
-      rgba(0,0,0,0.10) 38%,
-      rgba(0,0,0,0.62) 58%,
-      rgba(0,0,0,0.82) 100%
-    );
+    background: rgba(0,0,0,0.38);
   }
 
-  /* Blur adicional solo en el tercio inferior */
-  .pf-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 50% 0 0 0;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-  }
-
-  /* Contenido sobre todo */
+  /* Contenido sobre el fondo */
   .pf-content {
     position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding-top: max(env(safe-area-inset-top), 18px);
-    padding-bottom: max(env(safe-area-inset-bottom), 24px);
+    padding-top: max(env(safe-area-inset-top), 14px);
+    padding-bottom: max(env(safe-area-inset-bottom), 20px);
   }
 
   .pf-header {
-    padding: 8px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 20px 18px;
   }
 
   .pf-back-btn {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.18);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.12);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: white;
+    transition: background 0.15s;
   }
+  .pf-back-btn:active { background: rgba(255,255,255,0.24); }
   .pf-back-btn svg { width: 20px; height: 20px; fill: none; stroke: white; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
-  .pf-spacer { flex: 1; }
-
-  /* Zona inferior con controles */
-  .pf-bottom {
-    padding: 0 28px 4px;
+  /* Portada cuadrada centrada */
+  .pf-artwork {
+    width: min(72vw, 290px);
+    height: min(72vw, 290px);
+    border-radius: 14px;
+    margin: 0 auto 28px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.60), 0 4px 20px rgba(0,0,0,0.35);
+    flex-shrink: 0;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 68px;
+    border: 0.5px solid rgba(255,255,255,0.08);
   }
+  .pf-artwork img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* Info: título + libro */
+  .pf-info {
+    padding: 0 28px 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .pf-info-text { flex: 1; min-width: 0; }
 
   .pf-title {
     font-family: 'Poppins', var(--font-sans);
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 700;
     color: #fff;
-    line-height: 1.15;
-    margin-bottom: 4px;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+    line-height: 1.2;
+    margin-bottom: 5px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .pf-book {
-    font-size: 13px;
-    color: rgba(255,255,255,0.65);
+    font-size: 14px;
+    color: rgba(255,255,255,0.58);
     font-weight: 400;
-    margin-bottom: 28px;
   }
 
-  /* Slider con thumb circular */
-  .pf-slider-wrap { margin-bottom: 8px; }
+  .pf-spacer { flex: 1; min-height: 8px; }
+
+  /* Slider */
+  .pf-slider-wrap { padding: 0 28px; margin-bottom: 6px; }
 
   .pf-slider {
     position: relative;
     width: 100%;
     height: 3px;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.25);
     border-radius: 3px;
     cursor: pointer;
   }
@@ -1067,57 +1083,57 @@
     pointer-events: none;
     transition: width 0.3s linear;
   }
-
   .pf-slider-fill::after {
     content: '';
     position: absolute;
     right: -10px;
     top: 50%;
     transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
 
   .pf-times {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
-    color: rgba(255,255,255,0.55);
-    margin-top: 14px;
-    margin-bottom: 28px;
+    color: rgba(255,255,255,0.48);
+    padding: 10px 28px 24px;
     font-variant-numeric: tabular-nums;
   }
 
+  /* Controles principales */
   .pf-controls {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
-    margin-bottom: 12px;
+    gap: 16px;
+    padding: 0 20px;
+    margin-bottom: 10px;
   }
 
   .pf-ctrl-skip {
-    width: 56px;
-    height: 56px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255,255,255,0.10);
     border: none;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: white;
+    transition: background 0.15s;
   }
-  .pf-ctrl-skip svg { width: 26px; height: 26px; fill: currentColor; }
+  .pf-ctrl-skip:active { background: rgba(255,255,255,0.22); }
+  .pf-ctrl-skip svg { width: 24px; height: 24px; fill: currentColor; }
 
   .pf-ctrl-play {
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
     border-radius: 50%;
     background: #fff;
     border: none;
@@ -1125,11 +1141,11 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.32);
     transition: transform 0.12s;
   }
-  .pf-ctrl-play:active { transform: scale(0.94); }
-  .pf-ctrl-play svg { width: 28px; height: 28px; fill: #1C1810; }
+  .pf-ctrl-play:active { transform: scale(0.93); }
+  .pf-ctrl-play svg { width: 26px; height: 26px; fill: #111; }
   .pf-ctrl-play.paused svg.pause-icon { display: none; }
   .pf-ctrl-play:not(.paused) svg.play-icon { display: none; }
 
@@ -1299,12 +1315,14 @@
   </div>
 </div>
 
-<!-- FULL PLAYER (solo móvil) -->
+<!-- FULL PLAYER (solo móvil) — Spotify style -->
 <div class="player-full" id="playerFull">
   <div class="pf-bg-img" id="pfBgImg"></div>
   <div class="pf-overlay"></div>
   <div class="pf-content">
-    <div class="pf-header" style="display:flex;justify-content:space-between;align-items:center;">
+
+    <!-- Header -->
+    <div class="pf-header">
       <button class="pf-back-btn" onclick="closeFullPlayer()" aria-label="Minimizar">
         <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
@@ -1316,37 +1334,50 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
       </button>
     </div>
-    <div class="pf-spacer"></div>
-    <div class="pf-bottom">
-      <div class="pf-title" id="pfTitle">—</div>
-      <div class="pf-book" id="pfBook"></div>
-      <div class="pf-slider-wrap">
-        <div class="pf-slider" id="pfSlider">
-          <div class="pf-slider-fill" id="pfSliderFill"></div>
-        </div>
-      </div>
-      <div class="pf-times">
-        <span id="pfTimeCurrent">0:00</span>
-        <span id="pfTimeDuration">—</span>
-      </div>
-      <div class="pf-controls">
-        <button class="pf-ctrl-speed" id="pfSpeedBtn" onclick="cycleSpeed()">1×</button>
-        <button class="pf-ctrl-skip" onclick="skipBack()">
-          <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
-        </button>
-        <button class="pf-ctrl-play paused" id="pfPlayBtn" onclick="togglePlay()">
-          <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-          <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-        </button>
-        <button class="pf-ctrl-skip" onclick="skipForward()">
-          <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
-        </button>
-        <button class="pf-ctrl-sleep" id="pfSleepBtn" onclick="cycleSleep()">
-          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          <span class="sleep-min" id="pfSleepMin"></span>
-        </button>
+
+    <!-- Portada cuadrada -->
+    <div class="pf-artwork" id="pfArtwork"></div>
+
+    <!-- Título + libro -->
+    <div class="pf-info">
+      <div class="pf-info-text">
+        <div class="pf-title" id="pfTitle">—</div>
+        <div class="pf-book" id="pfBook"></div>
       </div>
     </div>
+
+    <div class="pf-spacer"></div>
+
+    <!-- Barra de progreso -->
+    <div class="pf-slider-wrap">
+      <div class="pf-slider" id="pfSlider">
+        <div class="pf-slider-fill" id="pfSliderFill"></div>
+      </div>
+    </div>
+    <div class="pf-times">
+      <span id="pfTimeCurrent">0:00</span>
+      <span id="pfTimeDuration">—</span>
+    </div>
+
+    <!-- Controles -->
+    <div class="pf-controls">
+      <button class="pf-ctrl-speed" id="pfSpeedBtn" onclick="cycleSpeed()">1×</button>
+      <button class="pf-ctrl-skip" onclick="skipBack()">
+        <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+      </button>
+      <button class="pf-ctrl-play paused" id="pfPlayBtn" onclick="togglePlay()">
+        <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button class="pf-ctrl-skip" onclick="skipForward()">
+        <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
+      </button>
+      <button class="pf-ctrl-sleep" id="pfSleepBtn" onclick="cycleSleep()">
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <span class="sleep-min" id="pfSleepMin"></span>
+      </button>
+    </div>
+
   </div>
 </div>
 
@@ -1622,11 +1653,20 @@ document.getElementById('pfSlider').addEventListener('click', e => {
 // ── Full player functions
 function syncFullPlayer(s) {
   const bg = s.cover
-    ? `url('${s.cover}') center top / cover no-repeat`
-    : `linear-gradient(160deg, ${s.color} 0%, #F4FAFB 100%)`;
+    ? `url('${s.cover}') center / cover no-repeat`
+    : `linear-gradient(160deg, ${s.color} 0%, #111 100%)`;
   document.getElementById('pfBgImg').style.background = bg;
   document.getElementById('pfTitle').textContent = s.title;
   document.getElementById('pfBook').textContent = s.book;
+
+  const artwork = document.getElementById('pfArtwork');
+  if (s.cover) {
+    artwork.innerHTML = `<img src="${s.cover}" alt="${s.title}">`;
+    artwork.style.background = '';
+  } else {
+    artwork.innerHTML = `<span>${s.emoji}</span>`;
+    artwork.style.background = s.color;
+  }
 }
 
 function openFullPlayer() {
