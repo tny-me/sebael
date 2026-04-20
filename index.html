@@ -156,11 +156,71 @@
   /* ── HERO ───────────────────────────── */
   .hero {
     position: relative;
-    padding: 44px 24px 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 44px 24px 48px;
     overflow: hidden;
     background: linear-gradient(135deg, rgba(185,195,242,0.10) 0%, rgba(122,192,212,0.06) 50%, transparent 100%);
     border-bottom: 0.5px solid rgba(255,255,255,0.06);
+    min-height: 220px;
   }
+
+  /* Decorative glow */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -80px;
+    right: -80px;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(185,195,242,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-left { flex: 1; position: relative; z-index: 1; }
+
+  .hero-right {
+    display: none;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .hero-right { display: flex; align-items: center; gap: 12px; }
+  }
+
+  .hero-cover-main {
+    width: 188px;
+    height: 188px;
+    border-radius: 18px;
+    object-fit: cover;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55), 0 6px 20px rgba(0,0,0,0.35);
+    transform: rotate(2deg);
+    cursor: pointer;
+    transition: transform 0.28s ease;
+    flex-shrink: 0;
+  }
+  .hero-cover-main:hover { transform: rotate(0deg) scale(1.03); }
+
+  .hero-cover-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-cover-sm {
+    width: 112px;
+    height: 112px;
+    border-radius: 13px;
+    object-fit: cover;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.45);
+    cursor: pointer;
+    transition: transform 0.28s ease;
+  }
+  .hero-cover-sm:nth-child(1) { transform: rotate(-2.5deg); }
+  .hero-cover-sm:nth-child(2) { transform: rotate(3deg); }
+  .hero-cover-sm:hover { transform: rotate(0deg) scale(1.04) !important; }
 
   .hero-eyebrow {
     font-size: 10px;
@@ -168,17 +228,17 @@
     text-transform: uppercase;
     color: var(--accent2);
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(30px, 6vw, 50px);
+    font-size: clamp(28px, 5vw, 52px);
     font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
     color: var(--text);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .hero-title em {
@@ -190,7 +250,7 @@
     font-size: 14px;
     font-weight: 400;
     color: var(--text-muted);
-    max-width: 440px;
+    max-width: 400px;
     line-height: 1.65;
   }
 
@@ -933,7 +993,7 @@
     .audio-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   }
   @media (min-width: 768px) {
-    /* Desktop: barra inferior tradicional */
+    /* Desktop: barra inferior — oculta hasta que haya reproducción Y panel cerrado */
     .player,
     .player.player-active,
     .player.player-mini {
@@ -941,18 +1001,24 @@
       bottom: 0;
       left: 240px;
       right: 0;
-      transform: none;
+      transform: translateY(100%);
       width: auto;
       max-width: none;
       border-radius: 0;
       border: none;
       border-top: 1px solid rgba(255,255,255,0.08);
       padding-bottom: env(safe-area-inset-bottom);
-      opacity: 1;
-      pointer-events: auto;
-      transition: none;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s, transform 0.3s;
       box-shadow: 0 -4px 24px rgba(0,0,0,0.3);
       background: rgba(14,14,34,0.98);
+    }
+    /* Mostrar solo cuando hay algo reproduciendo Y el panel derecho está cerrado */
+    body:not(.right-panel-open) .player.player-active {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
     }
     .player-progress { display: block; width: 100%; height: 2px; background: var(--surface3); cursor: pointer; position: relative; }
     .player-fill { background: var(--accent2); }
@@ -967,7 +1033,52 @@
     .ctrl-play:hover { background: #d4daff; }
     .ctrl-play svg { width: 18px; height: 18px; }
     .player-close { display: none; }
+    .player-tap-zone { cursor: pointer; }
     .toast { bottom: calc(var(--player-h) + env(safe-area-inset-bottom) + 14px); }
+  }
+
+  /* ── SEARCH BAR (solo desktop) ────── */
+  .search-bar-wrap { display: none; }
+  @media (min-width: 768px) {
+    .search-bar-wrap {
+      display: flex;
+      padding: 24px 32px 0;
+      position: sticky;
+      top: 0;
+      z-index: 80;
+      background: var(--bg);
+    }
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 460px;
+      height: 44px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0 16px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .search-bar:focus-within { border-color: var(--accent2); background: var(--surface3); }
+    .search-bar svg { width: 15px; height: 15px; stroke: var(--text-dim); fill: none; stroke-width: 2; stroke-linecap: round; flex-shrink: 0; transition: stroke 0.2s; }
+    .search-bar:focus-within svg { stroke: var(--accent2); }
+    .search-bar input { flex: 1; background: transparent; border: none; outline: none; color: var(--text); font-family: var(--font-sans); font-size: 14px; }
+    .search-bar input::placeholder { color: var(--text-dim); }
+    .search-clear { width: 20px; height: 20px; border-radius: 50%; border: none; background: rgba(255,255,255,0.12); color: var(--text-muted); cursor: pointer; flex-shrink: 0; font-size: 11px; display: none; align-items: center; justify-content: center; }
+    .search-bar input:not(:placeholder-shown) ~ .search-clear { display: flex; }
+    .search-clear:hover { background: rgba(255,255,255,0.22); }
+  }
+
+  /* ── CATS ROW sticky desktop ─────── */
+  @media (min-width: 768px) {
+    .cats-wrap {
+      position: sticky;
+      top: 68px;
+      z-index: 70;
+      background: var(--bg);
+    }
   }
   @media (min-width: 900px) {
     .hero { padding: 64px 48px 52px; }
@@ -1100,9 +1211,7 @@
   .audio-card:nth-child(8) { animation-delay: 0.4s; }
   .audio-card:nth-child(n+9) { animation-delay: 0.45s; }
 
-  /* ── FULL PLAYER — Spotify style (móvil) ── */
-  @media (min-width: 768px) { .player-full { display: none !important; } }
-
+  /* ── FULL PLAYER — móvil: pantalla completa / desktop: panel derecho ── */
   .player-full {
     position: fixed;
     inset: 0;
@@ -1113,6 +1222,46 @@
     background: #0e0e12;
   }
   .player-full.open { transform: translateY(0); }
+
+  @media (min-width: 768px) {
+    .player-full {
+      inset: auto;
+      top: 0;
+      right: 0;
+      width: 360px;
+      height: 100vh;
+      transform: translateX(110%);
+      background: var(--bg);
+      border-left: 1px solid rgba(255,255,255,0.08);
+      box-shadow: -12px 0 48px rgba(0,0,0,0.45);
+    }
+    .player-full.open { transform: translateX(0); }
+    .player-full .pf-bg-img { display: none; }
+    .player-full .pf-overlay { display: none; }
+    .player-full .pf-content {
+      overflow-y: auto;
+      background: var(--bg);
+    }
+    .player-full .pf-artwork {
+      width: min(50vw, 200px);
+      height: min(50vw, 200px);
+      margin: 0 auto 14px;
+    }
+    .player-full .pf-title { color: var(--text); }
+    .player-full .pf-book { color: var(--text-muted); }
+    .player-full .pf-times { color: var(--text-dim); }
+    .player-full .pf-slider { background: rgba(255,255,255,0.15); }
+    /* Right panel open: shift content + hide bottom bar */
+    body.right-panel-open {
+      padding-right: 360px;
+    }
+    body.right-panel-open .player,
+    body.right-panel-open .player.player-active {
+      right: 360px;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
 
   /* Fondo desenfocado (muy oscuro) */
   .pf-bg-img {
@@ -1686,6 +1835,15 @@
 <!-- AUDIO ENGINE -->
 <audio id="audioEl" preload="metadata"></audio>
 
+<!-- SEARCH BAR (solo desktop) -->
+<div class="search-bar-wrap">
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="search" id="searchInput" placeholder="Buscar episodios…" autocomplete="off" oninput="searchEpisodes(this.value)">
+    <button class="search-clear" onclick="clearSearch()">✕</button>
+  </div>
+</div>
+
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
@@ -1709,12 +1867,16 @@
   </div>
 </header>
 
-<!-- HERO -->
+<!-- HERO BANNER -->
 <section class="hero">
-  <div class="hero-glow"></div>
-  <p class="hero-eyebrow">✦ Palabra viva</p>
-  <h1 class="hero-title">Las escrituras,<br><em>narradas al alma</em></h1>
-  <p class="hero-desc">Crónicas bíblicas en audio. Escucha la Palabra en cada momento, donde quieras.</p>
+  <div class="hero-left">
+    <p class="hero-eyebrow">✦ Audiolibros bíblicos</p>
+    <h1 class="hero-title">Sumérgete en<br>la <em>Palabra de Dios</em></h1>
+    <p class="hero-desc">Crónicas sagradas narradas al alma. Escucha la Escritura en cualquier momento, donde quieras.</p>
+  </div>
+  <div class="hero-right" id="heroCoverWrap">
+    <!-- covers populated by buildHero() -->
+  </div>
 </section>
 
 <!-- FEATURED -->
@@ -2226,6 +2388,7 @@ function playSong(s) {
   buildGrid(activeFilter);
   buildFeatured();
   showToast(`▶ ${s.title}`);
+  if (window.innerWidth >= 768) openFullPlayer();
 }
 
 function togglePlay() {
@@ -2382,13 +2545,15 @@ function playNextStory() {
 
 function openFullPlayer() {
   const p = document.getElementById('player');
-  if (p.classList.contains('player-mini')) {
-    p.classList.remove('player-mini');
-    return;
+  if (p.classList.contains('player-mini')) { p.classList.remove('player-mini'); return; }
+  if (!current) return;
+  if (window.innerWidth >= 768) {
+    document.getElementById('playerFull').classList.add('open');
+    document.body.classList.add('right-panel-open');
+  } else {
+    document.getElementById('playerFull').classList.add('open');
+    document.body.style.overflow = 'hidden';
   }
-  if (!current || window.innerWidth >= 768) return;
-  document.getElementById('playerFull').classList.add('open');
-  document.body.style.overflow = 'hidden';
 }
 
 function closeFullPlayer() {
@@ -2396,6 +2561,7 @@ function closeFullPlayer() {
   pf.style.transition = '';
   pf.style.transform = '';
   pf.classList.remove('open');
+  document.body.classList.remove('right-panel-open');
   document.body.style.overflow = '';
 }
 
@@ -2811,6 +2977,67 @@ async function admPublish() {
   }
 }
 
+// ── Hero covers ─────────────────────────────────────────────────────────────
+
+function buildHero() {
+  const wrap = document.getElementById('heroCoverWrap');
+  if (!wrap) return;
+  const withCovers = STORIES.filter(s => s.cover);
+  if (withCovers.length < 1) return;
+  const main = withCovers[0];
+  const smList = withCovers.slice(1, 3);
+  wrap.innerHTML = `
+    <img class="hero-cover-main" src="${main.cover}" alt="${main.title}"
+         onclick="playSong(STORIES[0])" loading="lazy">
+    ${smList.length ? `<div class="hero-cover-stack">
+      ${smList.map((s, i) => `<img class="hero-cover-sm" src="${s.cover}" alt="${s.title}"
+           onclick="playSong(STORIES[${STORIES.indexOf(s)}])" loading="lazy">`).join('')}
+    </div>` : ''}`;
+}
+
+// ── Search ───────────────────────────────────────────────────────────────────
+
+function searchEpisodes(query) {
+  const q = query.trim().toLowerCase();
+  if (!q) { buildGrid(activeFilter); buildFeatured(activeFilter); return; }
+  const results = STORIES.filter(s =>
+    s.title.toLowerCase().includes(q) ||
+    s.book.toLowerCase().includes(q) ||
+    (s.desc || '').toLowerCase().includes(q) ||
+    (s.cat || '').toLowerCase().includes(q)
+  );
+  const grid = document.getElementById('audioGrid');
+  grid.innerHTML = '';
+  if (!results.length) {
+    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      <svg viewBox="0 0 24 24"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/></svg>
+      <p>Sin resultados</p><span>No se encontraron episodios</span></div>`;
+    return;
+  }
+  results.forEach(s => {
+    const card = document.createElement('div');
+    const isActive = current && current.id === s.id;
+    card.className = 'audio-card' + (isActive ? ' card-active' : '');
+    card.onclick = () => playSong(s);
+    const art = s.cover ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="card-art" style="background:${s.color};">${s.emoji}</div>`;
+    const pos = parseFloat(localStorage.getItem('pos_' + s.id) || 0);
+    const dur = parseFloat(localStorage.getItem('dur_' + s.id) || 0);
+    const pct = dur > 0 ? Math.min(100, pos / dur * 100).toFixed(1) : 0;
+    card.innerHTML = `<div class="card-cover">${art}<div class="card-play-overlay"><div class="card-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div></div>
+      <div class="card-info"><div class="card-title">${s.title}</div><div class="card-book">${s.book}</div>
+      <div class="card-duration">${headphoneIcon}<span class="card-dur-val">${s.dur || '—'}</span></div>
+      ${pct > 0 ? `<div class="card-progress"><div class="card-progress-fill" style="width:${pct}%"></div></div>` : ''}</div>`;
+    grid.appendChild(card);
+  });
+}
+
+function clearSearch() {
+  const inp = document.getElementById('searchInput');
+  if (inp) inp.value = '';
+  buildGrid(activeFilter);
+  buildFeatured(activeFilter);
+}
+
 // ── Init ────────────────────────────────────────────────────────────────────
 
 function initApp(episodes) {
@@ -2820,6 +3047,7 @@ function initApp(episodes) {
   buildCats();
   buildFeatured('Todos');
   buildGrid('Todos');
+  buildHero();
   applySpeed();
   setInterval(rotateVerse, 12000);
   checkAdminParam();
