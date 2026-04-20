@@ -1013,39 +1013,38 @@
 
   /* Portada cuadrada centrada */
   .pf-artwork {
-    width: min(72vw, 290px);
-    height: min(72vw, 290px);
+    width: min(62vw, 240px);
+    height: min(62vw, 240px);
     border-radius: 14px;
-    margin: 0 auto 28px;
+    margin: 0 auto 16px;
     overflow: hidden;
-    box-shadow: 0 24px 70px rgba(0,0,0,0.60), 0 4px 20px rgba(0,0,0,0.35);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.60), 0 4px 16px rgba(0,0,0,0.35);
     flex-shrink: 0;
     background: var(--surface2);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 68px;
+    font-size: 60px;
     border: 0.5px solid rgba(255,255,255,0.08);
   }
   .pf-artwork img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   /* Info: título + libro */
   .pf-info {
-    padding: 0 28px 20px;
+    padding: 0 28px 14px;
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
     gap: 12px;
   }
   .pf-info-text { flex: 1; min-width: 0; }
 
   .pf-title {
     font-family: 'Poppins', var(--font-sans);
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color: #fff;
     line-height: 1.2;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -1053,21 +1052,53 @@
   }
 
   .pf-book {
-    font-size: 14px;
-    color: rgba(255,255,255,0.58);
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
     font-weight: 400;
   }
 
-  .pf-spacer { flex: 1; min-height: 8px; }
+  /* Botón play/pausa ancho — primario */
+  .pf-ctrl-play-wide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: calc(100% - 56px);
+    max-width: 340px;
+    height: 58px;
+    margin: 0 auto 18px;
+    border-radius: 50px;
+    border: none;
+    background: linear-gradient(135deg, var(--sky) 0%, var(--teal) 100%);
+    box-shadow: 0 8px 30px rgba(90,173,160,0.48), 0 2px 8px rgba(90,173,160,0.22);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.12s, box-shadow 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .pf-ctrl-play-wide:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 16px rgba(90,173,160,0.35);
+  }
+  .pf-ctrl-play-wide svg { width: 22px; height: 22px; fill: #fff; flex-shrink: 0; }
+  .pf-ctrl-play-wide .play-text,
+  .pf-ctrl-play-wide .pause-text { pointer-events: none; }
+  .pf-ctrl-play-wide.paused .pause-icon,
+  .pf-ctrl-play-wide.paused .pause-text { display: none; }
+  .pf-ctrl-play-wide:not(.paused) .play-icon,
+  .pf-ctrl-play-wide:not(.paused) .play-text { display: none; }
 
   /* Slider */
-  .pf-slider-wrap { padding: 0 28px; margin-bottom: 6px; }
+  .pf-slider-wrap { padding: 0 28px; margin-bottom: 4px; }
 
   .pf-slider {
     position: relative;
     width: 100%;
     height: 3px;
-    background: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.22);
     border-radius: 3px;
     cursor: pointer;
   }
@@ -1084,38 +1115,37 @@
   .pf-slider-fill::after {
     content: '';
     position: absolute;
-    right: -10px;
+    right: -9px;
     top: 50%;
     transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     border-radius: 50%;
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
   }
 
   .pf-times {
     display: flex;
     justify-content: space-between;
     font-size: 11px;
-    color: rgba(255,255,255,0.48);
-    padding: 10px 28px 24px;
+    color: rgba(255,255,255,0.45);
+    padding: 8px 28px 18px;
     font-variant-numeric: tabular-nums;
   }
 
-  /* Controles principales */
+  /* Controles secundarios: skip + speed + sleep */
   .pf-controls {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-    padding: 0 20px;
-    margin-bottom: 10px;
+    gap: 14px;
+    padding: 0 28px;
   }
 
   .pf-ctrl-skip {
-    width: 52px;
-    height: 52px;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
     background: rgba(255,255,255,0.10);
     border: none;
@@ -1126,26 +1156,8 @@
     color: white;
     transition: background 0.15s;
   }
-  .pf-ctrl-skip:active { background: rgba(255,255,255,0.22); }
-  .pf-ctrl-skip svg { width: 24px; height: 24px; fill: currentColor; }
-
-  .pf-ctrl-play {
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    background: #fff;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.32);
-    transition: transform 0.12s;
-  }
-  .pf-ctrl-play:active { transform: scale(0.93); }
-  .pf-ctrl-play svg { width: 26px; height: 26px; fill: #111; }
-  .pf-ctrl-play.paused svg.pause-icon { display: none; }
-  .pf-ctrl-play:not(.paused) svg.play-icon { display: none; }
+  .pf-ctrl-skip:active { background: rgba(255,255,255,0.20); }
+  .pf-ctrl-skip svg { width: 22px; height: 22px; fill: currentColor; }
 
   /* tap zone mini player */
   .player-tap-zone { cursor: pointer; display: flex; align-items: center; gap: 14px; flex: 1; min-width: 0; overflow: hidden; }
@@ -1344,7 +1356,13 @@
       </div>
     </div>
 
-    <div class="pf-spacer"></div>
+    <!-- Botón play/pausa ancho (primario) -->
+    <button class="pf-ctrl-play-wide paused" id="pfPlayBtn" onclick="togglePlay()">
+      <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <span class="play-text">Reproducir</span>
+      <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      <span class="pause-text">Pausar</span>
+    </button>
 
     <!-- Barra de progreso -->
     <div class="pf-slider-wrap">
@@ -1357,15 +1375,11 @@
       <span id="pfTimeDuration">—</span>
     </div>
 
-    <!-- Controles -->
+    <!-- Controles secundarios -->
     <div class="pf-controls">
       <button class="pf-ctrl-speed" id="pfSpeedBtn" onclick="cycleSpeed()">1×</button>
       <button class="pf-ctrl-skip" onclick="skipBack()">
         <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
-      </button>
-      <button class="pf-ctrl-play paused" id="pfPlayBtn" onclick="togglePlay()">
-        <svg class="play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="pause-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
       </button>
       <button class="pf-ctrl-skip" onclick="skipForward()">
         <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z"/><text x="12" y="15" text-anchor="middle" font-size="5" fill="currentColor" font-family="sans-serif">15</text></svg>
