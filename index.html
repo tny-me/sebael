@@ -73,6 +73,7 @@ header{
   background:rgba(7,9,26,0.85);
   backdrop-filter:blur(20px);
   border-bottom:1px solid rgba(232,164,62,0.1);
+  position:relative;
 }
 .logo{
   
@@ -91,7 +92,7 @@ header{
 }
 nav{
   display:flex;gap:0.25rem;
-  margin-left:2rem;
+  position:absolute;left:50%;transform:translateX(-50%);
 }
 nav a{
   padding:0.4rem 0.9rem;
@@ -656,7 +657,9 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   color:var(--white2);
   font-family:var(--ff-body);font-size:0.78rem;
   padding:0.3rem 0.5rem;cursor:pointer;outline:none;
+  max-width:130px;
 }
+.sleep-select{max-width:140px;}
 .speed-select option,.sleep-select option{background:var(--navy2);}
 .sc-divider{
   width:1px;height:28px;
