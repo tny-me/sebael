@@ -878,6 +878,108 @@ footer{
 
 /* DRAG PROGRESS */
 .progress-bar-track{user-select:none;}
+
+/* ── LIGHT / DAY MODE ── */
+[data-theme="light"]{
+  --navy:#F7F3EC;
+  --navy2:#FFFFFF;
+  --navy3:#EDE8DF;
+  --navy4:#DDD8CE;
+  --card:#FFFFFF;
+  --card2:#F2EDE4;
+  --white:#1A1510;
+  --white2:#3D3830;
+  --white3:#7A7570;
+}
+[data-theme="light"] body::before{
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(232,164,62,0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(77,184,168,0.06) 0%, transparent 50%);
+}
+[data-theme="light"] #stars{display:none;}
+[data-theme="light"] header{
+  background:rgba(247,243,236,0.90);
+  border-bottom-color:rgba(232,164,62,0.2);
+}
+[data-theme="light"] nav a:hover,
+[data-theme="light"] nav a.active{background:rgba(0,0,0,0.07);}
+[data-theme="light"] .btn-search,
+[data-theme="light"] .btn-theme{
+  background:rgba(0,0,0,0.05);
+  border-color:rgba(0,0,0,0.12);
+  color:var(--white2);
+}
+[data-theme="light"] .btn-search:hover,
+[data-theme="light"] .btn-theme:hover{background:rgba(0,0,0,0.10);}
+[data-theme="light"] .search-overlay{background:rgba(247,243,236,0.97);}
+[data-theme="light"] .search-input{
+  background:rgba(0,0,0,0.04);
+  border-color:rgba(0,0,0,0.12);
+  color:var(--white);
+}
+[data-theme="light"] .search-input::placeholder{color:var(--white3);}
+[data-theme="light"] .hero{
+  background:linear-gradient(135deg,#EDE0C8 0%,#F7F3EC 100%);
+}
+[data-theme="light"] .hero::after{display:none;}
+[data-theme="light"] .book-card{
+  background:var(--card);
+  border-color:rgba(0,0,0,0.08);
+  box-shadow:0 4px 20px rgba(0,0,0,0.08);
+}
+[data-theme="light"] .book-card:hover{box-shadow:0 8px 32px rgba(0,0,0,0.14);}
+[data-theme="light"] .section-header h2{color:var(--white);}
+[data-theme="light"] .tab{
+  background:rgba(0,0,0,0.05);
+  color:var(--white2);
+  border-color:rgba(0,0,0,0.08);
+}
+[data-theme="light"] .tab.active,
+[data-theme="light"] .tab:hover{background:var(--gold);color:#fff;}
+[data-theme="light"] .player-overlay{background:rgba(180,170,155,0.85);}
+[data-theme="light"] .player-modal{
+  background:var(--navy2);
+  border-color:rgba(0,0,0,0.10);
+}
+[data-theme="light"] .player-left{
+  background:var(--navy3);
+  border-right-color:rgba(0,0,0,0.08);
+}
+[data-theme="light"] .icon-btn{
+  background:rgba(0,0,0,0.05);
+  border-color:rgba(0,0,0,0.10);
+  color:var(--white2);
+}
+[data-theme="light"] .icon-btn:hover{background:rgba(0,0,0,0.12);color:var(--white);}
+[data-theme="light"] .secondary-controls{
+  background:rgba(0,0,0,0.04);
+  border-color:rgba(0,0,0,0.08);
+}
+[data-theme="light"] .speed-select,
+[data-theme="light"] .sleep-select{
+  background:rgba(0,0,0,0.05);
+  border-color:rgba(0,0,0,0.12);
+  color:var(--white);
+}
+[data-theme="light"] .speed-select option,
+[data-theme="light"] .sleep-select option{background:var(--navy2);color:var(--white);}
+[data-theme="light"] .sc-divider{background:rgba(0,0,0,0.10);}
+[data-theme="light"] .auth-modal{background:var(--navy2);border-color:rgba(0,0,0,0.10);}
+[data-theme="light"] .auth-input{
+  background:rgba(0,0,0,0.04);
+  border-color:rgba(0,0,0,0.12);
+  color:var(--white);
+}
+
+/* Theme toggle button */
+.btn-theme{
+  width:36px;height:36px;border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.1);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:all 0.2s;color:var(--white2);
+}
+.btn-theme:hover{background:rgba(255,255,255,0.12);color:var(--white);}
 </style>
 </head>
 <body>
@@ -896,6 +998,9 @@ footer{
     <a href="#" onclick="filterCat('Oraciones',this)">Oraciones</a>
   </nav>
   <div class="header-right">
+    <button class="btn-theme" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">
+      <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
     <button class="btn-search" onclick="toggleSearch()" title="Buscar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
     </button>
@@ -1541,6 +1646,28 @@ fetch('episodes.json?v='+Date.now())
   })
   .catch(()=>{ renderBooks('all'); });
 
+// ── THEME TOGGLE ──
+function toggleTheme(){
+  const html = document.documentElement;
+  const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('sebael-theme', next);
+  updateThemeIcon(next);
+}
+function updateThemeIcon(theme){
+  const icon = document.getElementById('themeIcon');
+  if(!icon) return;
+  if(theme === 'light'){
+    icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+  } else {
+    icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+  }
+}
+(function initTheme(){
+  const saved = localStorage.getItem('sebael-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeIcon(saved);
+})();
 </script>
 </body>
 </html>
