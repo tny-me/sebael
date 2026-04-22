@@ -74,7 +74,7 @@
 
   @media (min-width: 768px) {
     body {
-      padding-left: 240px;
+      padding-left: 0;
       padding-bottom: calc(var(--player-h) + 24px);
     }
   }
@@ -459,7 +459,7 @@
 
   @media (min-width: 768px) {
     .bottom-nav { display: none; }
-    .topbar { display: none; /* sidebar replaces topbar on desktop */ }
+    .topbar { display: flex; height: 72px; padding: 0 40px; }
     .topbar-nav {
       display: flex;
       align-items: center;
@@ -998,7 +998,7 @@
     .player.player-mini {
       top: auto;
       bottom: 0;
-      left: 240px;
+      left: 0;
       right: 0;
       transform: translateY(100%);
       width: auto;
@@ -1817,34 +1817,233 @@
     .adm-sheet, .adm-form-sheet { border-radius: 22px; margin: auto; max-height: 85vh; }
     .adm-overlay, .adm-form-overlay { align-items: center; }
   }
+
+  /* ── TOPBAR SEARCH (integrada, solo desktop) ─── */
+  .topbar-search-wrap { display: none; }
+  @media (min-width: 768px) {
+    .topbar-search-wrap {
+      display: flex;
+      flex: 1;
+      max-width: 360px;
+      margin: 0 20px;
+    }
+    .topbar-search-wrap .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      height: 40px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 0 14px;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .topbar-search-wrap .search-bar:focus-within {
+      border-color: var(--accent2);
+      background: var(--surface3);
+    }
+    .topbar-search-wrap .search-bar svg {
+      width: 15px; height: 15px;
+      stroke: var(--text-dim); fill: none;
+      stroke-width: 2; stroke-linecap: round; flex-shrink: 0;
+    }
+    .topbar-search-wrap .search-bar:focus-within svg { stroke: var(--accent2); }
+    .topbar-search-wrap .search-bar input {
+      flex: 1; background: transparent; border: none; outline: none;
+      color: var(--text); font-family: var(--font-sans); font-size: 13px;
+    }
+    .topbar-search-wrap .search-bar input::placeholder { color: var(--text-dim); }
+    .topbar-search-wrap .search-clear {
+      width: 20px; height: 20px; border-radius: 50%; border: none;
+      background: rgba(0,0,0,0.08); color: var(--text-muted);
+      display: none; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; font-size: 12px;
+    }
+    .topbar-search-wrap .search-bar input:not(:placeholder-shown) ~ .search-clear { display: flex; }
+    .logo-img { height: 44px; }
+  }
+
+  /* ── LIBRARY ROWS (Spotify-style) ────── */
+  .library-wrap { padding: 0 24px 48px; }
+  @media (min-width: 768px) { .library-wrap { padding: 0 40px 56px; } }
+  @media (min-width: 1200px) { .library-wrap { padding: 0 64px 56px; } }
+
+  .lib-section { padding-top: 36px; }
+  .lib-section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .lib-section-title {
+    font-family: var(--font-serif);
+    font-size: clamp(17px, 2.5vw, 22px);
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+
+  .lib-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    padding-bottom: 8px;
+  }
+  .lib-row::-webkit-scrollbar { display: none; }
+
+  /* ── ROW CARD ─── */
+  .row-card {
+    flex-shrink: 0;
+    width: 168px;
+    cursor: pointer;
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: box-shadow 0.25s, transform 0.25s;
+  }
+  .row-card:hover {
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0,0,0,0.16);
+    transform: translateY(-5px);
+  }
+  .row-card-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--surface2);
+    overflow: hidden;
+    position: relative;
+  }
+  .row-card-info { padding: 10px 12px 13px; }
+  .row-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 3px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .row-card-book { font-size: 11px; color: var(--text-muted); }
+  .row-card-dur {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 10.5px; color: var(--text-dim); margin-top: 5px;
+  }
+  .row-card-dur svg { width: 11px; height: 11px; fill: currentColor; opacity: 0.75; }
+  .row-card.card-active {
+    border-color: var(--accent2);
+    box-shadow: 0 4px 20px rgba(232,82,10,0.22), 0 0 0 2px var(--accent2);
+  }
+  .row-card.card-active .row-card-title { color: var(--accent2); }
+  .row-card-progress {
+    height: 3px; background: rgba(0,0,0,0.10);
+    border-radius: 2px; margin-top: 8px; overflow: hidden;
+  }
+  .row-card-progress-fill {
+    height: 100%; background: var(--accent2);
+    border-radius: 2px; min-width: 6px;
+  }
+
+  /* ── DARK MODE ───────────────────────── */
+  [data-theme="dark"] {
+    --bg: #0E0C1E;
+    --sidebar: #090715;
+    --surface: #1A1640;
+    --surface2: #221D50;
+    --surface3: #2D2868;
+    --accent: #FFD700;
+    --accent2: #F5C842;
+    --text: #F0EEFF;
+    --text-muted: #9898BE;
+    --text-dim: #6060A0;
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.18);
+    --shadow-card: 0 4px 20px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25);
+    --shadow-hover: 0 12px 40px rgba(0,0,0,0.65), 0 4px 12px rgba(0,0,0,0.35);
+  }
+  [data-theme="dark"] body::before {
+    background: linear-gradient(180deg, #0E0C1E 0%, #0E0C1E 65%, #180A35 88%, #220A40 100%);
+  }
+  [data-theme="dark"] .topbar {
+    background: rgba(9,7,21,0.97);
+    border-bottom-color: rgba(255,255,255,0.08);
+  }
+  [data-theme="dark"] .bottom-nav {
+    background: rgba(9,7,21,0.97);
+    border-top-color: rgba(255,255,255,0.08);
+  }
+  [data-theme="dark"] .topbar-nav-item { color: rgba(255,255,255,0.65); }
+  [data-theme="dark"] .topbar-nav-item:hover { background: rgba(255,255,255,0.10); color: #fff; }
+  [data-theme="dark"] .topbar-nav-item.active { background: rgba(245,200,66,0.14); color: #F5C842; }
+  [data-theme="dark"] .row-card,
+  [data-theme="dark"] .feat-card,
+  [data-theme="dark"] .audio-card {
+    border-color: rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+  }
+  [data-theme="dark"] .row-card:hover,
+  [data-theme="dark"] .feat-card:hover,
+  [data-theme="dark"] .audio-card:hover {
+    border-color: rgba(255,255,255,0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  }
+  [data-theme="dark"] .row-card.card-active,
+  [data-theme="dark"] .audio-card.card-active {
+    box-shadow: 0 4px 20px rgba(245,200,66,0.20), 0 0 0 2px var(--accent2);
+  }
+  [data-theme="dark"] .row-card.card-active .row-card-title,
+  [data-theme="dark"] .audio-card.card-active .card-title { color: #F5C842; }
+  [data-theme="dark"] .row-card-progress,
+  [data-theme="dark"] .card-progress { background: rgba(255,255,255,0.12); }
+  [data-theme="dark"] .cat-pill { border-color: rgba(255,255,255,0.10); background: var(--surface2); }
+  [data-theme="dark"] .player {
+    background: rgba(9,7,21,0.98);
+    border-top-color: rgba(255,255,255,0.08);
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
+  }
+  [data-theme="dark"] .player-full { border-left-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .player-full .pf-slider { background: rgba(255,255,255,0.15); }
+  [data-theme="dark"] .player-full .pf-back-btn { background: rgba(255,255,255,0.10); }
+  [data-theme="dark"] .player-full .pf-back-btn svg { stroke: #fff; }
+  [data-theme="dark"] .player-full .pf-next { border-top-color: rgba(255,255,255,0.12); }
+  [data-theme="dark"] .player-full .pf-next-label { color: rgba(255,255,255,0.40); }
+  [data-theme="dark"] .player-full .pf-next-card { background: rgba(255,255,255,0.07); }
+  [data-theme="dark"] .player-full .pf-next-card:active { background: rgba(255,255,255,0.14); }
+  [data-theme="dark"] .player-full .pf-next-title { color: #fff; }
+  [data-theme="dark"] .player-full .pf-next-book { color: rgba(255,255,255,0.50); }
+  [data-theme="dark"] .player-full .pf-next-arrow { color: rgba(255,255,255,0.50); }
+  [data-theme="dark"] .player-full .pf-ctrl-skip,
+  [data-theme="dark"] .player-full .pf-ctrl-speed,
+  [data-theme="dark"] .player-full .pf-ctrl-sleep { background: rgba(255,255,255,0.10); color: rgba(255,255,255,0.90); }
+  [data-theme="dark"] .player-full .pf-ctrl-speed.speed-active,
+  [data-theme="dark"] .player-full .pf-ctrl-sleep.sleep-active { background: rgba(245,200,66,0.20); color: #F5C842; }
+  [data-theme="dark"] .player-full .pf-sleep-countdown { color: rgba(255,255,255,0.65); }
+  [data-theme="dark"] .topbar-search-wrap .search-bar { background: var(--surface2); border-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .topbar-search-wrap .search-clear { background: rgba(255,255,255,0.10); }
+  [data-theme="dark"] .verse-banner { background: rgba(245,200,66,0.05); border-color: rgba(245,200,66,0.12); }
+  [data-theme="dark"] .verse-banner::before { color: rgba(245,200,66,0.10); }
+  [data-theme="dark"] .footer { background: var(--sidebar); border-top-color: rgba(255,255,255,0.06); }
+  [data-theme="dark"] .adm-header { border-bottom-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .adm-form-header { border-bottom-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .adm-form-footer { border-top-color: rgba(255,255,255,0.08); }
+  [data-theme="dark"] .adm-add-btn { border-color: rgba(255,255,255,0.18); }
+  [data-theme="dark"] .adm-drag-handle { background: rgba(255,255,255,0.20); }
+  [data-theme="dark"] .icon-btn { background: var(--surface2); border-color: rgba(255,255,255,0.10); }
+  [data-theme="dark"] .icon-btn:hover { background: var(--surface3); border-color: rgba(255,255,255,0.20); }
+  [data-theme="dark"] .feat-playing-badge { background: rgba(245,200,66,0.90); color: #1A0800; }
+  [data-theme="dark"] #themeToggleBtn .moon-icon { display: none; }
+  [data-theme="dark"] #themeToggleBtn .sun-icon { display: block; }
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR DESKTOP -->
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-logo">
-    <img src="https://tny-me.github.io/sebael/images/Icono%20app%20y%20favicon.png" class="sidebar-logo-img" alt="Sebael" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-    <span class="sidebar-logo-text" style="display:none">Sebael</span>
-    <span class="sidebar-brand">Sebael</span>
-  </div>
-  <div class="sidebar-nav">
-    <button class="sidebar-item active" data-cat="Todos" onclick="filterCat('Todos');setSidebarActive(this)">
-      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      Inicio
-    </button>
-    <button class="sidebar-item" data-cat="Cuentos para dormir" onclick="filterCat('Cuentos para dormir');setSidebarActive(this)">
-      <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      Para dormir
-    </button>
-  </div>
-  <div class="sidebar-bottom">
-    <button class="sidebar-item" onclick="openAdmin()">
-      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M12 14c-5 0-8 2-8 4v1h16v-1c0-2-3-4-8-4z"/></svg>
-      Admin
-    </button>
-  </div>
-</nav>
+<!-- SIDEBAR: reservado para login futuro -->
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
@@ -1852,20 +2051,19 @@
 <!-- AUDIO ENGINE -->
 <audio id="audioEl" preload="metadata"></audio>
 
-<!-- SEARCH BAR (desktop canvas top) -->
-<div class="search-bar-wrap">
-  <div class="search-bar">
-    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-    <input type="search" id="searchInput" placeholder="Buscar episodios…" autocomplete="off" oninput="searchEpisodes(this.value)">
-    <button class="search-clear" onclick="clearSearch()" title="Limpiar">✕</button>
-  </div>
-</div>
-
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
     <img src="images/logosinfondo.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span class="logo-fallback">Sebael</span>
+  </div>
+  <!-- Search integrada (solo desktop) -->
+  <div class="topbar-search-wrap">
+    <div class="search-bar">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="search" id="searchInput" placeholder="Buscar historias…" autocomplete="off" oninput="searchEpisodes(this.value)">
+      <button class="search-clear" onclick="clearSearch()" title="Limpiar">✕</button>
+    </div>
   </div>
   <nav class="topbar-nav" id="topbarNav">
     <button class="topbar-nav-item active" data-cat="Todos" onclick="filterCat('Todos')">Inicio</button>
@@ -1874,8 +2072,9 @@
     <button class="topbar-nav-item" data-cat="Afirmaciones" onclick="filterCat('Afirmaciones')">Afirmaciones</button>
   </nav>
   <div class="topbar-actions">
-    <button class="icon-btn" title="Buscar" onclick="showToast('Búsqueda próximamente')">
-      <svg viewBox="0 0 24 24"><path d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/></svg>
+    <button class="icon-btn" id="themeToggleBtn" onclick="toggleDarkMode()" title="Modo oscuro/claro">
+      <svg class="moon-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
     <button class="install-btn" id="installBtn" onclick="handleInstall()">
       <svg viewBox="0 0 24 24"><path d="M12 16l-5-5h3V4h4v7h3l-5 5zm-7 2h14v2H5v-2z"/></svg>
@@ -1896,19 +2095,9 @@
   </div>
 </section>
 
-<!-- FEATURED -->
-<div class="featured-wrap">
-  <h2 class="section-heading">Historias destacadas</h2>
-  <div class="featured-scroll" id="featuredScroll">
-    <!-- populated by JS -->
-  </div>
-</div>
-
-<!-- CATS ROW -->
-<div class="cats-wrap">
-  <div class="cats-row" id="catsRow">
-    <!-- populated by JS -->
-  </div>
+<!-- LIBRARY (filas por categoría — estilo Spotify) -->
+<div class="library-wrap" id="libraryWrap">
+  <!-- populated by buildLibrary() -->
 </div>
 
 <!-- VERSE BANNER -->
@@ -1937,13 +2126,6 @@
   </button>
 </nav>
 
-<!-- GRID -->
-<div class="grid-wrap">
-  <h2 class="section-heading">Toda la biblioteca</h2>
-  <div class="audio-grid" id="audioGrid">
-    <!-- populated by JS -->
-  </div>
-</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -2273,19 +2455,85 @@ function isNew(s) {
   return (Date.now() - new Date(s.addedAt)) / 86400000 <= 30;
 }
 
-function buildCats() {
-  const row = document.getElementById('catsRow');
-  const cats = ['Todos', ...new Set(STORIES.map(s => s.cat))];
-  row.innerHTML = cats.map((c, i) =>
-    `<button class="cat-pill${i === 0 ? ' active' : ''}" onclick="filterCat('${c}', this)">${c}</button>`
-  ).join('');
-}
-
 const headphoneIcon = `<svg viewBox="0 0 24 24"><path d="M12 3C7.03 3 3 7.03 3 12v4a3 3 0 0 0 3 3h1a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H5v-1a7 7 0 0 1 14 0v1h-2a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h1a3 3 0 0 0 3-3v-4c0-4.97-4.03-9-9-9z"/></svg>`;
 
-function buildFeatured(filter) {
+function buildLibrary(filter) {
+  filter = filter || activeFilter;
+  const wrap = document.getElementById('libraryWrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  const continueEps = STORIES.filter(s => parseFloat(localStorage.getItem('pos_' + s.id) || 0) > 10);
+  if (continueEps.length) wrap.appendChild(buildLibSection('🎧 Continuar escuchando', continueEps));
+  const filtered = filter === 'Todos' ? STORIES : STORIES.filter(s => s.cat === filter);
+  if (!filtered.length) {
+    wrap.innerHTML += `<div class="empty-state" style="padding:60px 0">
+      <svg viewBox="0 0 24 24"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/></svg>
+      <p>Próximamente</p><span>Estamos preparando contenido para esta sección</span></div>`;
+    return;
+  }
+  const cats = filter === 'Todos'
+    ? [...new Set(STORIES.map(s => s.cat).filter(Boolean))]
+    : [filter];
+  cats.forEach(cat => {
+    const eps = STORIES.filter(s => s.cat === cat);
+    if (eps.length) wrap.appendChild(buildLibSection('🌙 ' + cat, eps));
+  });
+}
+
+function buildLibSection(title, stories) {
+  const section = document.createElement('div');
+  section.className = 'lib-section';
+  section.innerHTML = `<div class="lib-section-header"><h2 class="lib-section-title">${title}</h2></div>`;
+  const row = document.createElement('div');
+  row.className = 'lib-row';
+  stories.forEach(s => {
+    const isActive = current && current.id === s.id;
+    const card = document.createElement('div');
+    card.className = 'row-card' + (isActive ? ' card-active' : '');
+    card.setAttribute('data-id', s.id);
+    card.onclick = () => playSong(s);
+    const art = s.cover
+      ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`
+      : `<div style="width:100%;height:100%;background:${s.color};display:flex;align-items:center;justify-content:center;font-size:48px">${s.emoji}</div>`;
+    const pos = parseFloat(localStorage.getItem('pos_' + s.id) || 0);
+    const durStr = localStorage.getItem('dur_' + s.id) || '';
+    const parts = durStr.split(':');
+    const durSecs = parts.length === 2 ? parseInt(parts[0])*60 + parseInt(parts[1]) : 0;
+    const pct = durSecs > 0 ? Math.min(100, pos / durSecs * 100).toFixed(1) : 0;
+    card.innerHTML = `
+      <div class="row-card-cover">
+        ${art}
+        <div class="card-play-overlay"><div class="card-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
+        ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
+        ${isActive && playing ? `<div class="feat-playing-badge">▶ Reproduciendo</div>` : ''}
+      </div>
+      <div class="row-card-info">
+        <div class="row-card-title">${s.title}</div>
+        <div class="row-card-book">${s.book}</div>
+        <div class="row-card-dur">${headphoneIcon}<span>${s.dur || (s.audio ? '—' : 'Próximamente')}</span></div>
+        ${pct > 0 ? `<div class="row-card-progress"><div class="row-card-progress-fill" style="width:${pct}%"></div></div>` : ''}
+      </div>`;
+    row.appendChild(card);
+  });
+  section.appendChild(row);
+  return section;
+}
+
+function buildCats() {}
+function buildFeatured(f) {}
+function buildGrid(filter) { buildLibrary(filter); }
+
+function toggleDarkMode() {
+  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+(function(){ const t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })();
+
+function _oldBuildFeatured(filter) {
   filter = filter || activeFilter;
   const wrap = document.getElementById('featuredScroll');
+  if (!wrap) return;
   wrap.innerHTML = '';
   const list = filter === 'Todos' ? STORIES : STORIES.filter(s => s.cat === filter);
   list.forEach(s => {
@@ -2365,16 +2613,7 @@ function filterCat(cat) {
   document.querySelectorAll('.bottom-nav-item, .topbar-nav-item').forEach(p => {
     p.classList.toggle('active', p.dataset.cat === cat);
   });
-  document.querySelectorAll('.cat-pill').forEach(p => {
-    p.classList.toggle('active', p.textContent.trim() === cat || (cat === 'Todos' && p.textContent.trim() === 'Todos'));
-  });
-  buildGrid(cat);
-  buildFeatured(cat);
-}
-
-function setSidebarActive(el) {
-  document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
-  el.classList.add('active');
+  buildLibrary(cat);
 }
 
 function playSong(s) {
@@ -3016,59 +3255,30 @@ function buildHero() {
 
 function searchEpisodes(query) {
   const q = query.trim().toLowerCase();
-  if (!q) {
-    buildGrid(activeFilter);
-    buildFeatured(activeFilter);
-    return;
-  }
+  if (!q) { buildLibrary(activeFilter); return; }
   const results = STORIES.filter(s =>
     s.title.toLowerCase().includes(q) ||
     s.book.toLowerCase().includes(q) ||
     (s.desc || '').toLowerCase().includes(q) ||
     (s.cat || '').toLowerCase().includes(q)
   );
-  const grid = document.getElementById('audioGrid');
-  grid.innerHTML = '';
+  const wrap = document.getElementById('libraryWrap');
+  if (!wrap) return;
+  wrap.innerHTML = '';
   if (!results.length) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+    wrap.innerHTML = `<div class="empty-state" style="padding:60px 0">
       <svg viewBox="0 0 24 24"><path d="M9 19V6l12-3v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="15" r="3"/></svg>
-      <p>Sin resultados</p><span>No se encontraron episodios para "${query}"</span>
+      <p>Sin resultados</p><span>No se encontraron historias para "${query}"</span>
     </div>`;
     return;
   }
-  results.forEach(s => {
-    const card = document.createElement('div');
-    const isActive = current && current.id === s.id;
-    card.className = 'audio-card' + (isActive ? ' card-active' : '');
-    card.setAttribute('data-id', s.id);
-    card.onclick = () => playSong(s);
-    const art = s.cover
-      ? `<img src="${s.cover}" style="width:100%;height:100%;object-fit:cover;">`
-      : `<div class="card-art" style="background:${s.color};">${s.emoji}</div>`;
-    const pos = parseFloat(localStorage.getItem('pos_' + s.id) || 0);
-    const dur = parseFloat(localStorage.getItem('dur_' + s.id) || 0);
-    const pct = dur > 0 ? Math.min(100, pos / dur * 100).toFixed(1) : 0;
-    card.innerHTML = `
-      <div class="card-cover">
-        ${art}
-        <div class="card-play-overlay"><div class="card-play-circle"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div></div>
-        ${isNew(s) ? `<span class="badge-new">Nuevo</span>` : ''}
-      </div>
-      <div class="card-info">
-        <div class="card-title">${s.title}</div>
-        <div class="card-book">${s.book}</div>
-        <div class="card-duration">${headphoneIcon}<span class="card-dur-val">${s.dur || (s.audio ? '—' : 'Próximamente')}</span></div>
-        ${pct > 0 ? `<div class="card-progress"><div class="card-progress-fill" style="width:${pct}%"></div></div>` : ''}
-      </div>`;
-    grid.appendChild(card);
-  });
+  wrap.appendChild(buildLibSection('Resultados', results));
 }
 
 function clearSearch() {
   const input = document.getElementById('searchInput');
-  if (input) { input.value = ''; }
-  buildGrid(activeFilter);
-  buildFeatured(activeFilter);
+  if (input) input.value = '';
+  buildLibrary(activeFilter);
 }
 
 // ── Init ────────────────────────────────────────────────────────────────────
@@ -3078,9 +3288,7 @@ function initApp(episodes) {
   episodes.forEach(ep => STORIES.push(ep));
   loadStoredDurations();
   buildHero();
-  buildCats();
-  buildFeatured('Todos');
-  buildGrid('Todos');
+  buildLibrary('Todos');
   applySpeed();
   setInterval(rotateVerse, 12000);
   checkAdminParam();
