@@ -625,9 +625,13 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   border-radius:var(--r2);
   margin-bottom:1.5rem;overflow:hidden;
 }
-.volume-group,.speed-group,.sleep-group{
+.volume-group,.speed-group{
   display:flex;align-items:center;gap:0.5rem;
   flex:1;min-width:0;
+}
+.sleep-group{
+  display:flex;align-items:center;gap:0.5rem;
+  flex:0 0 auto;overflow:hidden;
 }
 .sc-label{font-size:0.7rem;color:var(--white3);white-space:nowrap;}
 .vol-slider{
@@ -652,7 +656,7 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   padding:0.3rem 0.5rem;cursor:pointer;outline:none;
   max-width:130px;
 }
-.sleep-select{max-width:140px;}
+.sleep-select{width:105px;max-width:105px;}
 .speed-select option,.sleep-select option{background:var(--navy2);}
 .sc-divider{
   width:1px;height:28px;
@@ -1054,10 +1058,7 @@ footer{
           <button class="icon-btn" onclick="showToast('Enlace copiado')" title="Compartir">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
           </button>
-          <button class="icon-btn" onclick="showToast('Descargando…')" title="Descargar">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          </button>
-          <button class="icon-btn player-close-inline" onclick="closePlayer()" title="Cerrar">
+<button class="icon-btn player-close-inline" onclick="closePlayer()" title="Cerrar">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
           </button>
         </div>
@@ -1127,7 +1128,7 @@ footer{
         <div class="sleep-group">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;color:var(--white3)"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           <select class="sleep-select" onchange="setSleep(this.value)">
-            <option value="0">Sin temporizador</option>
+            <option value="0">Sin límite</option>
             <option value="5">5 minutos</option>
             <option value="10">10 minutos</option>
             <option value="15">15 minutos</option>
