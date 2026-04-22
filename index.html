@@ -3,8 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Lumina — Historias que Iluminan</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<title>Sebael — Crónicas Bíblicas</title>
+<meta name="theme-color" content="#07091A">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" sizes="180x180" href="https://tny-me.github.io/sebael/images/Icono%20app%20y%20favicon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Sebael">
+<meta name="description" content="Sebael — Crónicas Bíblicas. Audiolibros sagrados para el alma.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -22,8 +28,8 @@
   --white:#F5F0E8;
   --white2:#C8C4BC;
   --white3:#8A8580;
-  --ff-display:'Cormorant Garamond',serif;
-  --ff-body:'Plus Jakarta Sans',sans-serif;
+  --ff-display:'Inter',sans-serif;
+  --ff-body:'Inter',sans-serif;
   --r:16px;
   --r2:24px;
 }
@@ -69,8 +75,8 @@ header{
   border-bottom:1px solid rgba(232,164,62,0.1);
 }
 .logo{
-  font-family:var(--ff-display);
-  font-size:1.8rem;font-weight:300;
+  
+  font-size:1.8rem;font-weight:700;
   letter-spacing:0.05em;
   color:var(--white);
   text-decoration:none;
@@ -92,7 +98,7 @@ nav a{
   color:var(--white2);
   text-decoration:none;
   font-size:0.875rem;
-  font-weight:400;
+  font-weight:500;
   border-radius:var(--r);
   transition:all 0.2s;
   letter-spacing:0.01em;
@@ -158,8 +164,8 @@ nav a:hover,nav a.active{color:var(--white);background:rgba(255,255,255,0.07);}
 }
 .search-wrap input{
   flex:1;background:none;border:none;outline:none;
-  font-family:var(--ff-display);
-  font-size:2.5rem;font-weight:300;
+  
+  font-size:2.5rem;font-weight:700;
   color:var(--white);
   caret-color:var(--gold);
 }
@@ -228,8 +234,8 @@ nav a:hover,nav a.active{color:var(--white);background:rgba(255,255,255,0.07);}
   box-shadow:0 0 8px var(--gold);
 }
 .hero h1{
-  font-family:var(--ff-display);
-  font-size:3.5rem;font-weight:300;
+  
+  font-size:3.5rem;font-weight:700;
   line-height:1.1;letter-spacing:-0.01em;
   color:var(--white);margin-bottom:0.75rem;
 }
@@ -279,8 +285,8 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   margin-bottom:1.25rem;
 }
 .section-title{
-  font-family:var(--ff-display);
-  font-size:1.5rem;font-weight:400;
+  
+  font-size:1.5rem;font-weight:500;
   letter-spacing:0.01em;color:var(--white);
 }
 .see-all{
@@ -372,8 +378,8 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
 .badge-kids{background:rgba(217,112,144,0.15);color:var(--rose);border:1px solid rgba(217,112,144,0.25);}
 .book-info{padding:0.75rem;}
 .book-title{
-  font-family:var(--ff-display);
-  font-size:1rem;font-weight:400;
+  
+  font-size:1rem;font-weight:500;
   color:var(--white);line-height:1.3;
   margin-bottom:0.2rem;
 }
@@ -413,8 +419,8 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
 .continue-info{flex:1;min-width:0;}
 .continue-label{font-size:0.7rem;color:var(--white3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.2rem;}
 .continue-title{
-  font-family:var(--ff-display);
-  font-size:1.1rem;font-weight:400;color:var(--white);
+  
+  font-size:1.1rem;font-weight:500;color:var(--white);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
 }
 .continue-ch{font-size:0.75rem;color:var(--white3);margin-top:0.15rem;}
@@ -485,8 +491,8 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   flex-shrink:0;
 }
 .player-book-title{
-  font-family:var(--ff-display);
-  font-size:1.5rem;font-weight:400;
+  
+  font-size:1.5rem;font-weight:500;
   color:var(--white);line-height:1.2;
   margin-bottom:0.25rem;
 }
@@ -549,8 +555,8 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   margin-bottom:1.5rem;
 }
 .player-title-block .p-title{
-  font-family:var(--ff-display);
-  font-size:1.75rem;font-weight:300;
+  
+  font-size:1.75rem;font-weight:700;
   color:var(--white);line-height:1.2;
 }
 .player-title-block .p-author{font-size:0.85rem;color:var(--white3);margin-top:0.25rem;}
@@ -701,8 +707,8 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   box-shadow:0 2px 8px rgba(0,0,0,0.3);
 }
 .auth-title{
-  font-family:var(--ff-display);
-  font-size:2rem;font-weight:300;
+  
+  font-size:2rem;font-weight:700;
   color:var(--white);margin-bottom:0.25rem;
 }
 .auth-sub{font-size:0.85rem;color:var(--white3);margin-bottom:1.75rem;}
@@ -792,7 +798,7 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
 }
 .feat-info{padding:1rem;}
 .feat-title{
-  font-family:var(--ff-display);
+  
   font-size:1.05rem;color:var(--white);
   margin-bottom:0.2rem;
 }
@@ -813,8 +819,8 @@ footer{
   background:var(--navy2);
 }
 .footer-logo{
-  font-family:var(--ff-display);font-size:1.3rem;
-  font-weight:300;color:var(--white2);
+  font-size:1.3rem;
+  font-weight:700;color:var(--white2);
 }
 .footer-links{display:flex;gap:1.5rem;}
 .footer-links a{
@@ -882,14 +888,13 @@ footer{
 <!-- HEADER -->
 <header>
   <a class="logo" href="#">
-    <div class="logo-dot"></div>
-    Lumina
+    <img src="images/sebael%20app.png" alt="Sebael" style="height:52px;width:auto;">
   </a>
   <nav>
     <a href="#" class="active">Inicio</a>
-    <a href="#" onclick="showSection('explorar')">Explorar</a>
-    <a href="#" onclick="showSection('ninos')">Para Niños</a>
-    <a href="#" onclick="showSection('biblioteca')">Mi Biblioteca</a>
+    <a href="#" onclick="filterCat('Todos',this)" class="active">Inicio</a>
+    <a href="#" onclick="filterCat('Cuentos para dormir',this)">Para dormir</a>
+    <a href="#" onclick="filterCat('Oraciones',this)">Oraciones</a>
   </nav>
   <div class="header-right">
     <button class="btn-search" onclick="toggleSearch()" title="Buscar">
@@ -926,33 +931,28 @@ footer{
   <div class="hero-bg"></div>
   <div class="hero-glow"></div>
   <div class="hero-content">
-    <div class="hero-badge">✦ Historia del día</div>
-    <h1>El Gran Viaje<br>al <em>Fin del Mundo</em></h1>
+    <div class="hero-badge" id="heroBadge">✦ Historia destacada</div>
+    <h1 id="heroTitle">Sumérgete en<br>la <em>Palabra de Dios</em></h1>
     <div class="hero-meta">
       <span>
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Isabela Moreno
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span id="heroBook">Crónicas Bíblicas</span>
       </span>
       <span>
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        4h 32min
+        <span id="heroDur">Audio narrado</span>
       </span>
-      <span>⭐ 4.9 · 2,341 oyentes</span>
     </div>
-    <p class="hero-desc">Un cuento épico sobre valentía, amistad y los secretos que guarda el horizonte. Para toda la familia, narrado con una voz que te transportará lejos, muy lejos…</p>
+    <p class="hero-desc" id="heroDesc">Crónicas sagradas narradas al alma. Escucha la Escritura en cualquier momento, donde quieras.</p>
     <div class="hero-actions">
-      <button class="btn-hero" onclick="openPlayer(books[0])">
+      <button class="btn-hero" id="heroPlayBtn" onclick="heroPlay()">
         <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
         Escuchar ahora
-      </button>
-      <button class="btn-hero-sec">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
-        Guardar
       </button>
     </div>
   </div>
   <div class="hero-artwork">
-    <div class="hero-artwork-placeholder" style="background:linear-gradient(135deg,#1A2240,#0D1629);">🌅</div>
+    <img id="heroImg" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:none;"><div id="heroEmoji" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:8rem;">📖</div>
   </div>
 </section>
 
@@ -1000,37 +1000,24 @@ footer{
 
   <!-- TABS + GRID -->
   <div class="section-header">
-    <div class="section-title">Explorar</div>
+    <div class="section-title">Explorar historias</div>
     <button class="see-all">Ver todo →</button>
   </div>
   <div class="tabs">
-    <button class="tab active" onclick="filterBooks('all',this)">Todo</button>
-    <button class="tab" onclick="filterBooks('audiolibro',this)">Audiolibros</button>
-    <button class="tab" onclick="filterBooks('cuento',this)">Cuentos Infantiles</button>
-    <button class="tab" onclick="filterBooks('historia',this)">Historias</button>
-    <button class="tab" onclick="filterBooks('aventura',this)">Aventuras</button>
+    <button class="tab active" onclick="filterBooks('all',this)">Todos</button>
+    <button class="tab" onclick="filterBooks('Cuentos para dormir',this)">Para dormir</button>
+    <button class="tab" onclick="filterBooks('Oraciones',this)">Oraciones</button>
+    <button class="tab" onclick="filterBooks('Afirmaciones',this)">Afirmaciones</button>
   </div>
   <div class="book-grid" id="bookGrid"></div>
 
-  <!-- FEATURED FOR KIDS -->
-  <div class="section-header">
-    <div class="section-title">✨ Rincón Mágico — Para los Peques</div>
-    <button class="see-all">Ver todo →</button>
-  </div>
-  <div class="h-scroll" id="kidsRow"></div>
 
-  <!-- FEATURED SERIES -->
-  <div class="section-header">
-    <div class="section-title">Series Populares</div>
-    <button class="see-all">Ver todo →</button>
-  </div>
-  <div class="h-scroll" id="seriesRow"></div>
 
 </main>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">✦ Lumina</div>
+  <div class="footer-logo">Sebael</div>
   <div class="footer-links">
     <a href="#">Acerca de</a>
     <a href="#">Autores</a>
@@ -1039,7 +1026,7 @@ footer{
     <a href="#">Términos</a>
     <a href="#">Ayuda</a>
   </div>
-  <div class="footer-copy">© 2025 Lumina Stories</div>
+  <div class="footer-copy">© 2026 Sebael</div>
 </footer>
 
 <!-- AUDIO PLAYER MODAL -->
@@ -1163,8 +1150,8 @@ footer{
 <div class="auth-overlay" id="authOverlay">
   <div class="auth-modal">
     <div class="auth-logo-row">
-      <div style="font-family:var(--ff-display);font-size:1.3rem;font-weight:300;color:var(--white);display:flex;align-items:center;gap:0.4rem;">
-        <div class="logo-dot"></div> Lumina
+      <div style="font-size:1.3rem;font-weight:700;color:var(--white);display:flex;align-items:center;gap:0.4rem;">
+        <img src="images/sebael%20app.png" alt="Sebael" style="height:36px;width:auto;">
       </div>
       <div class="auth-tabs">
         <button class="auth-tab active" id="loginTab" onclick="switchAuthTab('login')">Entrar</button>
@@ -1240,33 +1227,20 @@ footer{
   <span id="toastMsg">Guardado</span>
 </div>
 
+<audio id="audioEl" preload="metadata"></audio>
 <script>
-// DATA
-const books=[
-  {id:1,emoji:'🌅',title:'El Gran Viaje al Fin del Mundo',author:'Isabela Moreno',narrator:'Carlos Ruiz',genre:'aventura',desc:'Un cuento épico sobre valentía, amistad y los secretos que guarda el horizonte. Para toda la familia.',duration:'4h 32min',rating:'4.9',bg:'linear-gradient(135deg,#1d2535,#111827)',badge:'popular',chapters:[{n:'1',name:'El inicio del camino',dur:'22min'},{n:'2',name:'La tormenta de arena',dur:'18min'},{n:'3',name:'El pueblo olvidado',dur:'31min'},{n:'4',name:'Voces en el viento',dur:'25min'},{n:'5',name:'El horizonte',dur:'27min'}]},
-  {id:2,emoji:'🌙',title:'El Bosque de los Sueños',author:'Ana Valentina',narrator:'Sofía López',genre:'historia',desc:'Un viaje onírico a través de un bosque encantado donde los sueños cobran vida propia.',duration:'3h 15min',rating:'4.8',bg:'linear-gradient(135deg,#1a2540,#0d1225)',badge:'new',chapters:[{n:'1',name:'La entrada prohibida',dur:'18min'},{n:'2',name:'Los guardianes',dur:'22min'},{n:'3',name:'La puerta prohibida',dur:'19min'},{n:'4',name:'El despertar',dur:'24min'}]},
-  {id:3,emoji:'🐻',title:'Osito y la Luna',author:'Carmen Soto',narrator:'Lucía Flores',genre:'cuento',desc:'Un adorable osito que quiere tocar la luna. Para los más pequeños de la casa.',duration:'28min',rating:'5.0',bg:'linear-gradient(135deg,#1f1c2c,#13111e)',badge:'kids',chapters:[{n:'1',name:'Historia completa',dur:'28min'}]},
-  {id:4,emoji:'🏰',title:'La Princesa del Mar',author:'Daniela Reyes',narrator:'Valeria Cruz',genre:'cuento',desc:'Una princesa que guarda los secretos del océano y los comparte solo con los más valientes.',duration:'1h 12min',rating:'4.7',bg:'linear-gradient(135deg,#0d2035,#061220)',badge:'popular',chapters:[{n:'1',name:'El palacio de corales',dur:'21min'},{n:'2',name:'La tormenta azul',dur:'25min'},{n:'3',name:'El regreso a casa',dur:'26min'}]},
-  {id:5,emoji:'🐉',title:'Dragones del Norte',author:'Miguel Ángel Torres',narrator:'Roberto Vega',genre:'aventura',desc:'En las tierras heladas del norte, el último dragón espera al elegido que leerá las runas.',duration:'5h 48min',rating:'4.9',bg:'linear-gradient(135deg,#1f1025,#0d0d20)',badge:'popular',chapters:[{n:'1',name:'El último huevo',dur:'28min'},{n:'2',name:'El niño elegido',dur:'32min'},{n:'3',name:'Las runas del fuego',dur:'29min'},{n:'4',name:'La batalla final',dur:'35min'},{n:'5',name:'Un nuevo amanecer',dur:'27min'}]},
-  {id:6,emoji:'🌟',title:'Cuentos de las Estrellas',author:'Lupita Jiménez',narrator:'Elena Ríos',genre:'cuento',desc:'Doce cuentos cortos inspirados en las constelaciones. Perfectos para antes de dormir.',duration:'2h 4min',rating:'4.8',bg:'linear-gradient(135deg,#0a1025,#151d35)',badge:'kids',chapters:[{n:'1',name:'Orión el cazador',dur:'10min'},{n:'2',name:'La Osa Mayor',dur:'11min'},{n:'3',name:'Casiopea la reina',dur:'9min'},{n:'4',name:'Las Pléyades',dur:'10min'}]},
-  {id:7,emoji:'🎭',title:'El Misterio del Teatro',author:'Fernando Rueda',narrator:'Pablo Morales',genre:'historia',desc:'Un detective de 12 años deberá resolver el misterio que se esconde en el viejo teatro abandonado.',duration:'3h 22min',rating:'4.6',bg:'linear-gradient(135deg,#1a1008,#0f0b05)',badge:'new',chapters:[{n:'1',name:'La nota misteriosa',dur:'20min'},{n:'2',name:'El primer acto',dur:'22min'},{n:'3',name:'Pistas en el escenario',dur:'18min'},{n:'4',name:'El culpable',dur:'25min'}]},
-  {id:8,emoji:'🦋',title:'El Jardín de los Colores',author:'Rosa Martínez',narrator:'Gabriela Santos',genre:'cuento',desc:'Las mariposas del jardín guardan un secreto que solo los niños que saben escuchar pueden descubrir.',duration:'45min',rating:'4.9',bg:'linear-gradient(135deg,#1a2015,#0d1508)',badge:'kids',chapters:[{n:'1',name:'Historia completa',dur:'45min'}]},
-  {id:9,emoji:'🚀',title:'Aventura en el Cosmos',author:'Dr. Alejandro Luna',narrator:'Marcos Silva',genre:'audiolibro',desc:'Un viaje científico y narrativo por los planetas del sistema solar. Educativo y emocionante.',duration:'6h 10min',rating:'4.7',bg:'linear-gradient(135deg,#050a1f,#0a1530)',badge:'popular',chapters:[{n:'1',name:'Despegue',dur:'28min'},{n:'2',name:'La Luna',dur:'32min'},{n:'3',name:'Marte el rojo',dur:'35min'},{n:'4',name:'Júpiter gigante',dur:'30min'},{n:'5',name:'Los anillos de Saturno',dur:'28min'}]},
-  {id:10,emoji:'🦁',title:'El León que Lloraba',author:'Gloria Herrera',narrator:'Patricia Méndez',genre:'cuento',desc:'Un poderoso rey de la selva que descubre que mostrar tus emociones es la mayor fortaleza.',duration:'52min',rating:'5.0',bg:'linear-gradient(135deg,#201005,#100802)',badge:'kids',chapters:[{n:'1',name:'Historia completa',dur:'52min'}]},
-  {id:11,emoji:'🔮',title:'La Hechicera Azul',author:'Verónica Castillo',narrator:'Andrea Blanco',genre:'historia',desc:'En una aldea de montaña, una niña descubre que tiene poderes mágicos que nadie esperaba.',duration:'2h 48min',rating:'4.8',bg:'linear-gradient(135deg,#0d0a25,#07061a)',badge:'new',chapters:[{n:'1',name:'El despertar',dur:'18min'},{n:'2',name:'El primer hechizo',dur:'22min'},{n:'3',name:'La academia',dur:'25min'},{n:'4',name:'El gran torneo',dur:'29min'}]},
-  {id:12,emoji:'🌺',title:'Mi Abuela y sus Historias',author:'Consuelo Ramos',narrator:'Yolanda Torres',genre:'audiolibro',desc:'Memorias narradas en forma de cuentos. Las historias de vida de una abuela sabia y amorosa.',duration:'4h 18min',rating:'4.9',bg:'linear-gradient(135deg,#201010,#120808)',badge:'popular',chapters:[{n:'1',name:'Los primeros años',dur:'28min'},{n:'2',name:'El amor de su vida',dur:'32min'},{n:'3',name:'Los hijos',dur:'25min'},{n:'4',name:'La sabiduría',dur:'30min'}]},
-];
+// SEBAEL DATA — cargado desde episodes.json
+let books = [];
+let currentBook = null, isPlaying = false;
+const audioEl = document.getElementById('audioEl');
 
-const kidsBooks=books.filter(b=>b.badge==='kids');
-const series=[
-  {emoji:'🌍',title:'Viajes Mágicos',sub:'6 temporadas · 48 episodios',tag:'Serie',tagColor:'badge-popular',bg:'linear-gradient(135deg,#102015,#081008)'},
-  {emoji:'⭐',title:'Las Estrellas Guardianas',sub:'3 temporadas · 24 episodios',tag:'Serie',tagColor:'badge-new',bg:'linear-gradient(135deg,#0a1020,#050810)'},
-  {emoji:'🏰',title:'Cuentos del Castillo',sub:'2 temporadas · 18 episodios',tag:'Familia',tagColor:'badge-kids',bg:'linear-gradient(135deg,#151020,#0a0815)'},
-  {emoji:'🎪',title:'El Circo de los Sueños',sub:'4 temporadas · 36 episodios',tag:'Serie',tagColor:'badge-popular',bg:'linear-gradient(135deg,#201510,#120d08)'},
-];
+function isNew(b){
+  if(!b.addedAt) return false;
+  return (Date.now()-new Date(b.addedAt))/86400000 <= 30;
+}
 
-let currentBook=null, isPlaying=false, progress=30;
-let timer=null, progressTimer=null;
+function getPos(id){ return parseFloat(localStorage.getItem('pos_'+id)||0); }
+function getDur(b){ return localStorage.getItem('dur_'+b.id)||b.dur||''; }
 
 // GENERATE STARS
 function generateStars(){
@@ -1281,66 +1255,96 @@ function generateStars(){
 }
 generateStars();
 
+// HERO
+function buildHero(){
+  if(!books.length) return;
+  const b = books[0];
+  document.getElementById('heroTitle').innerHTML = b.title.replace(/(.+)\s(\S+)$/, '$1<br><em>$2</em>') || b.title;
+  document.getElementById('heroBook').textContent = b.book || 'Crónicas Bíblicas';
+  document.getElementById('heroDur').textContent = getDur(b) || 'Audio narrado';
+  document.getElementById('heroDesc').textContent = b.desc || '';
+  if(b.cover){
+    const img = document.getElementById('heroImg');
+    img.src = b.cover; img.alt = b.title; img.style.display='block';
+    document.getElementById('heroEmoji').style.display='none';
+  } else {
+    document.getElementById('heroEmoji').textContent = b.emoji||'📖';
+  }
+}
+
+function heroPlay(){
+  if(books.length) openPlayer(books[0]);
+}
+
+function filterCat(cat, el){
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderBooks(cat==='Todos'?'all':cat);
+}
+
 // RENDER BOOKS
 function renderBooks(filter='all'){
   const grid=document.getElementById('bookGrid');
-  const filtered=filter==='all'?books:books.filter(b=>b.genre===filter);
-  grid.innerHTML=filtered.map(b=>`
-    <div class="book-card" onclick="openPlayer(books[${books.indexOf(b)}])">
-      <div class="book-cover" style="background:${b.bg}">
-        <div class="book-cover-inner">${b.emoji}</div>
+  const filtered = filter==='all' ? books : books.filter(b=>b.cat===filter);
+  if(!filtered.length){
+    grid.innerHTML='<p style="color:var(--white3);padding:2rem 0;">Próximamente en esta categoría.</p>';
+    return;
+  }
+  grid.innerHTML=filtered.map(b=>{
+    const pos = getPos(b.id);
+    const durSecs = (()=>{ const d=getDur(b); const p=d.split(':'); return p.length===2?parseInt(p[0])*60+parseInt(p[1]):0; })();
+    const pct = durSecs>0 ? Math.min(100,pos/durSecs*100).toFixed(0) : 0;
+    const badge = isNew(b)?'new':'';
+    const coverHtml = b.cover
+      ? `<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`
+      : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:${b.color||'#1a2540'};">${b.emoji||'📖'}</div>`;
+    return `<div class="book-card" onclick="openPlayer(books[${books.indexOf(b)}])">
+      <div class="book-cover" style="background:${b.color||'#121830'}">
+        ${coverHtml}
         <div class="book-play-overlay">
-          <div class="book-play-btn">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#07091A"><path d="M8 5v14l11-7z"/></svg>
-          </div>
+          <div class="book-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="#07091A"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
-        <div class="book-badge ${b.badge==='new'?'badge-new':b.badge==='kids'?'badge-kids':'badge-popular'}">${b.badge==='new'?'Nuevo':b.badge==='kids'?'Niños':'Popular'}</div>
+        ${badge?`<div class="book-badge badge-new">Nuevo</div>`:''}
+        ${pct>0?`<div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.15);"><div style="height:100%;width:${pct}%;background:var(--gold);"></div></div>`:''}
       </div>
       <div class="book-info">
         <div class="book-title">${b.title}</div>
-        <div class="book-author">${b.author}</div>
+        <div class="book-author">${b.book||''}</div>
         <div class="book-meta-row">
-          <span class="book-rating">⭐ ${b.rating}</span>
-          <span class="book-dur">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            ${b.duration}
-          </span>
+          <span class="book-dur"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${getDur(b)||'—'}</span>
         </div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
-renderBooks();
 
-function renderKids(){
-  const row=document.getElementById('kidsRow');
-  row.innerHTML=kidsBooks.map(b=>`
-    <div class="feat-card" onclick="openPlayer(books[${books.indexOf(b)}])">
-      <div class="feat-cover" style="background:${b.bg}">${b.emoji}</div>
-      <div class="feat-info">
-        <div class="feat-title">${b.title}</div>
-        <div class="feat-sub">${b.author} · ${b.duration}</div>
-        <span class="feat-tag badge-kids">Niños</span>
+function buildContinue(){
+  const section = document.querySelector('.continue-section');
+  const grid = document.querySelector('.continue-grid');
+  const continueEps = books.filter(b=>getPos(b.id)>10);
+  if(!continueEps.length){ if(section) section.style.display='none'; return; }
+  if(section) section.style.display='';
+  grid.innerHTML = continueEps.map(b=>{
+    const pos=getPos(b.id);
+    const durStr=getDur(b); const parts=durStr.split(':');
+    const durSecs=parts.length===2?parseInt(parts[0])*60+parseInt(parts[1]):0;
+    const pct=durSecs>0?Math.min(100,pos/durSecs*100).toFixed(0):0;
+    const coverHtml=b.cover?`<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;">`:`<span>${b.emoji||'📖'}</span>`;
+    return `<div class="continue-card" onclick="openPlayer(books[${books.indexOf(b)}])">
+      <div class="continue-cover" style="background:${b.color||'#1a2540'}">${coverHtml}</div>
+      <div class="continue-info">
+        <div class="continue-label">${b.cat||'Audiolibro'}</div>
+        <div class="continue-title">${b.title}</div>
+        <div class="continue-ch">${b.book||''}</div>
+        <div class="continue-progress"><div class="continue-fill" style="width:${pct}%"></div></div>
       </div>
-    </div>
-  `).join('');
-}
-renderKids();
-
-function renderSeries(){
-  const row=document.getElementById('seriesRow');
-  row.innerHTML=series.map(s=>`
-    <div class="feat-card">
-      <div class="feat-cover" style="background:${s.bg}">${s.emoji}</div>
-      <div class="feat-info">
-        <div class="feat-title">${s.title}</div>
-        <div class="feat-sub">${s.sub}</div>
-        <span class="feat-tag ${s.tagColor}">${s.tag}</span>
+      <div class="continue-right">
+        <div class="continue-time">${durStr||'—'}</div>
+        <div class="mini-play"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
-renderSeries();
 
 function filterBooks(f,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -1348,90 +1352,92 @@ function filterBooks(f,el){
   renderBooks(f);
 }
 
-// PLAYER
+// PLAYER — real audio
 function openPlayer(book){
-  if(!book)return;
-  currentBook=book;
-  document.getElementById('playerEmoji').textContent=book.emoji;
-  document.getElementById('playerCover').style.background=book.bg;
-  document.getElementById('playerTitle').textContent=book.title;
-  document.getElementById('playerAuthor').textContent=book.author+' · Narrado por '+book.narrator;
-  document.getElementById('playerDesc').textContent=book.desc;
-  document.getElementById('pRTitle').textContent=book.title;
-  document.getElementById('pRAuthor').textContent=book.author;
-  document.getElementById('totalTime').textContent=book.duration;
-  renderChapters(book, 0);
+  if(!book) return;
+  currentBook = book;
+  // Cover
+  const coverWrap = document.getElementById('playerCover');
+  const emoji = document.getElementById('playerEmoji');
+  if(book.cover){
+    coverWrap.style.background='#121830';
+    emoji.innerHTML=`<img src="${book.cover}" alt="${book.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`;
+  } else {
+    coverWrap.style.background = book.color||'#1a2540';
+    emoji.textContent = book.emoji||'📖';
+  }
+  document.getElementById('playerTitle').textContent = book.title;
+  document.getElementById('playerAuthor').textContent = book.book||'';
+  document.getElementById('playerDesc').textContent = book.desc||'';
+  document.getElementById('pRTitle').textContent = book.title;
+  document.getElementById('pRAuthor').textContent = book.book||'';
+  // Chapters list — single episode
+  const list = document.getElementById('chaptersList');
+  list.innerHTML = `<div class="chapter-item active"><span class="ch-num">1</span><span class="ch-name">${book.title}</span><div class="ch-playing"><span></span><span></span><span></span></div><span class="ch-dur">${getDur(book)||'—'}</span></div>`;
+  // Audio
+  if(book.audio){
+    audioEl.src = book.audio;
+    const savedPos = getPos(book.id);
+    if(savedPos > 5) audioEl.currentTime = savedPos;
+    audioEl.play().then(()=>{ isPlaying=true; updatePlayIcon(); }).catch(()=>{});
+  }
   document.getElementById('playerOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
+
 function closePlayer(){
-  stopProgress();
+  audioEl.pause();
+  if(currentBook) localStorage.setItem('pos_'+currentBook.id, audioEl.currentTime);
+  isPlaying = false;
+  updatePlayIcon();
   document.getElementById('playerOverlay').classList.remove('open');
   document.body.style.overflow='';
-  isPlaying=false;
+}
+
+function togglePlay(){
+  if(!audioEl.src) return;
+  if(isPlaying){ audioEl.pause(); isPlaying=false; }
+  else { audioEl.play(); isPlaying=true; }
   updatePlayIcon();
 }
-function renderChapters(book, activeIdx){
-  const list=document.getElementById('chaptersList');
-  list.innerHTML=book.chapters.map((ch,i)=>`
-    <div class="chapter-item ${i===activeIdx?'active':''}" onclick="selectChapter(${i})">
-      <span class="ch-num">${ch.n}</span>
-      <span class="ch-name">${ch.name}</span>
-      <div class="ch-playing"><span></span><span></span><span></span></div>
-      <span class="ch-dur">${ch.dur}</span>
-    </div>
-  `).join('');
+
+function updatePlayIcon(){
+  document.getElementById('playIcon').style.display = isPlaying?'none':'block';
+  document.getElementById('pauseIcon').style.display = isPlaying?'block':'none';
 }
-function selectChapter(idx){
-  if(!currentBook)return;
-  renderChapters(currentBook,idx);
-  progress=0;
-  updateProgress();
-  if(!isPlaying){isPlaying=true;updatePlayIcon();startProgress();}
+
+function seekAudio(e){
+  if(!audioEl.duration) return;
+  const track = document.getElementById('progressTrack');
+  const rect = track.getBoundingClientRect();
+  const pct = Math.max(0,Math.min(1,(e.clientX-rect.left)/rect.width));
+  audioEl.currentTime = pct * audioEl.duration;
 }
-let currentChapter=0;
+
 function prevTrack(){
-  if(!currentBook)return;
-  currentChapter=Math.max(0,currentChapter-1);
-  selectChapter(currentChapter);
+  const idx = books.indexOf(currentBook);
+  if(idx > 0) openPlayer(books[idx-1]);
 }
 function nextTrack(){
-  if(!currentBook)return;
-  currentChapter=Math.min(currentBook.chapters.length-1,currentChapter+1);
-  selectChapter(currentChapter);
+  const idx = books.indexOf(currentBook);
+  if(idx < books.length-1) openPlayer(books[idx+1]);
 }
-function togglePlay(){
-  isPlaying=!isPlaying;
-  updatePlayIcon();
-  if(isPlaying){startProgress();}else{stopProgress();}
-}
-function updatePlayIcon(){
-  document.getElementById('playIcon').style.display=isPlaying?'none':'block';
-  document.getElementById('pauseIcon').style.display=isPlaying?'block':'none';
-}
-function startProgress(){
-  stopProgress();
-  progressTimer=setInterval(()=>{
-    progress=Math.min(100,progress+0.05);
-    updateProgress();
-    if(progress>=100){nextTrack();}
-  },300);
-}
-function stopProgress(){
-  if(progressTimer){clearInterval(progressTimer);progressTimer=null;}
-}
-function updateProgress(){
-  document.getElementById('progressFill').style.width=progress+'%';
-  const total=82*60, cur=Math.round(total*progress/100);
-  const m=Math.floor(cur/60), s=cur%60;
-  document.getElementById('currentTime').textContent=m+':'+String(s).padStart(2,'0');
-}
-function seekAudio(e){
-  const track=document.getElementById('progressTrack');
-  const rect=track.getBoundingClientRect();
-  progress=Math.max(0,Math.min(100,((e.clientX-rect.left)/rect.width)*100));
-  updateProgress();
-}
+
+// Audio events
+audioEl.addEventListener('timeupdate', ()=>{
+  if(!audioEl.duration) return;
+  const pct = (audioEl.currentTime/audioEl.duration*100).toFixed(1);
+  document.getElementById('progressFill').style.width = pct+'%';
+  const m=Math.floor(audioEl.currentTime/60), s=Math.floor(audioEl.currentTime%60);
+  document.getElementById('currentTime').textContent = m+':'+String(s).padStart(2,'0');
+  if(currentBook) localStorage.setItem('pos_'+currentBook.id, audioEl.currentTime);
+});
+audioEl.addEventListener('loadedmetadata', ()=>{
+  const m=Math.floor(audioEl.duration/60), s=Math.floor(audioEl.duration%60);
+  document.getElementById('totalTime').textContent = m+':'+String(s).padStart(2,'0');
+  if(currentBook) localStorage.setItem('dur_'+currentBook.id, m+':'+String(s).padStart(2,'0'));
+});
+audioEl.addEventListener('ended', ()=>{ isPlaying=false; updatePlayIcon(); nextTrack(); });
 let bookmarked=false;
 function toggleBookmark(){
   bookmarked=!bookmarked;
@@ -1448,13 +1454,14 @@ function toggleRepeat(){
   repeated=!repeated;
   document.getElementById('btnRepeat').classList.toggle('active',repeated);
 }
-function seekBack(){progress=Math.max(0,progress-3);updateProgress();}
-function seekForward(){progress=Math.min(100,progress+3);updateProgress();}
+function seekBack(){audioEl.currentTime=Math.max(0,audioEl.currentTime-15);}
+function seekForward(){audioEl.currentTime=Math.min(audioEl.duration||0,audioEl.currentTime+15);}
 function setVolume(v){
+  audioEl.volume=v/100;
   const s=document.getElementById('volSlider');
   s.style.background=`linear-gradient(to right, var(--gold) ${v}%, rgba(255,255,255,0.15) ${v}%)`;
 }
-function setSpeed(v){showToast('Velocidad: '+v+'×');}
+function setSpeed(v){audioEl.playbackRate=parseFloat(v);showToast('Velocidad: '+v+'×');}
 function setSleep(v){
   if(v>0)showToast('Temporizador: '+v+' minutos');
   else showToast('Temporizador desactivado');
@@ -1476,8 +1483,8 @@ function switchAuthTab(tab){
   document.getElementById('loginForm').style.display=tab==='login'?'block':'none';
   document.getElementById('registerForm').style.display=tab==='register'?'block':'none';
 }
-function fakeLogin(){closeAuth();showToast('¡Bienvenido de vuelta a Lumina!');}
-function fakeRegister(){closeAuth();showToast('¡Cuenta creada! Bienvenido a Lumina');}
+function fakeLogin(){closeAuth();showToast('¡Bienvenido de vuelta a Sebael!');}
+function fakeRegister(){closeAuth();showToast('¡Cuenta creada! Bienvenido a Sebael');}
 
 // SEARCH
 function toggleSearch(){
@@ -1527,6 +1534,17 @@ document.addEventListener('keydown',function(e){
     e.preventDefault();togglePlay();
   }
 });
+// LOAD EPISODES
+fetch('episodes.json?v='+Date.now())
+  .then(r=>r.json())
+  .then(data=>{
+    books = data;
+    buildHero();
+    renderBooks('all');
+    buildContinue();
+  })
+  .catch(()=>{ renderBooks('all'); });
+
 </script>
 </body>
 </html>
