@@ -105,8 +105,8 @@
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
-  .logo { display: flex; align-items: center; }
-  .logo-img { height: 80px; width: auto; display: block; }
+  .logo { display: flex; align-items: center; line-height: 0; }
+  .logo-img { height: 100px; width: auto; display: block; }
   .logo-fallback { display: none; font-family: var(--font-serif); font-size: 26px; font-weight: 700; color: #fff; }
 
   .topbar-actions {
@@ -1881,7 +1881,7 @@
       cursor: pointer; flex-shrink: 0; font-size: 12px;
     }
     .topbar-search-wrap .search-bar input:not(:placeholder-shown) ~ .search-clear { display: flex; }
-    .logo-img { height: 90px; }
+    .logo-img { height: 100px; }
   }
 
   /* ── LIBRARY ROWS (Spotify-style) ────── */
@@ -2094,14 +2094,6 @@
   <div class="logo">
     <img src="images/sebael%20app.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span class="logo-fallback">Sebael</span>
-  </div>
-  <!-- Search integrada (solo desktop) -->
-  <div class="topbar-search-wrap">
-    <div class="search-bar">
-      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="search" id="searchInput" placeholder="Buscar historias…" autocomplete="off" oninput="searchEpisodes(this.value)">
-      <button class="search-clear" onclick="clearSearch()" title="Limpiar">✕</button>
-    </div>
   </div>
   <nav class="topbar-nav" id="topbarNav">
     <button class="topbar-nav-item active" data-cat="Todos" onclick="filterCat('Todos')">Inicio</button>
