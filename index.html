@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -475,35 +475,43 @@
   }
 
   /* ── TOPBAR NAV (desktop) ───────────── */
-  .topbar-nav { display: none; }
+  /* ── TOPBAR CHIP (centro, estilo Flix.id) ── */
+  .topbar-chip { display: none; }
 
   @media (min-width: 768px) {
     .bottom-nav { display: none; }
     .topbar { display: flex; height: 96px; padding: 0 40px; }
-    .topbar-nav {
+    .topbar-chip {
       display: flex;
       align-items: center;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 50px;
+      padding: 4px;
       gap: 2px;
     }
-    .topbar-nav-item {
+    .topbar-chip-item {
       display: flex;
       align-items: center;
-      padding: 6px 15px;
+      padding: 8px 20px;
       border-radius: 40px;
       border: none;
       background: transparent;
-      color: var(--text-muted);
+      color: rgba(255,255,255,0.55);
       font-family: var(--font-sans);
       font-size: 13px;
       font-weight: 500;
       cursor: pointer;
       transition: background 0.18s, color 0.18s;
-      letter-spacing: 0.02em;
       white-space: nowrap;
+      letter-spacing: 0.01em;
     }
-    .topbar-nav-item { color: rgba(255,255,255,0.65); }
-    .topbar-nav-item:hover { background: rgba(255,255,255,0.10); color: #fff; }
-    .topbar-nav-item.active { background: rgba(232,197,71,0.18); color: #E8C547; font-weight: 600; }
+    .topbar-chip-item:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.90); }
+    .topbar-chip-item.active {
+      background: rgba(255,255,255,0.16);
+      color: #fff;
+      font-weight: 600;
+    }
   }
 
   /* ── SIDEBAR (desktop) ─────────────── */
@@ -1990,30 +1998,32 @@
 
   /* ── DARK MODE ───────────────────────── */
   [data-theme="dark"] {
-    --bg: #0E0C1E;
-    --sidebar: #090715;
-    --surface: #1A1640;
-    --surface2: #221D50;
-    --surface3: #2D2868;
-    --accent: #FFD700;
-    --accent2: #F5C842;
-    --text: #F0EEFF;
-    --text-muted: #9898BE;
-    --text-dim: #6060A0;
+    --bg: #141929;
+    --sidebar: #0E1220;
+    --surface: #1C2338;
+    --surface2: #232C44;
+    --surface3: #2C3658;
+    --accent: #C47B2B;
+    --accent2: #E8C547;
+    --text: #E8EAF2;
+    --text-muted: #8892B0;
+    --text-dim: #5A6480;
     --border: rgba(255,255,255,0.08);
     --border-hover: rgba(255,255,255,0.18);
-    --shadow-card: 0 4px 20px rgba(0,0,0,0.45), 0 1px 4px rgba(0,0,0,0.25);
-    --shadow-hover: 0 12px 40px rgba(0,0,0,0.65), 0 4px 12px rgba(0,0,0,0.35);
+    --shadow-card: 0 4px 24px rgba(0,0,0,0.50), 0 1px 4px rgba(0,0,0,0.30);
+    --shadow-hover: 0 16px 48px rgba(0,0,0,0.70), 0 4px 12px rgba(0,0,0,0.40);
   }
   [data-theme="dark"] body::before {
-    background: #0E0C1E;
+    background:
+      radial-gradient(ellipse 90% 45% at 50% -5%, rgba(90,110,200,0.13) 0%, transparent 65%),
+      #141929;
   }
   [data-theme="dark"] .topbar {
-    background: linear-gradient(140deg, #080618 0%, #0E0B2E 60%, #150F3F 100%);
+    background: linear-gradient(140deg, #0C0A1D 0%, #14103A 60%, #1E1452 100%);
     border-bottom-color: rgba(255,255,255,0.06);
   }
   [data-theme="dark"] .bottom-nav {
-    background: rgba(9,7,21,0.97);
+    background: rgba(14,18,32,0.97);
     border-top-color: rgba(255,255,255,0.08);
   }
   [data-theme="dark"] .topbar-nav-item { color: rgba(255,255,255,0.65); }
@@ -2041,7 +2051,7 @@
   [data-theme="dark"] .card-progress { background: rgba(255,255,255,0.12); }
   [data-theme="dark"] .cat-pill { border-color: rgba(255,255,255,0.10); background: var(--surface2); }
   [data-theme="dark"] .player {
-    background: rgba(9,7,21,0.98);
+    background: rgba(14,18,32,0.98);
     border-top-color: rgba(255,255,255,0.08);
     box-shadow: 0 -4px 24px rgba(0,0,0,0.5);
   }
@@ -2077,6 +2087,15 @@
   [data-theme="dark"] .feat-playing-badge { background: rgba(245,200,66,0.90); color: #1A0800; }
   [data-theme="dark"] #themeToggleBtn .moon-icon { display: none; }
   [data-theme="dark"] #themeToggleBtn .sun-icon { display: block; }
+  [data-theme="light"] #themeToggleBtn .moon-icon { display: block; }
+  [data-theme="light"] #themeToggleBtn .sun-icon { display: none; }
+
+  /* ── LIGHT MODE override (fondo blanco) ── */
+  [data-theme="light"] body::before { background: #FFFFFF; }
+  [data-theme="light"] .topbar { background: linear-gradient(140deg, #0C0A1D 0%, #14103A 60%, #1E1452 100%); }
+  [data-theme="light"] .bottom-nav { background: rgba(255,255,255,0.97); border-top-color: rgba(0,0,0,0.09); }
+  [data-theme="light"] .row-card { background: #fff; border-color: rgba(0,0,0,0.07); }
+  [data-theme="light"] .verse-banner { background: linear-gradient(135deg,#FAF6EE,#F5EDD8); border-color: rgba(155,92,20,0.12); }
 </style>
 </head>
 <body>
@@ -2095,12 +2114,12 @@
     <img src="images/sebael%20app.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span class="logo-fallback">Sebael</span>
   </div>
-  <nav class="topbar-nav" id="topbarNav">
-    <button class="topbar-nav-item active" data-cat="Todos" onclick="filterCat('Todos')">Inicio</button>
-    <button class="topbar-nav-item" data-cat="Cuentos para dormir" onclick="filterCat('Cuentos para dormir')">Para dormir</button>
-    <button class="topbar-nav-item" data-cat="Oraciones" onclick="filterCat('Oraciones')">Oraciones</button>
-    <button class="topbar-nav-item" data-cat="Afirmaciones" onclick="filterCat('Afirmaciones')">Afirmaciones</button>
-  </nav>
+  <div class="topbar-chip" id="topbarNav">
+    <button class="topbar-chip-item active" data-cat="Todos" onclick="filterCat('Todos')">Inicio</button>
+    <button class="topbar-chip-item" data-cat="Cuentos para dormir" onclick="filterCat('Cuentos para dormir')">Para dormir</button>
+    <button class="topbar-chip-item" data-cat="Oraciones" onclick="filterCat('Oraciones')">Oraciones</button>
+    <button class="topbar-chip-item" data-cat="Afirmaciones" onclick="filterCat('Afirmaciones')">Afirmaciones</button>
+  </div>
   <div class="topbar-actions">
     <button class="icon-btn" id="themeToggleBtn" onclick="toggleDarkMode()" title="Modo oscuro/claro">
       <svg class="moon-icon" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -2558,11 +2577,11 @@ function buildFeatured(f) {}
 function buildGrid(filter) { buildLibrary(filter); }
 
 function toggleDarkMode() {
-  const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
 }
-(function(){ const t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })();
+(function(){ const t = localStorage.getItem('theme') || 'dark'; document.documentElement.setAttribute('data-theme', t); })();
 
 function _oldBuildFeatured(filter) {
   filter = filter || activeFilter;
@@ -2644,7 +2663,7 @@ function buildGrid(filter) {
 
 function filterCat(cat) {
   activeFilter = cat;
-  document.querySelectorAll('.bottom-nav-item, .topbar-nav-item').forEach(p => {
+  document.querySelectorAll('.bottom-nav-item, .topbar-chip-item').forEach(p => {
     p.classList.toggle('active', p.dataset.cat === cat);
   });
   buildLibrary(cat);
