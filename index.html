@@ -897,7 +897,26 @@ footer{
     radial-gradient(ellipse at 80% 80%, rgba(77,184,168,0.06) 0%, transparent 50%);
 }
 [data-theme="light"] #stars{display:none;}
-/* header stays dark in light mode — no override */
+/* header always dark regardless of theme */
+[data-theme="light"] header{
+  background:rgba(7,9,26,0.85);
+  border-bottom-color:rgba(232,164,62,0.1);
+  color:#F5F0E8;
+}
+[data-theme="light"] header nav a{color:#C8C4BC;}
+[data-theme="light"] header nav a:hover,
+[data-theme="light"] header nav a.active{color:#F5F0E8;background:rgba(255,255,255,0.07);}
+[data-theme="light"] header .btn-search,
+[data-theme="light"] header .btn-theme{
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(255,255,255,0.1);
+  color:#C8C4BC;
+}
+[data-theme="light"] header .btn-search:hover,
+[data-theme="light"] header .btn-theme:hover{background:rgba(255,255,255,0.12);color:#F5F0E8;}
+[data-theme="light"] header .btn-login{color:#F5C26B;border-color:rgba(232,164,62,0.5);}
+[data-theme="light"] header .btn-login:hover{background:rgba(232,164,62,0.08);}
+[data-theme="light"] header .btn-primary{background:var(--gold);color:#07091A;}
 [data-theme="light"] .search-overlay{background:rgba(247,243,236,0.97);}
 [data-theme="light"] .search-input{
   background:rgba(0,0,0,0.04);
