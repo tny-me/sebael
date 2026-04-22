@@ -99,11 +99,10 @@
     justify-content: space-between;
     padding: 0 24px;
     height: 64px;
-    background: rgba(255,255,255,0.96);
+    background: linear-gradient(140deg, #0C0A1D 0%, #14103A 60%, #1E1452 100%);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0,0,0,0.07);
-    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
   .logo { display: flex; align-items: center; }
@@ -117,14 +116,14 @@
   }
 
   .topbar .icon-btn {
-    background: rgba(0,0,0,0.04);
-    border-color: rgba(0,0,0,0.08);
-    color: var(--text-muted);
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.80);
   }
-  .topbar .icon-btn:hover { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.15); color: var(--accent2); }
-  .topbar .install-btn { background: transparent; color: var(--accent2); border-color: rgba(155,92,20,0.28); }
-  .topbar .install-btn:hover { background: rgba(155,92,20,0.06); }
-  .topbar .install-btn span { color: var(--accent2); }
+  .topbar .icon-btn:hover { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.28); color: #E8C547; }
+  .topbar .install-btn { background: transparent; color: #E8C547; border-color: rgba(232,197,71,0.40); font-size: 12px; }
+  .topbar .install-btn:hover { background: rgba(232,197,71,0.10); }
+  .topbar .install-btn span { color: #E8C547; }
 
   .icon-btn {
     width: 38px;
@@ -480,7 +479,7 @@
 
   @media (min-width: 768px) {
     .bottom-nav { display: none; }
-    .topbar { display: flex; height: 72px; padding: 0 40px; }
+    .topbar { display: flex; height: 68px; padding: 0 40px; }
     .topbar-nav {
       display: flex;
       align-items: center;
@@ -502,8 +501,9 @@
       letter-spacing: 0.02em;
       white-space: nowrap;
     }
-    .topbar-nav-item:hover { background: rgba(0,0,0,0.05); color: var(--text); }
-    .topbar-nav-item.active { background: rgba(155,92,20,0.10); color: var(--accent2); font-weight: 600; }
+    .topbar-nav-item { color: rgba(255,255,255,0.65); }
+    .topbar-nav-item:hover { background: rgba(255,255,255,0.10); color: #fff; }
+    .topbar-nav-item.active { background: rgba(232,197,71,0.18); color: #E8C547; font-weight: 600; }
   }
 
   /* ── SIDEBAR (desktop) ─────────────── */
@@ -2009,9 +2009,8 @@
     background: #0E0C1E;
   }
   [data-theme="dark"] .topbar {
-    background: rgba(9,7,21,0.97);
-    border-bottom-color: rgba(255,255,255,0.08);
-    box-shadow: 0 1px 0 rgba(255,255,255,0.04);
+    background: linear-gradient(140deg, #080618 0%, #0E0B2E 60%, #150F3F 100%);
+    border-bottom-color: rgba(255,255,255,0.06);
   }
   [data-theme="dark"] .bottom-nav {
     background: rgba(9,7,21,0.97);
@@ -2093,7 +2092,7 @@
 <!-- TOPBAR -->
 <header class="topbar">
   <div class="logo">
-    <img src="images/logosinfondo.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+    <img src="images/Logosebael.png" alt="Sebael" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
     <span class="logo-fallback">Sebael</span>
   </div>
   <!-- Search integrada (solo desktop) -->
@@ -2172,7 +2171,7 @@
 
 <!-- FOOTER -->
 <footer class="footer">
-  <img src="images/logosinfondo.png" alt="Sebael" class="footer-logo" onerror="this.style.display='none'">
+  <img src="images/Logosebael.png" alt="Sebael" class="footer-logo" onerror="this.style.display='none'">
   <p class="footer-text">Sebael — Crónicas Bíblicas</p>
   <p class="footer-sub">© 2026 Sebael. Todos los derechos reservados.</p>
 </footer>
