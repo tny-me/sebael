@@ -1,5 +1,18 @@
 [
   {
+    "id": 7,
+    "title": "El guardián del río de la luz",
+    "book": "Cuento original",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🌊",
+    "color": "#C9E8F5",
+    "addedAt": "2026-04-23",
+    "audio": "https://ia600605.us.archive.org/27/items/el-guardian-del-rio-de-la-luz/El%20Guardian%20del%20rio%20de%20la%20luz.mp3",
+    "cover": "images/Portada_el%20guardian%20del%20rio%20de%20la%20luz.jpg",
+    "desc": "Un guardián silencioso que protege las aguas donde nace la luz."
+  },
+  {
     "id": 1,
     "title": "La valentía de David",
     "book": "1 Samuel 17",
