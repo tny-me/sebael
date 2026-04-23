@@ -879,6 +879,155 @@ footer{
 /* DRAG PROGRESS */
 .progress-bar-track{user-select:none;}
 
+/* ── LANDING PAGE ── */
+.l-hero{
+  display:flex;align-items:center;gap:4rem;
+  min-height:calc(100vh - 68px);
+  padding:5rem 3rem 4rem;
+  max-width:1200px;margin:0 auto;
+  position:relative;
+}
+.l-hero-bg{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 80% at 80% 50%, rgba(232,164,62,0.07) 0%, transparent 70%);
+}
+.l-hero-content{flex:1;min-width:0;position:relative;}
+.l-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  background:rgba(232,164,62,0.12);border:1px solid rgba(232,164,62,0.25);
+  color:var(--gold2);font-size:0.78rem;font-weight:600;letter-spacing:0.08em;
+  padding:0.35rem 1rem;border-radius:100px;margin-bottom:1.75rem;
+}
+.l-title{
+  font-size:clamp(2.5rem,5vw,4rem);font-weight:800;
+  color:var(--white);line-height:1.1;margin-bottom:1.5rem;
+}
+.l-title em{color:var(--gold2);font-style:normal;}
+.l-subtitle{
+  font-size:1.1rem;color:var(--white2);line-height:1.7;
+  max-width:520px;margin-bottom:2.5rem;
+}
+.l-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+.l-cta-main{font-size:1rem;padding:0.85rem 2rem;}
+.l-cta-sec{
+  background:none;border:none;color:var(--white2);
+  font-size:1rem;font-weight:500;cursor:pointer;
+  padding:0.85rem 0;transition:color 0.2s;
+}
+.l-cta-sec:hover{color:var(--gold2);}
+.l-stats{display:flex;align-items:center;gap:1.5rem;}
+.l-stat{display:flex;flex-direction:column;gap:0.1rem;}
+.l-stat strong{font-size:1.5rem;font-weight:800;color:var(--white);}
+.l-stat span{font-size:0.75rem;color:var(--white3);text-transform:uppercase;letter-spacing:0.06em;}
+.l-stat-div{width:1px;height:36px;background:rgba(255,255,255,0.1);}
+.l-hero-visual{
+  flex-shrink:0;width:380px;height:420px;
+  position:relative;
+}
+.l-covers-stack{
+  width:100%;height:100%;position:relative;
+}
+.l-cover-card{
+  position:absolute;border-radius:18px;overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,0.5);
+  transition:transform 0.4s;
+}
+.l-cover-card:nth-child(1){width:200px;height:200px;top:0;left:80px;z-index:3;}
+.l-cover-card:nth-child(2){width:170px;height:170px;top:130px;left:0;z-index:2;transform:rotate(-5deg);}
+.l-cover-card:nth-child(3){width:155px;height:155px;top:180px;right:20px;z-index:1;transform:rotate(4deg);}
+.l-cover-card img,.l-cover-card .l-cover-emoji{width:100%;height:100%;object-fit:cover;display:flex;align-items:center;justify-content:center;font-size:4rem;}
+
+/* Features */
+.l-features{padding:6rem 3rem;max-width:1200px;margin:0 auto;text-align:center;}
+.l-section-label{
+  font-size:0.78rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:1rem;
+}
+.l-section-title{
+  font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;
+  color:var(--white);line-height:1.2;margin-bottom:3.5rem;
+}
+.l-features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;}
+.l-feature{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+  border-radius:var(--r2);padding:2.5rem 2rem;text-align:left;
+  transition:border-color 0.3s;
+}
+.l-feature:hover{border-color:rgba(232,164,62,0.25);}
+.l-feat-icon{font-size:2.5rem;margin-bottom:1.25rem;}
+.l-feature h3{font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:0.75rem;}
+.l-feature p{font-size:0.9rem;color:var(--white2);line-height:1.65;}
+
+/* Catalog preview */
+.l-catalog{padding:2rem 3rem 6rem;max-width:1200px;margin:0 auto;text-align:center;}
+
+/* Pricing */
+.l-pricing{padding:6rem 3rem;max-width:900px;margin:0 auto;text-align:center;}
+.l-plans{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem;}
+.l-plan{
+  background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
+  border-radius:var(--r2);padding:2.5rem;text-align:left;position:relative;
+}
+.l-plan-gold{
+  background:rgba(232,164,62,0.06);border-color:rgba(232,164,62,0.35);
+  box-shadow:0 0 60px rgba(232,164,62,0.08);
+}
+.l-plan-badge{
+  position:absolute;top:-1px;right:2rem;
+  background:var(--gold);color:var(--navy);
+  font-size:0.7rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;
+  padding:0.3rem 0.85rem;border-radius:0 0 10px 10px;
+}
+.l-plan-name{font-size:0.85rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--white3);margin-bottom:1rem;}
+.l-plan-price{display:flex;align-items:baseline;gap:0.25rem;margin-bottom:0.75rem;}
+.l-price-num{font-size:2.75rem;font-weight:800;color:var(--white);}
+.l-price-period{font-size:1rem;color:var(--white3);}
+.l-plan-desc{font-size:0.85rem;color:var(--white2);margin-bottom:1.75rem;line-height:1.5;}
+.l-plan-list{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:2rem;}
+.l-plan-list li{font-size:0.88rem;color:var(--white2);}
+.l-plan-list li.ok::before{content:'✓ ';color:var(--gold2);font-weight:700;}
+.l-plan-list li.no{color:var(--white3);}
+.l-plan-list li.no::before{content:'✕ ';color:var(--white3);}
+.l-btn-free{
+  width:100%;padding:0.75rem;border-radius:var(--r);
+  background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);
+  color:var(--white);font-weight:600;cursor:pointer;transition:all 0.2s;
+}
+.l-btn-free:hover{background:rgba(255,255,255,0.12);}
+.l-btn-gold{
+  width:100%;padding:0.75rem;border-radius:var(--r);
+  background:var(--gold);border:none;
+  color:var(--navy);font-weight:700;cursor:pointer;transition:all 0.2s;
+}
+.l-btn-gold:hover{background:var(--gold2);}
+
+/* Bottom CTA */
+.l-cta-banner{
+  text-align:center;padding:6rem 2rem;
+  background:linear-gradient(180deg, transparent 0%, rgba(232,164,62,0.06) 100%);
+  border-top:1px solid rgba(232,164,62,0.1);
+}
+.l-cta-banner h2{font-size:clamp(1.75rem,3vw,2.5rem);font-weight:800;color:var(--white);line-height:1.3;margin-bottom:1rem;}
+.l-cta-banner p{font-size:1rem;color:var(--white2);}
+
+/* Light mode landing overrides */
+[data-theme="light"] .l-feature{background:rgba(0,0,0,0.03);border-color:rgba(0,0,0,0.07);}
+[data-theme="light"] .l-feature:hover{border-color:rgba(232,164,62,0.35);}
+[data-theme="light"] .l-plan{background:rgba(0,0,0,0.03);border-color:rgba(0,0,0,0.08);}
+[data-theme="light"] .l-plan-gold{background:rgba(232,164,62,0.07);border-color:rgba(232,164,62,0.4);}
+
+/* Responsive landing */
+@media(max-width:900px){
+  .l-hero{flex-direction:column;min-height:auto;padding:4rem 1.5rem 3rem;text-align:center;}
+  .l-hero-visual{width:100%;height:260px;}
+  .l-stats{justify-content:center;}
+  .l-actions{justify-content:center;}
+  .l-subtitle{margin-left:auto;margin-right:auto;}
+  .l-features-grid{grid-template-columns:1fr;}
+  .l-plans{grid-template-columns:1fr;}
+  .l-features,.l-catalog,.l-pricing,.l-cta-banner{padding-left:1.5rem;padding-right:1.5rem;}
+}
+
 /* ── LIGHT / DAY MODE ── */
 [data-theme="light"]{
   --navy:#F7F3EC;
@@ -999,9 +1148,8 @@ footer{
     <img src="images/Logosebael.png" alt="Sebael" style="height:40px;width:auto;">
   </a>
   <nav>
-    <a href="#" onclick="filterCat('Todos',this)" class="active">Inicio</a>
-    <a href="#" onclick="filterCat('Cuentos para dormir',this)">Para dormir</a>
-    <a href="#" onclick="filterCat('Oraciones',this)">Oraciones</a>
+    <a href="#" onclick="showView('landing',this)" class="active">Inicio</a>
+    <a href="#" onclick="showView('biblioteca',this)">Biblioteca</a>
   </nav>
   <div class="header-right">
     <button class="btn-theme" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">
@@ -1036,6 +1184,112 @@ footer{
   </div>
 </div>
 
+<!-- LANDING VIEW -->
+<div id="landingView">
+
+  <!-- L-HERO -->
+  <section class="l-hero">
+    <div class="l-hero-bg"></div>
+    <div class="l-hero-content">
+      <div class="l-badge">✦ Audiolibros bíblicos</div>
+      <h1 class="l-title">La Palabra de Dios,<br><em>narrada para tu alma</em></h1>
+      <p class="l-subtitle">Historias sagradas narradas con voz humana y alma. Escucha la Escritura en cualquier momento, donde quieras, al ritmo que tú elijas.</p>
+      <div class="l-actions">
+        <button class="btn-primary l-cta-main" onclick="openAuth('register')">Comenzar gratis</button>
+        <button class="l-cta-sec" onclick="showView('biblioteca',document.querySelectorAll('nav a')[1])">Ver catálogo →</button>
+      </div>
+      <div class="l-stats">
+        <div class="l-stat"><strong id="lStatCount">6+</strong><span>Historias</span></div>
+        <div class="l-stat-div"></div>
+        <div class="l-stat"><strong>100%</strong><span>Bíblico</span></div>
+        <div class="l-stat-div"></div>
+        <div class="l-stat"><strong>Gratis</strong><span>Para empezar</span></div>
+      </div>
+    </div>
+    <div class="l-hero-visual">
+      <div class="l-covers-stack" id="lCoversStack"></div>
+    </div>
+  </section>
+
+  <!-- L-FEATURES -->
+  <section class="l-features">
+    <div class="l-section-label">¿Por qué Sebael?</div>
+    <h2 class="l-section-title">Todo lo que necesitas para<br>conectar con la Escritura</h2>
+    <div class="l-features-grid">
+      <div class="l-feature">
+        <div class="l-feat-icon">🎙️</div>
+        <h3>Narración profesional</h3>
+        <p>Voces cuidadosamente seleccionadas que dan vida a cada historia con emoción y claridad.</p>
+      </div>
+      <div class="l-feature">
+        <div class="l-feat-icon">🎧</div>
+        <h3>Escucha donde quieras</h3>
+        <p>En tu móvil, tablet o computadora. Controla la velocidad, el volumen y el temporizador.</p>
+      </div>
+      <div class="l-feature">
+        <div class="l-feat-icon">✨</div>
+        <h3>Contenido exclusivo</h3>
+        <p>Nuevas historias bíblicas añadidas regularmente. Desde el Génesis hasta el Apocalipsis.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- L-CATALOG PREVIEW -->
+  <section class="l-catalog">
+    <div class="l-section-label">Catálogo</div>
+    <h2 class="l-section-title">Historias que transforman</h2>
+    <div class="book-grid" id="landingGrid" style="margin-top:2rem;"></div>
+    <div style="text-align:center;margin-top:2.5rem;">
+      <button class="l-cta-sec" onclick="showView('biblioteca',document.querySelectorAll('nav a')[1])">Ver catálogo completo →</button>
+    </div>
+  </section>
+
+  <!-- L-PRICING -->
+  <section class="l-pricing">
+    <div class="l-section-label">Planes</div>
+    <h2 class="l-section-title">Empieza gratis,<br>escucha sin límites</h2>
+    <div class="l-plans">
+      <div class="l-plan">
+        <div class="l-plan-name">Gratuito</div>
+        <div class="l-plan-price"><span class="l-price-num">$0</span></div>
+        <div class="l-plan-desc">Perfecto para comenzar tu camino espiritual</div>
+        <ul class="l-plan-list">
+          <li class="ok">1 historia por semana</li>
+          <li class="ok">Reproductor completo</li>
+          <li class="ok">Control de velocidad</li>
+          <li class="no">Acceso ilimitado</li>
+          <li class="no">Sin anuncios</li>
+        </ul>
+        <button class="l-btn-free" onclick="openAuth()">Crear cuenta gratis</button>
+      </div>
+      <div class="l-plan l-plan-gold">
+        <div class="l-plan-badge">Más popular</div>
+        <div class="l-plan-name">Premium</div>
+        <div class="l-plan-price"><span class="l-price-num">$4.99</span><span class="l-price-period">/mes</span></div>
+        <div class="l-plan-desc">Acceso ilimitado a todo el catálogo bíblico</div>
+        <ul class="l-plan-list">
+          <li class="ok">Catálogo completo ilimitado</li>
+          <li class="ok">Nuevas historias antes que nadie</li>
+          <li class="ok">Sin anuncios</li>
+          <li class="ok">Temporizador de sueño</li>
+          <li class="ok">Soporte prioritario</li>
+        </ul>
+        <button class="l-btn-gold" onclick="openAuth('register')">Empezar ahora</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- L-BOTTOM CTA -->
+  <section class="l-cta-banner">
+    <h2>Únete a familias que escuchan<br>la Biblia cada día</h2>
+    <p>Sin tarjeta de crédito. Cancela cuando quieras.</p>
+    <button class="btn-primary" onclick="openAuth('register')" style="font-size:1rem;padding:0.85rem 2.5rem;margin-top:1.5rem;">Comenzar gratis</button>
+  </section>
+
+</div><!-- /landingView -->
+
+<!-- BIBLIOTECA VIEW -->
+<div id="bibliotecaView" style="display:none">
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg"></div>
@@ -1124,6 +1378,8 @@ footer{
 
 
 </main>
+
+</div><!-- /bibliotecaView -->
 
 <!-- FOOTER -->
 <footer>
@@ -1649,8 +1905,56 @@ fetch('episodes.json?v='+Date.now())
     buildHero();
     renderBooks('all');
     buildContinue();
+    buildLanding();
   })
   .catch(()=>{ renderBooks('all'); });
+
+// show landing by default
+showView('landing', document.querySelector('nav a'));
+
+// ── VIEW SWITCHER ──
+function showView(view, el){
+  document.getElementById('landingView').style.display    = view==='landing'    ? '' : 'none';
+  document.getElementById('bibliotecaView').style.display = view==='biblioteca' ? '' : 'none';
+  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+  if(el) el.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function buildLanding(){
+  // populate landing grid (first 3 episodes)
+  const grid = document.getElementById('landingGrid');
+  if(!grid || !books.length) return;
+  const preview = books.slice(0,3);
+  grid.innerHTML = preview.map(b=>{
+    const cover = b.cover
+      ? `<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:${b.color||'#1a2540'}">${b.emoji||'📖'}</div>`;
+    return `<div class="book-card" onclick="showView('biblioteca',document.querySelectorAll('nav a')[1]);setTimeout(()=>openPlayer(books.find(x=>x.id===${b.id})),300)">
+      <div class="book-cover">${cover}</div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.book||''}</div>
+        <div class="book-meta"><span>${b.dur||''}</span></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // cover stack
+  const stack = document.getElementById('lCoversStack');
+  if(stack){
+    stack.innerHTML = books.slice(0,3).map(b=>{
+      const inner = b.cover
+        ? `<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;">`
+        : `<div class="l-cover-emoji" style="background:${b.color||'#1a2540'}">${b.emoji||'📖'}</div>`;
+      return `<div class="l-cover-card">${inner}</div>`;
+    }).join('');
+  }
+
+  // stats count
+  const sc = document.getElementById('lStatCount');
+  if(sc) sc.textContent = books.length + '+';
+}
 
 // ── THEME TOGGLE ──
 function toggleTheme(){
