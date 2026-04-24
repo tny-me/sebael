@@ -375,6 +375,9 @@ main{position:relative;z-index:1;padding:0 3rem 4rem;}
   letter-spacing:0.05em;text-transform:uppercase;
 }
 .badge-new{background:rgba(77,184,168,0.2);color:var(--teal);border:1px solid rgba(77,184,168,0.3);}
+.badge-soon{background:rgba(99,102,241,0.2);color:#a5b4fc;border:1px solid rgba(99,102,241,0.35);}
+.book-card.book-soon{cursor:default;opacity:0.82;}
+.book-card.book-soon .book-play-overlay{display:none;}
 .badge-popular{background:rgba(232,164,62,0.15);color:var(--gold2);border:1px solid rgba(232,164,62,0.25);}
 .badge-kids{background:rgba(217,112,144,0.15);color:var(--rose);border:1px solid rgba(217,112,144,0.25);}
 .book-info{padding:0.75rem;}
@@ -1790,17 +1793,19 @@ function renderBooks(filter='all'){
     const pos = getPos(b.id);
     const durSecs = (()=>{ const d=getDur(b); const p=d.split(':'); return p.length===2?parseInt(p[0])*60+parseInt(p[1]):0; })();
     const pct = durSecs>0 ? Math.min(100,pos/durSecs*100).toFixed(0) : 0;
-    const badge = isNew(b)?'new':'';
+    const isSoon = !!b.soon;
+    const badge = isSoon ? 'soon' : isNew(b) ? 'new' : '';
     const coverHtml = b.cover
       ? `<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`
       : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:${b.color||'#1a2540'};">${b.emoji||'📖'}</div>`;
-    return `<div class="book-card" onclick="openPlayer(books[${books.indexOf(b)}])">
+    return `<div class="book-card${isSoon?' book-soon':''}" onclick="${isSoon?'':'openPlayer(books['+books.indexOf(b)+'])'}">
       <div class="book-cover" style="background:${b.color||'#121830'}">
         ${coverHtml}
         <div class="book-play-overlay">
           <div class="book-play-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="#07091A"><path d="M8 5v14l11-7z"/></svg></div>
         </div>
-        ${badge?`<div class="book-badge badge-new">Nuevo</div>`:''}
+        ${badge==='soon'?`<div class="book-badge badge-soon">Próximamente</div>`:''}
+        ${badge==='new'?`<div class="book-badge badge-new">Nuevo</div>`:''}
         ${pct>0?`<div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.15);"><div style="height:100%;width:${pct}%;background:var(--gold);"></div></div>`:''}
       </div>
       <div class="book-info">

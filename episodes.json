@@ -1,5 +1,19 @@
 [
   {
+    "id": 8,
+    "title": "El niño que aprendió a escuchar el bosque",
+    "book": "Cuento original",
+    "cat": "Cuentos para dormir",
+    "dur": "",
+    "emoji": "🌿",
+    "color": "#C8E6C4",
+    "addedAt": "2026-04-24",
+    "soon": true,
+    "audio": "",
+    "cover": "images/Portada_el%20ni%C3%B1o%20que%20aprendio%20a%20escuchar%20el%20bosque.jpg",
+    "desc": "Un niño descubre que el bosque habla — solo hay que aprender a escucharlo."
+  },
+  {
     "id": 7,
     "title": "El guardián del río de la luz",
     "book": "Cuento original",
