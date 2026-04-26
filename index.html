@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>StoryLoom – Audiolibros & Cuentos</title>
+<title>Sebael – Historias que inspiran</title>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Sora:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -266,8 +266,7 @@
 <div id="login-overlay">
   <div class="login-card">
     <div class="login-logo">
-      <div class="logo-icon"><svg width="24" height="24" style="color:#fff"><use href="#i-headphones"/></svg></div>
-      <span class="logo-text">StoryLoom</span>
+      <img src="images/Logosebael.png" alt="Sebael" style="height:44px;width:auto;">
     </div>
     <h2>Bienvenido de vuelta</h2>
     <p class="subtitle">Tu mundo de historias y cuentos te espera</p>
@@ -324,8 +323,8 @@
     <div class="player-body">
       <div class="player-title-row">
         <div>
-          <div class="player-book-title" id="player-title">El León y la Magia</div>
-          <div class="player-author" id="player-author">por María Torres</div>
+          <div class="player-book-title" id="player-title">—</div>
+          <div class="player-author" id="player-author">—</div>
           <div class="player-rating-row">
             <span class="player-stars"><svg width="13" height="13"><use href="#i-star"/></svg> 4.9</span>
             <span class="player-tag">AVENTURA</span>
@@ -374,8 +373,8 @@
     <svg width="22" height="22" style="color:rgba(255,255,255,0.88)"><use href="#i-book"/></svg>
   </div>
   <div class="mini-info">
-    <div class="mini-title" id="mini-title">El León y la Magia</div>
-    <div class="mini-author">María Torres</div>
+    <div class="mini-title" id="mini-title">—</div>
+    <div class="mini-author">Sebael</div>
   </div>
   <div class="mini-controls">
     <button class="mini-btn" onclick="event.stopPropagation();skipTime(-15)"><svg width="17" height="17"><use href="#i-skip-back"/></svg></button>
@@ -390,14 +389,13 @@
 <div class="page" id="main-app" style="display:none">
   <nav class="topbar">
     <a class="logo">
-      <div class="logo-icon"><svg width="22" height="22" style="color:#fff"><use href="#i-headphones"/></svg></div>
-      <span class="logo-text">StoryLoom</span>
+      <img src="images/Logosebael.png" alt="Sebael" style="height:36px;width:auto;">
     </a>
     <div class="nav-chip">
-      <button class="active" onclick="setNav(this)">Audiolibros</button>
-      <button onclick="setNav(this)">Cuentos</button>
-      <button onclick="setNav(this)">Originals</button>
-      <button onclick="setNav(this)">Pódcast</button>
+      <button class="active" onclick="setNav(this);filterCat('all')">Todos</button>
+      <button onclick="setNav(this);filterCat('Cuentos para dormir')">Para dormir</button>
+      <button onclick="setNav(this);filterCat('Fe y valores')">Fe & Valores</button>
+      <button onclick="setNav(this);filterCat('Próximamente')">Próximamente</button>
     </div>
     <div class="topbar-right">
       <button class="icon-btn"><svg width="17" height="17"><use href="#i-search"/></svg></button>
@@ -412,40 +410,7 @@
 
   <main class="main">
     <!-- HERO -->
-    <div class="hero-grid stagger">
-      <div class="hero-card hero-1" onclick="openBook('El León y la Magia','María Torres','38:42','c1')">
-        <svg class="hero-deco" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="90" stroke="white" stroke-width="1" stroke-dasharray="4 8"/><circle cx="100" cy="100" r="55" stroke="white" stroke-width="0.5"/></svg>
-        <div class="hero-content">
-          <div class="hero-tag"><svg width="11" height="11"><use href="#i-fire" style="stroke:#fff"/></svg> Más escuchado</div>
-          <h2>El León<br>y la Magia</h2>
-          <div class="hero-meta">
-            <span class="hero-stars"><svg width="13" height="13"><use href="#i-star"/></svg> 4.9</span>
-            <span class="hero-sep">·</span>
-            <span class="hero-info">12 capítulos · 6–10 años</span>
-          </div>
-          <button class="play-btn">
-            <span class="play-icon"><svg width="11" height="11" style="color:var(--accent)"><use href="#i-play"/></svg></span>
-            Escuchar ahora
-          </button>
-        </div>
-      </div>
-      <div class="hero-card hero-2" onclick="openBook('El Mago del Bosque','Carlos Ruiz','44:10','c2')">
-        <svg class="hero-deco" viewBox="0 0 200 200" fill="none"><path d="M100 10 L190 190 L10 190 Z" stroke="white" stroke-width="0.8"/><path d="M100 40 L170 170 L30 170 Z" stroke="white" stroke-width="0.5"/></svg>
-        <div class="hero-content">
-          <div class="hero-tag"><svg width="11" height="11"><use href="#i-sparkle" style="stroke:#fff"/></svg> StoryLoom Original</div>
-          <h2>El Mago del<br>Bosque Eterno</h2>
-          <div class="hero-meta">
-            <span class="hero-stars"><svg width="13" height="13"><use href="#i-star"/></svg> 4.8</span>
-            <span class="hero-sep">·</span>
-            <span class="hero-info">8 capítulos · 5–8 años</span>
-          </div>
-          <button class="play-btn">
-            <span class="play-icon"><svg width="11" height="11" style="color:var(--accent2)"><use href="#i-play"/></svg></span>
-            Escuchar ahora
-          </button>
-        </div>
-      </div>
-    </div>
+    <div class="hero-grid stagger" id="heroGrid"></div>
 
     <!-- CATEGORIES -->
     <div class="category-strip">
@@ -459,127 +424,200 @@
       <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-globe"/></svg> Clásicos</button>
     </div>
 
-    <!-- TRENDING -->
+    <!-- CATALOG -->
     <div class="section-header">
-      <h3><span class="section-icon"><svg width="15" height="15" style="color:#fff"><use href="#i-fire"/></svg></span> Tendencias en Fantasía</h3>
-      <button class="see-all">Ver todo <svg width="13" height="13"><use href="#i-arrow-r"/></svg></button>
+      <h3><span class="section-icon"><svg width="15" height="15" style="color:#fff"><use href="#i-sparkle"/></svg></span> Nuestras historias</h3>
     </div>
-    <div class="books-row stagger">
-      <div class="book-card" onclick="openBook('El Unicornio Azul','Ana Pérez','32:10','c1')">
-        <div class="book-cover c1"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-compass"/></svg></div>
-        <div class="book-info"><div class="book-title">El Unicornio Azul</div><div class="book-author">Ana Pérez</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.9</span><span class="book-age">4–7</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('Dragón de Fuego','Luis García','45:30','c2')">
-        <div class="book-cover c2"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-zap"/></svg></div>
-        <div class="book-info"><div class="book-title">Dragón de Fuego</div><div class="book-author">Luis García</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.7</span><span class="book-age">6–10</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('El Árbol Sabio','Rosa Méndez','28:15','c3')">
-        <div class="book-cover c3"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-tree"/></svg></div>
-        <div class="book-info"><div class="book-title">El Árbol Sabio</div><div class="book-author">Rosa Méndez</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.8</span><span class="book-age">3–6</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('Viaje Estelar','Pedro Luna','52:40','c4')">
-        <div class="book-cover c4"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-rocket"/></svg></div>
-        <div class="book-info"><div class="book-title">Viaje Estelar</div><div class="book-author">Pedro Luna</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.6</span><span class="book-age">7–12</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('La Sirena del Mar','Isabel Mar','35:55','c5')">
-        <div class="book-cover c5"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-wave"/></svg></div>
-        <div class="book-info"><div class="book-title">La Sirena del Mar</div><div class="book-author">Isabel Mar</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.9</span><span class="book-age">5–9</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('El Elfo Guerrero','Tomás Vega','48:20','c6')">
-        <div class="book-cover c6"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-sparkle"/></svg></div>
-        <div class="book-info"><div class="book-title">El Elfo Guerrero</div><div class="book-author">Tomás Vega</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.5</span><span class="book-age">8–12</span></div></div>
-      </div>
-    </div>
+    <div class="books-row stagger" id="mainGrid"></div>
 
-    <!-- SLEEP -->
+    <!-- SOON -->
     <div class="section-header">
-      <h3><span class="section-icon"><svg width="15" height="15" style="color:#fff"><use href="#i-moon"/></svg></span> Para Dormir Dulce</h3>
-      <button class="see-all">Ver todo <svg width="13" height="13"><use href="#i-arrow-r"/></svg></button>
+      <h3><span class="section-icon"><svg width="15" height="15" style="color:#fff"><use href="#i-moon"/></svg></span> Próximamente</h3>
     </div>
-    <div class="books-row stagger">
-      <div class="book-card" onclick="openBook('Luna de Sueños','Clara Paz','20:00','c7')">
-        <div class="book-cover c7"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-moon"/></svg></div>
-        <div class="book-info"><div class="book-title">Luna de Sueños</div><div class="book-author">Clara Paz</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 5.0</span><span class="book-age">2–5</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('Las Estrellas Cuentan','Elena Río','18:30','c8')">
-        <div class="book-cover c8"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-sparkle"/></svg></div>
-        <div class="book-info"><div class="book-title">Las Estrellas Cuentan</div><div class="book-author">Elena Río</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.8</span><span class="book-age">3–7</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('El Sueño de Nubes','Sofía Mar','22:15','c9')">
-        <div class="book-cover c9"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-wave"/></svg></div>
-        <div class="book-info"><div class="book-title">El Sueño de Nubes</div><div class="book-author">Sofía Mar</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.7</span><span class="book-age">2–6</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('La Mariposa Dormilona','Carlos Sol','16:45','c10')">
-        <div class="book-cover c10"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-zap"/></svg></div>
-        <div class="book-info"><div class="book-title">La Mariposa Dormilona</div><div class="book-author">Carlos Sol</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.9</span><span class="book-age">2–5</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('Olas de Calma','Marina Vidal','25:10','c11')">
-        <div class="book-cover c11"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-headphones"/></svg></div>
-        <div class="book-info"><div class="book-title">Olas de Calma</div><div class="book-author">Marina Vidal</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.6</span><span class="book-age">3–7</span></div></div>
-      </div>
-      <div class="book-card" onclick="openBook('El Jardín Secreto','Laura Pino','30:00','c12')">
-        <div class="book-cover c12"><div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div><svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-mic"/></svg></div>
-        <div class="book-info"><div class="book-title">El Jardín Secreto</div><div class="book-author">Laura Pino</div><div class="book-meta"><span class="book-rating"><svg width="10" height="10"><use href="#i-star"/></svg> 4.8</span><span class="book-age">4–8</span></div></div>
-      </div>
-    </div>
+    <div class="books-row stagger" id="soonGrid"></div>
   </main>
 </div>
 
+<audio id="audioEl" preload="metadata"></audio>
 <script>
-  const grads={c1:'linear-gradient(135deg,#1e4a8f,#4f8ef7)',c2:'linear-gradient(135deg,#5b1f9c,#9b59b6)',c3:'linear-gradient(135deg,#1a6b3a,#27ae60)',c4:'linear-gradient(135deg,#8b3a1f,#e67e22)',c5:'linear-gradient(135deg,#1f4a8b,#3498db)',c6:'linear-gradient(135deg,#7b1f5c,#e91e8c)',c7:'linear-gradient(135deg,#2c5f6e,#16a085)',c8:'linear-gradient(135deg,#4a2c1f,#c0392b)',c9:'linear-gradient(135deg,#1f3a6e,#2980b9)',c10:'linear-gradient(135deg,#3a1f6e,#8e44ad)',c11:'linear-gradient(135deg,#1f5a2c,#2ecc71)',c12:'linear-gradient(135deg,#6e3a1f,#d35400)'};
-  let isPlaying=false,speeds=[.75,1,1.25,1.5,2],speedIdx=1,progress=0,isFaved=false,pInterval=null;
+  // ── STATE ──
+  let books=[], currentBook=null, isPlaying=false, isFaved=false;
+  const audioEl = document.getElementById('audioEl');
+  const grads={c1:'linear-gradient(135deg,#1e4a8f,#4f8ef7)',c2:'linear-gradient(135deg,#5b1f9c,#9b59b6)',c3:'linear-gradient(135deg,#1a6b3a,#27ae60)',c4:'linear-gradient(135deg,#8b3a1f,#e67e22)',c5:'linear-gradient(135deg,#1f4a8b,#3498db)',c6:'linear-gradient(135deg,#7b1f5c,#e91e8c)',c7:'linear-gradient(135deg,#2c5f6e,#16a085)',c8:'linear-gradient(135deg,#4a2c1f,#c0392b)'};
+  const gradKeys=Object.keys(grads);
 
-  function closeLogin(){document.getElementById('login-overlay').style.display='none';document.getElementById('main-app').style.display='block'}
-  function selectAvatar(b){document.querySelectorAll('.avatar-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
-  function setNav(b){document.querySelectorAll('.nav-chip button').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
-  function setCategory(b){document.querySelectorAll('.cat-chip').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+  function getPos(id){return parseFloat(localStorage.getItem('pos_'+id)||0);}
+  function savePos(id,t){localStorage.setItem('pos_'+id,t);}
 
-  function openBook(title,author,duration,cc){
-    document.getElementById('player-title').textContent=title;
-    document.getElementById('player-author').textContent='por '+author;
-    document.getElementById('total-time').textContent=duration;
-    document.getElementById('player-header-bg').style.background=grads[cc]||grads.c1;
-    document.getElementById('mini-title').textContent=title;
-    document.getElementById('mini-cover').className='mini-cover '+cc;
-    progress=0;updateProgress();openPlayer();startPlay();
+  // ── UI HELPERS ──
+  function closeLogin(){document.getElementById('login-overlay').style.display='none';document.getElementById('main-app').style.display='block';}
+  function selectAvatar(b){document.querySelectorAll('.avatar-btn').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+  function setNav(b){document.querySelectorAll('.nav-chip button').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+  function setCategory(b){document.querySelectorAll('.cat-chip').forEach(x=>x.classList.remove('active'));b.classList.add('active');}
+
+  // ── RENDER ──
+  function cardHTML(b, idx){
+    const gk = gradKeys[idx % gradKeys.length];
+    const coverStyle = b.cover ? '' : `background:${grads[gk]};`;
+    const coverInner = b.cover
+      ? `<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`
+      : `<svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-book"/></svg>`;
+    const soonBadge = b.soon ? `<div style="position:absolute;top:8px;left:8px;background:rgba(99,102,241,0.85);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.06em;">PRÓXIMAMENTE</div>` : '';
+    const click = b.soon ? '' : `onclick="openBook(books[${idx}])"`;
+    return `<div class="book-card${b.soon?' book-soon':''}" ${click} style="${b.soon?'cursor:default;opacity:0.8;':''}">
+      <div class="book-cover" style="${coverStyle}position:relative;">
+        <div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div>
+        ${coverInner}${soonBadge}
+      </div>
+      <div class="book-info">
+        <div class="book-title">${b.title}</div>
+        <div class="book-author">${b.book||'Sebael'}</div>
+        <div class="book-meta">${b.soon?'<span class="book-age">Pronto</span>':'<span class="book-age">'+b.cat+'</span>'}</div>
+      </div>
+    </div>`;
   }
 
-  function openPlayer(){document.getElementById('player-modal').classList.add('open')}
-  function closePlayer(){document.getElementById('player-modal').classList.remove('open')}
+  function heroCardHTML(b, idx, tag, gradClass){
+    const bg = b.cover ? `background:url('${b.cover}') center/cover` : grads[gradClass]||grads.c1;
+    return `<div class="hero-card hero-${idx+1}" onclick="openBook(books[${idx}}])" style="${b.cover?'background:url(''+b.cover+'') center/cover no-repeat;':grads[gradClass]||grads.c1}">
+      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.2) 60%,transparent 100%);border-radius:inherit;"></div>
+      <div class="hero-content" style="position:relative;">
+        <div class="hero-tag"><svg width="11" height="11"><use href="#i-sparkle" style="stroke:#fff"/></svg> ${tag}</div>
+        <h2>${b.title}</h2>
+        <div class="hero-meta">
+          <span class="hero-info">${b.cat}</span>
+        </div>
+        <button class="play-btn">
+          <span class="play-icon"><svg width="11" height="11" style="color:var(--accent)"><use href="#i-play"/></svg></span>
+          Escuchar ahora
+        </button>
+      </div>
+    </div>`;
+  }
+
+  function renderAll(){
+    const playable = books.filter(b=>!b.soon);
+    const soon = books.filter(b=>b.soon);
+
+    // Hero (first 2 playable)
+    const heroGrid = document.getElementById('heroGrid');
+    if(heroGrid && playable.length>=2){
+      heroGrid.innerHTML =
+        heroCardHTML(playable[0], books.indexOf(playable[0]), 'Más escuchado', 'c1') +
+        heroCardHTML(playable[1], books.indexOf(playable[1]), 'Sebael Original', 'c2');
+    }
+
+    // Main grid (all playable)
+    const mainGrid = document.getElementById('mainGrid');
+    if(mainGrid) mainGrid.innerHTML = playable.map((b,i)=>cardHTML(b,books.indexOf(b))).join('');
+
+    // Soon grid
+    const soonGrid = document.getElementById('soonGrid');
+    if(soonGrid){
+      soonGrid.innerHTML = soon.length
+        ? soon.map((b,i)=>cardHTML(b,books.indexOf(b))).join('')
+        : '<p style="color:var(--text-muted);font-size:14px;padding:1rem 0;">Nuevas historias próximamente...</p>';
+    }
+  }
+
+  function filterCat(cat){
+    const playable = cat==='all' ? books.filter(b=>!b.soon) :
+                     cat==='Próximamente' ? books.filter(b=>b.soon) :
+                     books.filter(b=>b.cat===cat && !b.soon);
+    const mainGrid = document.getElementById('mainGrid');
+    if(mainGrid) mainGrid.innerHTML = playable.map((b,i)=>cardHTML(b,books.indexOf(b))).join('');
+  }
+
+  // ── PLAYER ──
+  function openBook(b){
+    if(!b || b.soon || !b.audio) return;
+    currentBook = b;
+    const idx = books.indexOf(b);
+    const gk = gradKeys[idx % gradKeys.length];
+    // Set audio
+    audioEl.src = b.audio;
+    const saved = getPos(b.id);
+    audioEl.addEventListener('loadedmetadata', ()=>{if(saved>5) audioEl.currentTime=saved;}, {once:true});
+    audioEl.play().catch(()=>{});
+    isPlaying = true;
+    // Player UI
+    document.getElementById('player-title').textContent = b.title;
+    document.getElementById('player-author').textContent = b.book||'Sebael';
+    document.getElementById('player-header-bg').style.background = b.cover
+      ? `url('${b.cover}') center/cover no-repeat` : grads[gk];
+    document.getElementById('mini-title').textContent = b.title;
+    const miniCover = document.getElementById('mini-cover');
+    miniCover.innerHTML = b.cover
+      ? `<img src="${b.cover}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`
+      : `<svg width="22" height="22" style="color:rgba(255,255,255,0.88)"><use href="#i-book"/></svg>`;
+    // Player cover icon
+    const pcIcon = document.querySelector('.player-cover-icon');
+    if(pcIcon) pcIcon.innerHTML = b.cover
+      ? `<img src="${b.cover}" style="width:88px;height:88px;object-fit:cover;border-radius:16px;box-shadow:0 8px 20px rgba(0,0,0,0.3);">`
+      : `<svg width="88" height="88" style="filter:drop-shadow(0 8px 20px rgba(0,0,0,0.22))"><use href="#i-book" style="stroke:rgba(255,255,255,0.88)"/></svg>`;
+    setIcon(true);
+    openPlayer();
+    document.getElementById('mini-player').classList.add('visible');
+  }
+
+  function openPlayer(){document.getElementById('player-modal').classList.add('open');}
+  function closePlayer(){document.getElementById('player-modal').classList.remove('open');}
 
   function setIcon(playing){
-    const h=playing?'#i-pause':'#i-play';
+    const h = playing?'#i-pause':'#i-play';
     document.querySelector('#pp-icon use').setAttribute('href',h);
     document.querySelector('#mini-pp-icon use').setAttribute('href',h);
   }
 
-  function togglePlay(){isPlaying?pausePlay():startPlay()}
-
-  function startPlay(){
-    isPlaying=true;setIcon(true);
-    document.getElementById('mini-player').classList.add('visible');
-    clearInterval(pInterval);
-    pInterval=setInterval(()=>{progress=Math.min(progress+0.15,100);updateProgress();if(progress>=100)clearInterval(pInterval)},500);
+  function togglePlay(){
+    if(isPlaying){audioEl.pause();isPlaying=false;}
+    else{audioEl.play();isPlaying=true;}
+    setIcon(isPlaying);
   }
 
-  function pausePlay(){isPlaying=false;setIcon(false);clearInterval(pInterval)}
-
-  function updateProgress(){
-    document.getElementById('progress-fill').style.width=progress+'%';
-    document.getElementById('mini-progress').style.width=progress+'%';
-    const total=38*60+42,cur=Math.floor((progress/100)*total);
-    const m=Math.floor(cur/60).toString().padStart(2,'0'),s=(cur%60).toString().padStart(2,'0');
-    document.getElementById('current-time').textContent=m+':'+s;
+  function toggleFav(){isFaved=!isFaved;document.getElementById('fav-btn').classList.toggle('faved',isFaved);}
+  function cycleSpeed(){
+    const speeds=[.75,1,1.25,1.5,2];
+    const cur = parseFloat(audioEl.playbackRate)||1;
+    const next = speeds[(speeds.indexOf(cur)+1)%speeds.length];
+    audioEl.playbackRate=next;
+    document.querySelector('.speed-badge').textContent=next+'×';
   }
 
-  function seekProgress(e){const r=e.currentTarget.getBoundingClientRect();progress=Math.max(0,Math.min(100,((e.clientX-r.left)/r.width)*100));updateProgress()}
-  function skipTime(secs){const total=38*60+42,cur=(progress/100)*total;progress=Math.max(0,Math.min(100,((cur+secs)/total)*100));updateProgress()}
-  function prevTrack(){progress=Math.max(0,progress-8);updateProgress()}
-  function nextTrack(){progress=Math.min(100,progress+8);updateProgress()}
-  function cycleSpeed(){speedIdx=(speedIdx+1)%speeds.length;document.querySelector('.speed-badge').textContent=speeds[speedIdx]+'×'}
-  function toggleFav(){isFaved=!isFaved;const b=document.getElementById('fav-btn');b.classList.toggle('faved',isFaved)}
+  function seekProgress(e){
+    if(!audioEl.duration) return;
+    const r=e.currentTarget.getBoundingClientRect();
+    audioEl.currentTime = ((e.clientX-r.left)/r.width)*audioEl.duration;
+  }
+  function skipTime(s){audioEl.currentTime=Math.max(0,Math.min(audioEl.duration||0,audioEl.currentTime+s));}
+  function prevTrack(){skipTime(-15);}
+  function nextTrack(){skipTime(15);}
 
-  document.getElementById('player-modal').addEventListener('click',function(e){if(e.target===this)closePlayer()});
+  audioEl.addEventListener('timeupdate',()=>{
+    if(!audioEl.duration) return;
+    const pct=(audioEl.currentTime/audioEl.duration)*100;
+    document.getElementById('progress-fill').style.width=pct+'%';
+    document.getElementById('mini-progress').style.width=pct+'%';
+    const cur=Math.floor(audioEl.currentTime);
+    document.getElementById('current-time').textContent=
+      Math.floor(cur/60).toString().padStart(2,'0')+':'+((cur%60)).toString().padStart(2,'0');
+    if(currentBook) savePos(currentBook.id, audioEl.currentTime);
+  });
+  audioEl.addEventListener('loadedmetadata',()=>{
+    const d=Math.floor(audioEl.duration);
+    document.getElementById('total-time').textContent=
+      Math.floor(d/60).toString().padStart(2,'0')+':'+(d%60).toString().padStart(2,'0');
+  });
+  audioEl.addEventListener('play',()=>{isPlaying=true;setIcon(true);});
+  audioEl.addEventListener('pause',()=>{isPlaying=false;setIcon(false);});
+
+  document.getElementById('player-modal').addEventListener('click',function(e){if(e.target===this)closePlayer();});
+
+  // ── LOAD EPISODES ──
+  fetch('episodes.json?v='+Date.now())
+    .then(r=>r.json())
+    .then(data=>{books=data;renderAll();})
+    .catch(()=>console.warn('No se pudo cargar episodes.json'));
 </script>
 </body>
 </html>
