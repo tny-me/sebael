@@ -458,17 +458,16 @@
   // ── RENDER ──
   function cardHTML(b, idx){
     const gk = gradKeys[idx % gradKeys.length];
-    const coverStyle = b.cover ? '' : `background:${grads[gk]};`;
+    const bgStyle = b.cover ? 'background:url("'+b.cover+'") center/cover no-repeat' : 'background:'+grads[gk];
     const coverInner = b.cover
-      ? `<img src="${b.cover}" alt="${b.title}" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">`
-      : `<svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-book"/></svg>`;
-    const soonBadge = b.soon ? `<div style="position:absolute;top:8px;left:8px;background:rgba(99,102,241,0.85);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.06em;">PRÓXIMAMENTE</div>` : '';
-    const click = b.soon ? '' : `onclick="openBook(books[${idx}])"`;
-    return `<div class="book-card${b.soon?' book-soon':''}" ${click} style="${b.soon?'cursor:default;opacity:0.8;':''}">
-      <div class="book-cover" style="${coverStyle}position:relative;">
-        <div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div>
-        ${coverInner}${soonBadge}
-      </div>
+      ? '<img src="'+b.cover+'" alt="'+b.title+'" style="width:100%;height:100%;object-fit:cover;">'
+      : '<svg class="book-cover-icon" width="50" height="50" style="color:rgba(255,255,255,0.82)"><use href="#i-book"/></svg>';
+    const soonBadge = b.soon ? '<div style="position:absolute;top:8px;left:8px;background:rgba(99,102,241,0.85);color:#fff;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.06em;">PRÓXIMAMENTE</div>' : '';
+    const clickAttr = b.soon ? '' : 'onclick="openBook(books['+idx+'])"';
+    return '<div class="book-card'+(b.soon?' book-soon':'')+'" '+clickAttr+' style="'+(b.soon?'cursor:default;opacity:0.8;':'')+'">'
+      +'<div class="book-cover" style="'+bgStyle+';position:relative;">'
+      +'<div class="book-play-overlay"><div class="book-play-circle"><svg width="16" height="16"><use href="#i-play"/></svg></div></div>'
+      +coverInner+soonBadge+'</div>
       <div class="book-info">
         <div class="book-title">${b.title}</div>
         <div class="book-author">${b.book||'Sebael'}</div>
@@ -478,21 +477,18 @@
   }
 
   function heroCardHTML(b, idx, tag, gradClass){
-    const bg = b.cover ? `background:url('${b.cover}') center/cover` : grads[gradClass]||grads.c1;
-    return `<div class="hero-card hero-${idx+1}" onclick="openBook(books[${idx}}])" style="${b.cover?'background:url(''+b.cover+'') center/cover no-repeat;':grads[gradClass]||grads.c1}">
-      <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.2) 60%,transparent 100%);border-radius:inherit;"></div>
-      <div class="hero-content" style="position:relative;">
-        <div class="hero-tag"><svg width="11" height="11"><use href="#i-sparkle" style="stroke:#fff"/></svg> ${tag}</div>
-        <h2>${b.title}</h2>
-        <div class="hero-meta">
-          <span class="hero-info">${b.cat}</span>
-        </div>
-        <button class="play-btn">
-          <span class="play-icon"><svg width="11" height="11" style="color:var(--accent)"><use href="#i-play"/></svg></span>
-          Escuchar ahora
-        </button>
-      </div>
-    </div>`;
+    const style = b.cover
+      ? 'background:url("'+b.cover+'") center/cover no-repeat'
+      : (grads[gradClass]||grads.c1).replace('background:','');
+    return '<div class="hero-card hero-'+(idx+1)+'" onclick="openBook(books['+idx+'])" style="'+style+'">'
+      +'<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.2) 60%,transparent 100%);border-radius:inherit;"></div>'
+      +'<div class="hero-content" style="position:relative;">'
+      +'<div class="hero-tag"><svg width="11" height="11"><use href="#i-sparkle" style="stroke:#fff"/></svg> '+tag+'</div>'
+      +'<h2>'+b.title+'</h2>'
+      +'<div class="hero-meta"><span class="hero-info">'+b.cat+'</span></div>'
+      +'<button class="play-btn" onclick="event.stopPropagation();openBook(books['+idx+'])">'
+      +'<span class="play-icon"><svg width="11" height="11" style="color:var(--accent)"><use href="#i-play"/></svg></span>'
+      +' Escuchar ahora</button></div></div>';
   }
 
   function renderAll(){
