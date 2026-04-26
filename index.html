@@ -90,29 +90,37 @@
   .main{padding:26px 32px 120px;max-width:1400px;margin:0 auto}
 
   /* HERO */
-  .hero-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-bottom:26px}
-  .hero-card{border-radius:var(--card-radius);padding:30px 34px;position:relative;overflow:hidden;cursor:pointer;min-height:210px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s;box-shadow:var(--shadow-md)}
-  .hero-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+  .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:30px}
+  .hero-card{border-radius:28px;padding:32px 36px;position:relative;overflow:hidden;cursor:pointer;min-height:252px;display:flex;flex-direction:column;justify-content:flex-end;transition:transform .38s cubic-bezier(.16,1,.3,1),box-shadow .38s;box-shadow:0 24px 70px rgba(0,0,0,0.32),0 0 0 1px rgba(255,255,255,0.05)}
+  .hero-card:hover{transform:translateY(-7px);box-shadow:0 44px 95px rgba(0,0,0,0.44),0 0 0 1px rgba(255,255,255,0.1)}
   .hero-card::before{content:'';position:absolute;inset:0;background:var(--card-bg);z-index:0}
-  .hero-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 20%,rgba(0,0,0,0.52) 100%);z-index:1}
-  .hero-1{--card-bg:linear-gradient(135deg,#1e407a 0%,#3b7ef4 60%,#1a3a70 100%)}
-  .hero-2{--card-bg:linear-gradient(135deg,#2e1a6e 0%,#6c4df5 60%,#3d1f80 100%)}
-  .hero-deco{position:absolute;right:-20px;top:-20px;width:180px;height:180px;z-index:0;opacity:.1}
-  .hero-cover-float{position:absolute;right:28px;top:50%;transform:translateY(-52%) rotate(-7deg);z-index:3;transition:transform .4s cubic-bezier(.16,1,.3,1)}
-  .hero-card:hover .hero-cover-float{transform:translateY(-56%) rotate(-4deg) scale(1.05)}
-  .hero-cover-float img{width:120px;height:120px;border-radius:18px;object-fit:cover;display:block;border:3px solid rgba(255,255,255,0.22);box-shadow:0 24px 50px rgba(0,0,0,0.55),0 0 0 1px rgba(255,255,255,0.1)}
-  .hero-1 .hero-cover-float img{width:150px;height:150px;border-radius:20px}
-  .hero-cover-glow{position:absolute;right:10px;top:5%;width:220px;height:220px;border-radius:50%;filter:blur(60px);opacity:0.4;z-index:1;pointer-events:none}
-  .hero-content{position:relative;z-index:2}
-  .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.18);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.28);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;color:rgba(255,255,255,0.9)}
-  .hero-card h2{font-family:var(--font-display);font-size:26px;font-weight:800;line-height:1.2;margin-bottom:10px;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,0.22)}
-  .hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-  .hero-stars{display:flex;align-items:center;gap:4px;color:var(--star);font-size:13px;font-weight:700}
-  .hero-sep{color:rgba(255,255,255,0.3)}
-  .hero-info{font-size:12px;color:rgba(255,255,255,0.65)}
-  .play-btn{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,0.18);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);border-radius:30px;padding:10px 22px;font-family:var(--font-body);font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:all .2s}
-  .play-btn:hover{background:rgba(255,255,255,0.28);transform:scale(1.04)}
-  .play-icon{width:26px;height:26px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center}
+  .hero-card::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,0.64) 100%);z-index:2;pointer-events:none}
+  .hero-1{--card-bg:linear-gradient(148deg,#0d1d4a 0%,#1b3d82 48%,#0b1a42 100%)}
+  .hero-2{--card-bg:linear-gradient(148deg,#150836 0%,#3b1d82 50%,#100728 100%)}
+  .hero-orb{position:absolute;border-radius:50%;filter:blur(75px);pointer-events:none;z-index:1}
+  .hero-orb-a{width:280px;height:280px;top:-90px;left:-60px}
+  .hero-orb-b{width:190px;height:190px;bottom:-55px;right:55px}
+  .hero-1 .hero-orb-a{background:rgba(59,126,244,0.55)}
+  .hero-1 .hero-orb-b{background:rgba(108,77,245,0.45)}
+  .hero-2 .hero-orb-a{background:rgba(108,77,245,0.55)}
+  .hero-2 .hero-orb-b{background:rgba(249,115,22,0.38)}
+  .hero-cover-float{position:absolute;right:30px;top:50%;transform:translateY(-50%) rotate(-6deg);z-index:5;transition:transform .45s cubic-bezier(.16,1,.3,1)}
+  .hero-card:hover .hero-cover-float{transform:translateY(-54%) rotate(-3deg) scale(1.07)}
+  .hero-cover-float img{display:block;border-radius:20px;object-fit:cover;border:2.5px solid rgba(255,255,255,0.18);box-shadow:0 32px 66px rgba(0,0,0,0.62),0 0 0 1px rgba(255,255,255,0.07),-7px 9px 28px rgba(0,0,0,0.38)}
+  .hero-1 .hero-cover-float img{width:158px;height:158px;border-radius:22px}
+  .hero-2 .hero-cover-float img{width:120px;height:120px;border-radius:18px}
+  .hero-cover-glow{position:absolute;right:-8px;top:2%;width:268px;height:268px;border-radius:50%;filter:blur(68px);opacity:0.36;z-index:3;pointer-events:none}
+  .hero-cover-ring{position:absolute;right:18px;top:50%;width:188px;height:188px;transform:translateY(-50%);border-radius:50%;border:1px solid rgba(255,255,255,0.07);z-index:4;pointer-events:none}
+  .hero-1 .hero-cover-ring{width:210px;height:210px;right:20px}
+  .hero-content{position:relative;z-index:6}
+  .hero-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.18);border-radius:20px;padding:5px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;color:rgba(255,255,255,0.9)}
+  .hero-card h2{font-family:var(--font-display);font-size:27px;font-weight:800;line-height:1.18;margin-bottom:12px;color:#fff;text-shadow:0 4px 22px rgba(0,0,0,0.38)}
+  .hero-2 h2{font-size:22px}
+  .hero-meta{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .hero-info{font-size:12px;color:rgba(255,255,255,0.52)}
+  .play-btn{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.13);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.22);border-radius:32px;padding:10px 22px;font-family:var(--font-body);font-size:13px;font-weight:700;color:#fff;cursor:pointer;transition:all .25s}
+  .play-btn:hover{background:rgba(255,255,255,0.22);transform:scale(1.04);box-shadow:0 8px 24px rgba(0,0,0,0.28)}
+  .play-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(59,126,244,0.5);flex-shrink:0}
 
   /* CATEGORIES */
   .category-strip{display:flex;gap:8px;margin-bottom:26px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
@@ -489,17 +497,24 @@
   function heroCardHTML(b, idx, tag) {
     var num  = idx === 0 ? '1' : '2';
     var glow = b.color || (idx === 0 ? '#3b7ef4' : '#6c4df5');
+    var maxW = idx === 0 ? 'calc(100% - 205px)' : 'calc(100% - 165px)';
     var coverEl = b.cover
-      ? '<div class="hero-cover-float"><img src="'+b.cover+'" alt="'+b.title+'"></div>'
-        + '<div class="hero-cover-glow" style="background:'+glow+';"></div>'
+      ? '<div class="hero-cover-ring"></div>'
+        + '<div class="hero-cover-float"><img src="'+b.cover+'" alt="'+b.title+'"></div>'
+        + '<div class="hero-cover-glow" style="background:'+glow+'"></div>'
       : '';
     return '<div class="hero-card hero-'+num+'" onclick="openBook('+idx+')">'
+      + '<div class="hero-orb hero-orb-a"></div>'
+      + '<div class="hero-orb hero-orb-b"></div>'
       + coverEl
-      + '<div class="hero-content" style="position:relative;z-index:2;max-width:calc(100% - 170px);">'
+      + '<div class="hero-content" style="max-width:'+maxW+'">'
       + '<div class="hero-tag"><svg width="11" height="11"><use href="#i-sparkle" style="stroke:#fff"/></svg> '+tag+'</div>'
       + '<h2>'+b.title+'</h2>'
       + '<div class="hero-meta"><span class="hero-info">'+b.cat+'</span></div>'
-      + '<button class="play-btn" onclick="event.stopPropagation();openBook('+idx+')"><span class="play-icon"><svg width="11" height="11" style="color:var(--accent)"><use href="#i-play"/></svg></span> Escuchar ahora</button>'
+      + '<button class="play-btn" onclick="event.stopPropagation();openBook('+idx+')">'
+        + '<span class="play-icon"><svg width="12" height="12" style="color:#fff"><use href="#i-play"/></svg></span>'
+        + ' Escuchar ahora'
+      + '</button>'
       + '</div></div>';
   }
 
