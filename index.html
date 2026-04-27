@@ -124,34 +124,90 @@
   .play-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(59,126,244,0.5);flex-shrink:0}
 
   /* LANDING */
-  .landing-section{display:grid;grid-template-columns:1fr 390px;gap:56px;align-items:center;padding:52px 0 48px}
-  .landing-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,126,244,0.1);border:1px solid rgba(59,126,244,0.22);color:var(--accent);font-size:11px;font-weight:700;padding:6px 16px;border-radius:24px;margin-bottom:22px;letter-spacing:.06em;text-transform:uppercase}
-  .landing-title{font-family:var(--font-display);font-size:50px;font-weight:900;line-height:1.08;color:var(--text-primary);margin-bottom:18px}
+  .landing-wrap{position:relative}
+  .landing-wrap::before{content:'';position:absolute;top:-80px;left:-100px;width:700px;height:600px;background:radial-gradient(ellipse 60% 55% at 30% 40%,rgba(59,126,244,0.1),transparent 65%);pointer-events:none;z-index:0}
+  .landing-wrap::after{content:'';position:absolute;top:40px;right:-80px;width:500px;height:500px;background:radial-gradient(ellipse 55% 50% at 70% 50%,rgba(108,77,245,0.08),transparent 65%);pointer-events:none;z-index:0}
+  .landing-section{display:grid;grid-template-columns:1fr 430px;gap:52px;align-items:center;padding:56px 0 52px;position:relative;z-index:1}
+  .landing-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(90deg,rgba(59,126,244,0.12),rgba(108,77,245,0.1));border:1px solid rgba(59,126,244,0.24);color:var(--accent);font-size:11px;font-weight:700;padding:7px 18px;border-radius:30px;margin-bottom:24px;letter-spacing:.08em;text-transform:uppercase}
+  .landing-title{font-family:var(--font-display);font-size:62px;font-weight:900;line-height:1.05;color:var(--text-primary);margin-bottom:20px;letter-spacing:-.02em}
   .landing-title em{font-style:normal;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-  .landing-desc{font-size:16px;color:var(--text-secondary);line-height:1.7;margin-bottom:30px;max-width:480px}
-  .landing-cta{display:flex;gap:12px;align-items:center;margin-bottom:34px;flex-wrap:wrap}
-  .cta-primary{padding:14px 30px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:36px;color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 10px 28px rgba(59,126,244,0.32);transition:all .25s}
-  .cta-primary:hover{transform:translateY(-2px);box-shadow:0 16px 38px rgba(59,126,244,0.44)}
-  .cta-secondary{padding:14px 26px;background:var(--surface2);border:1.5px solid var(--border);border-radius:36px;color:var(--text-secondary);font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;box-shadow:var(--shadow-sm)}
-  .cta-secondary:hover{border-color:rgba(59,126,244,0.35);color:var(--accent);background:#fff}
-  .landing-stats{display:flex;gap:30px}
-  .landing-stat span{display:block;font-family:var(--font-display);font-size:26px;font-weight:900;color:var(--text-primary)}
-  .landing-stat small{font-size:11px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-  .landing-covers{height:370px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;gap:10px;border-radius:24px;mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%);-webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 14%,#000 86%,transparent 100%)}
-  .covers-col{display:flex;flex-direction:column;gap:10px}
-  .covers-col-a{animation:coverUp 16s linear infinite}
-  .covers-col-b{animation:coverDown 20s linear infinite}
-  .landing-cover-item{border-radius:14px;overflow:hidden;flex-shrink:0;aspect-ratio:1/1;background:var(--surface2);border:1.5px solid var(--border);box-shadow:var(--shadow-sm)}
-  .landing-cover-item img{width:100%;height:100%;object-fit:cover;display:block}
-  @keyframes coverUp{0%{transform:translateY(0)}100%{transform:translateY(-50%)}}
-  @keyframes coverDown{0%{transform:translateY(-50%)}100%{transform:translateY(0)}}
-  .landing-divider{height:1px;background:var(--border);margin:0 0 32px}
-  .features-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px}
-  .feature-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:20px;padding:22px 24px;display:flex;gap:16px;align-items:flex-start;transition:all .28s;box-shadow:var(--shadow-sm)}
-  .feature-card:hover{transform:translateY(-4px);border-color:rgba(59,126,244,0.22);box-shadow:var(--shadow-md)}
-  .feature-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-  .feature-text h4{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:5px}
-  .feature-text p{font-size:13px;color:var(--text-muted);line-height:1.6}
+  .landing-desc{font-size:17px;color:var(--text-secondary);line-height:1.72;margin-bottom:34px;max-width:460px}
+  .landing-cta{display:flex;gap:12px;align-items:center;margin-bottom:38px;flex-wrap:wrap}
+  .cta-primary{padding:16px 34px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:40px;color:#fff;font-family:var(--font-display);font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 12px 32px rgba(59,126,244,0.36);transition:all .28s;display:flex;align-items:center;gap:9px}
+  .cta-primary:hover{transform:translateY(-3px);box-shadow:0 20px 44px rgba(59,126,244,0.48)}
+  .cta-secondary{padding:16px 28px;background:var(--surface2);border:1.5px solid var(--border);border-radius:40px;color:var(--text-secondary);font-family:var(--font-display);font-size:15px;font-weight:700;cursor:pointer;transition:all .28s;box-shadow:var(--shadow-sm)}
+  .cta-secondary:hover{border-color:rgba(59,126,244,0.4);color:var(--accent);background:#fff;transform:translateY(-2px)}
+  .landing-stats{display:flex;gap:0;border:1.5px solid var(--border);border-radius:18px;overflow:hidden;background:var(--surface2);box-shadow:var(--shadow-sm)}
+  .landing-stat{flex:1;padding:14px 20px;text-align:center;border-right:1.5px solid var(--border)}
+  .landing-stat:last-child{border-right:none}
+  .landing-stat span{display:block;font-family:var(--font-display);font-size:24px;font-weight:900;color:var(--text-primary);line-height:1.2}
+  .landing-stat small{font-size:10px;color:var(--text-muted);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+  /* Cover mosaic */
+  .covers-mosaic{position:relative;height:440px;flex-shrink:0}
+  .mosaic-item{position:absolute;border-radius:20px;overflow:hidden;box-shadow:0 20px 50px rgba(59,126,244,0.14),0 6px 18px rgba(0,0,0,0.1),0 0 0 1.5px rgba(255,255,255,0.55);cursor:pointer}
+  .mosaic-item:hover{animation-play-state:paused;filter:brightness(1.08);box-shadow:0 28px 60px rgba(59,126,244,0.24),0 0 0 2.5px rgba(59,126,244,0.5);z-index:20}
+  .mosaic-item img{width:100%;height:100%;object-fit:cover;display:block}
+  .mosaic-item:nth-child(1){width:172px;height:172px;top:10px;left:0;animation:mosaic1 5.2s ease-in-out infinite}
+  .mosaic-item:nth-child(2){width:136px;height:136px;top:0;right:8px;animation:mosaic2 6.4s ease-in-out infinite}
+  .mosaic-item:nth-child(3){width:138px;height:138px;top:185px;left:40px;animation:mosaic3 7.1s ease-in-out infinite}
+  .mosaic-item:nth-child(4){width:162px;height:162px;top:140px;right:0;animation:mosaic4 5.9s ease-in-out infinite}
+  .mosaic-item:nth-child(5){width:122px;height:122px;bottom:8px;left:168px;animation:mosaic5 6.9s ease-in-out infinite}
+  .mosaic-item:nth-child(6){width:110px;height:110px;bottom:20px;right:50px;animation:mosaic6 6.1s ease-in-out infinite}
+  @keyframes mosaic1{0%,100%{transform:rotate(-7deg) translateY(0)}50%{transform:rotate(-5deg) translateY(-14px)}}
+  @keyframes mosaic2{0%,100%{transform:rotate(5deg) translateY(0)}50%{transform:rotate(7deg) translateY(-10px)}}
+  @keyframes mosaic3{0%,100%{transform:rotate(6deg) translateY(0)}50%{transform:rotate(4deg) translateY(-16px)}}
+  @keyframes mosaic4{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-6deg) translateY(-12px)}}
+  @keyframes mosaic5{0%,100%{transform:rotate(-3deg) translateY(0)}50%{transform:rotate(-5deg) translateY(-9px)}}
+  @keyframes mosaic6{0%,100%{transform:rotate(7deg) translateY(0)}50%{transform:rotate(5deg) translateY(-11px)}}
+  /* Features */
+  .features-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:36px;position:relative;z-index:1}
+  .feature-card{background:var(--surface2);border:1.5px solid var(--border);border-radius:22px;padding:26px 24px;display:flex;flex-direction:column;gap:16px;transition:all .3s cubic-bezier(.16,1,.3,1);box-shadow:var(--shadow-sm)}
+  .feature-card:hover{transform:translateY(-5px);border-color:rgba(59,126,244,0.25);box-shadow:0 18px 50px rgba(59,126,244,0.12)}
+  .feature-icon{width:50px;height:50px;border-radius:15px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .feature-card h4{font-family:var(--font-display);font-size:16px;font-weight:800;color:var(--text-primary);margin-bottom:6px}
+  .feature-card p{font-size:13px;color:var(--text-muted);line-height:1.65;margin:0}
+  .landing-divider{height:1px;background:var(--border);margin:0 0 34px;position:relative;z-index:1}
+
+  /* RESPONSIVE */
+  @media(max-width:1100px){
+    .landing-title{font-size:50px}
+    .landing-section{grid-template-columns:1fr 370px;gap:36px}
+    .books-row{grid-template-columns:repeat(4,1fr)}
+  }
+  @media(max-width:900px){
+    .landing-section{grid-template-columns:1fr;padding:36px 0 40px}
+    .covers-mosaic{display:none}
+    .landing-title{font-size:44px}
+    .features-row{grid-template-columns:1fr}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-2 h2{font-size:27px}
+    .books-row{grid-template-columns:repeat(3,1fr)}
+    .main{padding:22px 22px 110px}
+    .topbar{padding:10px 20px}
+  }
+  @media(max-width:600px){
+    .landing-title{font-size:34px;letter-spacing:-.01em}
+    .landing-desc{font-size:15px}
+    .cta-primary,.cta-secondary{padding:13px 22px;font-size:14px}
+    .landing-stats{flex-direction:row}
+    .landing-stat{padding:11px 14px}
+    .landing-stat span{font-size:20px}
+    .hero-card{min-height:186px;padding:22px 22px}
+    .hero-card h2{font-size:19px}
+    .hero-1 .hero-cover-float img{width:100px;height:100px}
+    .hero-2 .hero-cover-float img{width:84px;height:84px}
+    .hero-cover-ring{display:none}
+    .books-row{grid-template-columns:repeat(2,1fr);gap:10px}
+    .features-row{gap:10px}
+    .feature-card{flex-direction:row;padding:18px 18px;align-items:flex-start}
+    .main{padding:16px 16px 110px}
+    .topbar{padding:8px 14px;gap:10px}
+    .nav-chip button{padding:7px 13px;font-size:12px}
+    .topbar-right .user-name,.topbar-right .badge-premium{display:none}
+    .player-cover-icon{width:160px;height:160px}
+    .player-inner{padding:22px 22px 24px}
+    #mini-player{min-width:calc(100vw - 28px);left:50%}
+  }
 
   /* CATEGORIES */
   .category-strip{display:flex;gap:8px;margin-bottom:26px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
@@ -466,61 +522,63 @@
 
   <main class="main">
     <!-- ─── LANDING ─── -->
-    <div class="landing-section">
-      <div>
-        <div class="landing-badge">
-          <svg width="13" height="13"><use href="#i-sparkle" style="stroke:var(--accent)"/></svg>
-          Historias para niños y familias
+    <div class="landing-wrap">
+      <div class="landing-section">
+        <div>
+          <div class="landing-badge">
+            <svg width="12" height="12"><use href="#i-sparkle" style="stroke:var(--accent)"/></svg>
+            Para niños · Para familias
+          </div>
+          <h1 class="landing-title">Historias que<br><em>despiertan</em><br>la imaginación</h1>
+          <p class="landing-desc">Audiolibros e historias narradas con cariño para niños de todas las edades. Para dormir tranquilos, imaginar sin límites y crecer con valores que duran toda la vida.</p>
+          <div class="landing-cta">
+            <button class="cta-primary" onclick="document.getElementById('mainGrid').scrollIntoView({behavior:'smooth'})">
+              <svg width="14" height="14"><use href="#i-play" style="fill:#fff"/></svg>
+              Explorar historias
+            </button>
+            <button class="cta-secondary" onclick="document.getElementById('heroGrid').scrollIntoView({behavior:'smooth'})">Ver destacados →</button>
+          </div>
+          <div class="landing-stats">
+            <div class="landing-stat"><span>8+</span><small>Historias</small></div>
+            <div class="landing-stat"><span>4.9★</span><small>Valoración</small></div>
+            <div class="landing-stat"><span>∞</span><small>Imaginación</small></div>
+          </div>
         </div>
-        <h1 class="landing-title">Cuentos que hacen<br><em>soñar, crecer</em><br>y aventurarse</h1>
-        <p class="landing-desc">Audiolibros e historias narradas con cariño para niños. Para dormir tranquilos, imaginar sin límites y aprender valores que duran toda la vida.</p>
-        <div class="landing-cta">
-          <button class="cta-primary" onclick="document.getElementById('mainGrid').scrollIntoView({behavior:'smooth'})">
-            <svg width="15" height="15" style="display:inline;margin-right:7px;vertical-align:-2px"><use href="#i-play" style="fill:#fff"/></svg>
-            Explorar historias
-          </button>
-          <button class="cta-secondary" onclick="document.getElementById('heroGrid').scrollIntoView({behavior:'smooth'})">Destacados →</button>
-        </div>
-        <div class="landing-stats">
-          <div class="landing-stat"><span>8+</span><small>Historias</small></div>
-          <div class="landing-stat"><span>4.9★</span><small>Valoración</small></div>
-          <div class="landing-stat"><span>100%</span><small>Para niños</small></div>
-        </div>
+        <div class="covers-mosaic" id="landing-covers"></div>
       </div>
-      <div class="landing-covers" id="landing-covers"></div>
-    </div>
 
-    <!-- ─── FEATURES ─── -->
-    <div class="features-row">
-      <div class="feature-card">
-        <div class="feature-icon" style="background:linear-gradient(135deg,#3b7ef4,#6c4df5);box-shadow:0 6px 18px rgba(59,126,244,0.3)">
-          <svg width="22" height="22" style="color:#fff"><use href="#i-moon"/></svg>
+      <!-- ─── FEATURES ─── -->
+      <div class="features-row">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:linear-gradient(135deg,#1e3d82,#3b7ef4);box-shadow:0 8px 22px rgba(59,126,244,0.28)">
+            <svg width="24" height="24" style="color:#fff"><use href="#i-moon"/></svg>
+          </div>
+          <div>
+            <h4>Dulces sueños</h4>
+            <p>Historias con voz calmada que acompañan a tu hijo mientras se duerme cada noche.</p>
+          </div>
         </div>
-        <div class="feature-text">
-          <h4>Dulces sueños</h4>
-          <p>Historias con voz calmada diseñadas para acompañar a tu hijo mientras se duerme.</p>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:linear-gradient(135deg,#c2410c,#f97316);box-shadow:0 8px 22px rgba(249,115,22,0.28)">
+            <svg width="24" height="24" style="color:#fff"><use href="#i-sparkle"/></svg>
+          </div>
+          <div>
+            <h4>Imaginación sin límites</h4>
+            <p>Aventuras y fantasía que activan la creatividad y enriquecen el vocabulario del niño.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:linear-gradient(135deg,#065f46,#10b981);box-shadow:0 8px 22px rgba(16,185,129,0.28)">
+            <svg width="24" height="24" style="color:#fff"><use href="#i-heart"/></svg>
+          </div>
+          <div>
+            <h4>Valores que perduran</h4>
+            <p>Valentía, bondad y fe contados de forma natural para que los lleven toda la vida.</p>
+          </div>
         </div>
       </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:linear-gradient(135deg,#f97316,#fb923c);box-shadow:0 6px 18px rgba(249,115,22,0.3)">
-          <svg width="22" height="22" style="color:#fff"><use href="#i-sparkle"/></svg>
-        </div>
-        <div class="feature-text">
-          <h4>Imaginación sin límites</h4>
-          <p>Aventuras, fantasía y misterio que activan la creatividad y enriquecen el lenguaje.</p>
-        </div>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon" style="background:linear-gradient(135deg,#10b981,#059669);box-shadow:0 6px 18px rgba(16,185,129,0.3)">
-          <svg width="22" height="22" style="color:#fff"><use href="#i-heart"/></svg>
-        </div>
-        <div class="feature-text">
-          <h4>Valores que perduran</h4>
-          <p>Valentía, bondad y fe contados de forma natural, para que los lleven toda la vida.</p>
-        </div>
-      </div>
+      <div class="landing-divider"></div>
     </div>
-    <div class="landing-divider"></div>
 
     <!-- HERO -->
     <div class="hero-grid stagger" id="heroGrid"></div>
@@ -771,18 +829,15 @@
       if (books[i].cover) withCover.push(books[i]);
     }
     if (withCover.length < 2) { el.style.display = 'none'; return; }
-    while (withCover.length < 8) withCover = withCover.concat(withCover);
-    var mid = Math.ceil(withCover.length / 2);
-    var colA = withCover.slice(0, mid).concat(withCover.slice(0, mid));
-    var colB = withCover.slice(mid).concat(withCover.slice(mid));
-    function itemHtml(b) {
-      return '<div class="landing-cover-item"><img src="' + b.cover + '" alt="' + b.title + '" loading="lazy"></div>';
+    while (withCover.length < 6) withCover = withCover.concat(withCover);
+    var html = '';
+    for (var i = 0; i < 6; i++) {
+      var b = withCover[i % withCover.length];
+      html += '<div class="mosaic-item" onclick="openBook(' + books.indexOf(b) + ')">'
+            + '<img src="' + b.cover + '" alt="' + b.title + '" loading="lazy">'
+            + '</div>';
     }
-    var aHtml = '', bHtml = '';
-    for (var a = 0; a < colA.length; a++) aHtml += itemHtml(colA[a]);
-    for (var b = 0; b < colB.length; b++) bHtml += itemHtml(colB[b]);
-    el.innerHTML = '<div class="covers-col covers-col-a">' + aHtml + '</div>'
-                 + '<div class="covers-col covers-col-b">' + bHtml + '</div>';
+    el.innerHTML = html;
   }
 
   // ── CARGAR EPISODIOS ──
