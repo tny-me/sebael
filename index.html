@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#130429">
 <meta name="apple-mobile-web-app-title" content="Sebael">
 <title>Sebael – Historias que inspiran</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Overpass:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-base: #f0ecff;
@@ -79,15 +79,14 @@
   .topbar.nav-hero .notif-dot{border-color:rgba(7,16,31,0.5)}
   .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
   .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:11px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(124,58,237,0.3)}
-  .logo-text{font-family:var(--font-display);font-size:20px;font-weight:800;background:linear-gradient(90deg,var(--text-primary) 50%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+  .logo-text{font-family:'Overpass',sans-serif;font-size:22px;font-weight:900;color:var(--text-primary);-webkit-text-fill-color:var(--text-primary);background:none;letter-spacing:-.02em}
+  .topbar.nav-hero .logo-text{color:#fff;-webkit-text-fill-color:#fff}
 
   /* DARK CHIP — ONLY dark element */
-  .nav-chip{background:var(--chip-dark);border-radius:40px;padding:5px 6px;display:flex;gap:3px;margin:0 auto;box-shadow:0 4px 20px rgba(14,28,53,0.28)}
-  .nav-chip button{padding:8px 20px;border-radius:32px;border:none;background:transparent;color:rgba(255,255,255,0.48);font-family:var(--font-body);font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;white-space:nowrap}
-  .nav-chip button.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 14px rgba(124,58,237,0.4)}
-  .nav-chip button:hover:not(.active){color:rgba(255,255,255,0.85)}
+  .nav-chip{display:none}
+  .nav-chip button{display:none}
 
-  .topbar-right{display:flex;align-items:center;gap:12px;flex-shrink:0}
+  .topbar-right{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-left:auto}
   .icon-btn{width:38px;height:38px;background:var(--surface2);border:1.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:all .2s;box-shadow:var(--shadow-sm);position:relative}
   .icon-btn:hover{border-color:var(--accent);color:var(--accent);background:#fff}
   .notif-dot{position:absolute;top:7px;right:7px;width:8px;height:8px;background:var(--accent3);border-radius:50%;border:2px solid var(--bg-base)}
@@ -554,7 +553,8 @@
 <div class="page" id="main-app">
   <nav class="topbar">
     <a class="logo">
-      <img src="images/Logosebael.png" alt="Sebael" style="height:36px;width:auto;">
+      <div class="logo-icon"><svg width="18" height="18" style="color:#fff"><use href="#i-sparkle"/></svg></div>
+      <span class="logo-text">sebael</span>
     </a>
     <div class="nav-chip">
       <button class="active" onclick="setNav(this);filterCat('all')">Todos</button>
