@@ -176,7 +176,7 @@
   /* ─── RESPONSIVE ─── */
   @media(max-width:1100px){
     .landing-title{font-size:44px}
-    .books-row{grid-template-columns:repeat(4,1fr)}
+    .books-row{grid-template-columns:repeat(4,1fr)!important}
   }
   @media(max-width:860px){
     .landing-title{font-size:36px}
@@ -186,7 +186,7 @@
     .features-row{grid-template-columns:1fr 1fr}
     .hero-grid{grid-template-columns:1fr}
     .hero-2 h2{font-size:27px}
-    .books-row{grid-template-columns:repeat(3,1fr)}
+    .books-row{grid-template-columns:repeat(3,1fr)!important}
     .main{padding:22px 22px 110px}
     .topbar{padding:10px 20px}
   }
@@ -240,8 +240,12 @@
     .hero-1 .hero-content{max-width:calc(100% - 120px)}
     .hero-2 .hero-content{max-width:calc(100% - 105px)}
     /* Catalog */
-    .books-row{grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:24px}
-    .book-title{font-size:12px}
+    .books-row{grid-template-columns:repeat(2,1fr)!important;gap:10px!important;margin-bottom:24px!important}
+    .book-card{border-radius:14px}
+    .book-info{padding:10px 10px 12px!important}
+    .book-title{font-size:12px!important;white-space:normal!important;line-height:1.25!important;-webkit-line-clamp:2;display:-webkit-box!important;-webkit-box-orient:vertical!important;overflow:hidden!important}
+    .book-meta{font-size:10px!important}
+    .book-age{font-size:10px!important}
     .category-strip{gap:7px;padding-bottom:6px}
     .cat-chip{padding:8px 14px;font-size:12px}
     /* Section headers */
