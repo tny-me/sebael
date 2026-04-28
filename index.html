@@ -135,7 +135,7 @@
   .play-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(59,126,244,0.5);flex-shrink:0}
 
   /* LANDING HERO */
-  .landing-hero{background:linear-gradient(148deg,#07101f 0%,#0c1a3a 40%,#10082a 75%,#08101e 100%);position:relative;overflow:hidden;border-radius:0 0 38px 38px;box-shadow:0 24px 70px rgba(0,0,0,0.28)}
+  .landing-hero{background:linear-gradient(148deg,#07101f 0%,#0c1a3a 40%,#10082a 75%,#08101e 100%);position:relative;overflow:visible;border-radius:0 0 38px 38px;box-shadow:0 24px 70px rgba(0,0,0,0.28);padding-bottom:60px}
   .landing-hero::before{content:'';position:absolute;top:-140px;left:-100px;width:700px;height:700px;background:radial-gradient(circle,rgba(59,126,244,0.22),transparent 62%);pointer-events:none}
   .landing-hero::after{content:'';position:absolute;bottom:-80px;right:-80px;width:560px;height:560px;background:radial-gradient(circle,rgba(108,77,245,0.2),transparent 62%);pointer-events:none}
   .landing-hero-inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:72px 32px 56px;text-align:center}
@@ -151,12 +151,13 @@
   .cta-secondary{padding:16px 30px;background:rgba(255,255,255,0.1);border:1.5px solid rgba(255,255,255,0.2);border-radius:40px;color:rgba(255,255,255,0.85);font-family:var(--font-display);font-size:15px;font-weight:700;cursor:pointer;transition:all .28s;backdrop-filter:blur(10px)}
   .cta-secondary:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.35);transform:translateY(-2px)}
   /* Marquee */
-  .covers-marquee{position:relative;overflow:hidden;mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);-webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
-  .covers-track{display:flex;gap:16px;animation:marqueeScroll 32s linear infinite;padding:26px 0 34px;width:max-content}
-  .covers-track:hover{animation-play-state:paused}
-  .marquee-cover{width:136px;height:136px;border-radius:20px;overflow:hidden;flex-shrink:0;box-shadow:0 20px 44px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.08);transform:rotate(var(--t,0deg));transition:transform .32s,box-shadow .32s;cursor:pointer}
-  .marquee-cover:hover{transform:rotate(0deg) scale(1.1) !important;box-shadow:0 30px 60px rgba(59,126,244,0.35),0 0 0 2px rgba(147,197,253,0.5);position:relative;z-index:5}
-  .marquee-cover img{width:100%;height:100%;object-fit:cover;display:block}
+  /* ─── 3D BOOK CAROUSEL ─── */
+  .bcar-scene{position:relative;height:390px;perspective:940px;perspective-origin:50% 48%;overflow:visible;margin:0 auto}
+  .bcar-card{position:absolute;width:216px;height:318px;top:50%;left:50%;margin:-159px 0 0 -108px;border-radius:24px;overflow:hidden;cursor:pointer;transition:transform .78s cubic-bezier(.25,.46,.45,.94),opacity .78s,box-shadow .4s;will-change:transform;box-shadow:0 32px 80px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.08);-webkit-tap-highlight-color:transparent}
+  .bcar-card:hover{box-shadow:0 44px 110px rgba(0,0,0,0.78),0 0 0 2px rgba(147,197,253,0.35)}
+  .bcar-img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .bcar-info{position:absolute;bottom:0;left:0;right:0;padding:22px 18px 24px;background:linear-gradient(0deg,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.4) 55%,transparent 100%)}
+  .bcar-title{color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;line-height:1.3;margin:0}
   @keyframes marqueeScroll{to{transform:translateX(-50%)}}
   /* Stats + Features (on light bg) */
   .landing-below{padding:40px 0 0}
@@ -209,16 +210,17 @@
     .main{padding:16px 16px calc(90px + env(safe-area-inset-bottom))}
     #mini-player{bottom:calc(70px + env(safe-area-inset-bottom));min-width:calc(100vw - 28px);left:50%;border-radius:16px}
     /* Landing hero — native full screen */
-    .landing-hero{border-radius:0;min-height:88svh;display:flex;flex-direction:column;justify-content:space-between}
+    .landing-hero{border-radius:0;min-height:88svh;display:flex;flex-direction:column;justify-content:space-between;padding-bottom:40px;overflow:hidden}
     .landing-hero-inner{padding:calc(52px + env(safe-area-inset-top)) 22px 28px;flex:1;display:flex;flex-direction:column;justify-content:center}
     .landing-badge{font-size:10px;padding:5px 14px;margin-bottom:20px}
     .landing-title{font-size:30px;letter-spacing:-.015em;line-height:1.12;margin-bottom:16px}
     .landing-desc{font-size:14px;line-height:1.6;margin-bottom:24px}
     .landing-cta{flex-direction:column;gap:10px;max-width:100%}
     .cta-primary,.cta-secondary{width:100%;justify-content:center;padding:15px 24px;font-size:15px;border-radius:16px}
-    .covers-marquee{padding:0}
-    .marquee-cover{width:88px;height:88px;border-radius:14px}
-    .covers-track{gap:10px;padding:16px 0 calc(22px + env(safe-area-inset-bottom))}
+    /* Carousel mobile */
+    .bcar-scene{height:272px}
+    .bcar-card{width:150px;height:220px;margin:-110px 0 0 -75px;border-radius:18px}
+    .bcar-title{font-size:12px}
     /* Stats */
     .landing-below{padding:28px 0 0}
     .landing-stats-row{width:calc(100% - 0px);border-radius:16px}
@@ -588,9 +590,7 @@
         <button class="cta-secondary" onclick="document.getElementById('heroGrid').scrollIntoView({behavior:'smooth'})">Ver destacados →</button>
       </div>
     </div>
-    <div class="covers-marquee">
-      <div class="covers-track" id="landing-covers"></div>
-    </div>
+    <div class="bcar-scene" id="bcarScene"></div>
   </div>
 
   <main class="main">
@@ -890,32 +890,80 @@
 
   document.getElementById('player-modal').addEventListener('click', function(e){ if(e.target===this) closePlayer(); });
 
-  function renderLandingCovers() {
-    var el = document.getElementById('landing-covers');
-    if (!el) return;
-    var withCover = [];
+  // ── 3D BOOK CAROUSEL ──
+  var bcarBooks = [];
+  var bcarIdx = 0;
+  var bcarTimer = null;
+
+  function initBcar() {
+    var scene = document.getElementById('bcarScene');
+    if (!scene) return;
+    bcarBooks = [];
     for (var i = 0; i < books.length; i++) {
-      if (books[i].cover) withCover.push(books[i]);
+      if (books[i].cover) bcarBooks.push(i);
     }
-    if (!withCover.length) { var mq = document.querySelector('.covers-marquee'); if(mq) mq.style.display='none'; return; }
-    while (withCover.length < 8) withCover = withCover.concat(withCover);
-    var doubled = withCover.concat(withCover);
-    var tilts = [-4,3,-2,5,-3,4,-5,2,-4,3,-2,4,-3,5,-4,2];
+    if (!bcarBooks.length) return;
     var html = '';
-    for (var i = 0; i < doubled.length; i++) {
-      var b = doubled[i];
-      var idx = books.indexOf(b);
-      html += '<div class="marquee-cover" style="--t:' + tilts[i % tilts.length] + 'deg" onclick="' + (idx>=0 ? 'openBook('+idx+')' : '') + '">'
-            + '<img src="' + b.cover + '" alt="' + b.title + '" loading="lazy">'
-            + '</div>';
+    for (var j = 0; j < bcarBooks.length; j++) {
+      var b = books[bcarBooks[j]];
+      html += '<div class="bcar-card" onclick="openBook(' + bcarBooks[j] + ')">'
+        + '<img class="bcar-img" src="' + b.cover + '" alt="' + (b.title||'') + '" loading="lazy">'
+        + '<div class="bcar-info"><p class="bcar-title">' + (b.title||'') + '</p></div>'
+        + '</div>';
     }
-    el.innerHTML = html;
+    scene.innerHTML = html;
+    updateBcar();
+    if (bcarTimer) clearInterval(bcarTimer);
+    bcarTimer = setInterval(function() {
+      bcarIdx = (bcarIdx + 1) % bcarBooks.length;
+      updateBcar();
+    }, 2800);
+  }
+
+  function updateBcar() {
+    var scene = document.getElementById('bcarScene');
+    if (!scene) return;
+    var cards = scene.querySelectorAll('.bcar-card');
+    var n = cards.length;
+    if (!n) return;
+    var mob = window.innerWidth <= 600;
+    var cfgs = mob ? [
+      {tx:-310, ry:52, s:0.68, op:0.38, zi:1},
+      {tx:-158, ry:30, s:0.83, op:0.74, zi:3},
+      {tx:   0, ry: 0, s:1.04, op:1.00, zi:5},
+      {tx: 158, ry:-30,s:0.83, op:0.74, zi:3},
+      {tx: 310, ry:-52,s:0.68, op:0.38, zi:1}
+    ] : [
+      {tx:-470, ry:54, s:0.68, op:0.38, zi:1},
+      {tx:-240, ry:32, s:0.83, op:0.74, zi:3},
+      {tx:   0, ry: 0, s:1.08, op:1.00, zi:5},
+      {tx: 240, ry:-32,s:0.83, op:0.74, zi:3},
+      {tx: 470, ry:-54,s:0.68, op:0.38, zi:1}
+    ];
+    for (var i = 0; i < n; i++) {
+      var off = ((i - bcarIdx) % n + n) % n;
+      if (off > n / 2) off = off - n;
+      var ci = off + 2;
+      var card = cards[i];
+      if (ci < 0 || ci > 4) {
+        card.style.opacity = '0';
+        card.style.transform = 'translateX(' + (off > 0 ? 650 : -650) + 'px) rotateY(' + (off > 0 ? -72 : 72) + 'deg) scale(0.45)';
+        card.style.zIndex = '0';
+        card.style.pointerEvents = 'none';
+      } else {
+        var c = cfgs[ci];
+        card.style.transform = 'translateX(' + c.tx + 'px) rotateY(' + c.ry + 'deg) scale(' + c.s + ')';
+        card.style.opacity = String(c.op);
+        card.style.zIndex = String(c.zi);
+        card.style.pointerEvents = 'auto';
+      }
+    }
   }
 
   // ── CARGAR EPISODIOS ──
   fetch('episodes.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
-    .then(function(data){ books = data; renderAll(); renderLandingCovers(); })
+    .then(function(data){ books = data; renderAll(); initBcar(); })
     .catch(function(){ console.warn('No se pudo cargar episodes.json'); });
 
   // ── BOTTOM NAV ──
