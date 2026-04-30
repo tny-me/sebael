@@ -9,7 +9,7 @@
 <meta name="theme-color" content="#130429">
 <meta name="apple-mobile-web-app-title" content="Sebael">
 <title>Sebael – Historias que inspiran</title>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Overpass:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Overpass:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg-base: #f0ecff;
@@ -28,7 +28,7 @@
     --shadow-sm: 0 2px 12px rgba(124,58,237,0.07);
     --shadow-md: 0 8px 32px rgba(124,58,237,0.13);
     --shadow-lg: 0 20px 60px rgba(124,58,237,0.2);
-    --font-display: 'Bricolage Grotesque', sans-serif;
+    --font-display: 'Nunito', sans-serif;
     --font-body: 'Plus Jakarta Sans', sans-serif;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -134,16 +134,16 @@
   .play-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(124,58,237,0.5);flex-shrink:0}
 
   /* LANDING HERO */
-  .landing-hero{background:linear-gradient(to bottom,#3b0764 0%,#4c1d95 20%,#2d0a5e 55%,#130429 80%,#0a0118 100%);position:relative;overflow:visible;padding-bottom:60px}
-  .landing-hero::before{content:'';position:absolute;top:-30px;left:50%;transform:translateX(-50%);width:900px;height:480px;background:radial-gradient(ellipse 75% 65% at 50% 0%,rgba(255,255,255,0.95) 0%,rgba(230,200,255,0.55) 30%,transparent 70%);pointer-events:none;z-index:1}
-  .landing-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:120px;background:linear-gradient(to bottom,transparent,#0a0118);pointer-events:none;z-index:0}
-  .landing-hero-inner{position:relative;z-index:1;max-width:1400px;margin:0 auto;padding:72px 32px 56px;text-align:center}
-  .landing-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.28);color:#fff;font-size:11px;font-weight:700;padding:7px 18px;border-radius:30px;margin-bottom:30px;letter-spacing:.09em;text-transform:uppercase;backdrop-filter:blur(12px);text-shadow:0 1px 3px rgba(0,0,0,0.3)}
-  .landing-title{font-family:var(--font-display);font-size:52px;font-weight:900;line-height:1.08;color:#fff;margin-bottom:22px;letter-spacing:-.025em;text-shadow:0 2px 4px rgba(0,0,0,0.5),0 8px 32px rgba(0,0,0,0.4)}
-  .landing-title em{font-style:normal;background:linear-gradient(90deg,#93c5fd,#c4b5fd,#93c5fd);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
-  .landing-title-sub{display:block;font-size:.72em;color:rgba(255,255,255,0.52);-webkit-text-fill-color:rgba(255,255,255,0.52);background:none;animation:none;letter-spacing:-.01em;margin-top:4px}
+  .landing-hero{background:radial-gradient(ellipse 70% 60% at 15% 30%,rgba(130,0,220,0.62) 0%,transparent 58%),radial-gradient(ellipse 55% 48% at 82% 12%,rgba(0,50,190,0.48) 0%,transparent 55%),radial-gradient(ellipse 50% 42% at 88% 68%,rgba(190,0,130,0.38) 0%,transparent 52%),radial-gradient(ellipse 65% 52% at 48% 92%,rgba(50,0,110,0.55) 0%,transparent 58%),radial-gradient(ellipse 38% 32% at 58% 50%,rgba(0,70,160,0.28) 0%,transparent 48%),radial-gradient(ellipse 45% 38% at 30% 70%,rgba(80,0,160,0.35) 0%,transparent 50%),linear-gradient(160deg,#04000e 0%,#060020 35%,#090038 65%,#030012 100%);position:relative;overflow:visible;padding-bottom:60px}
+  .landing-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 35% 25% at 72% 38%,rgba(255,180,80,0.06) 0%,transparent 55%),radial-gradient(ellipse 25% 18% at 22% 15%,rgba(100,200,255,0.07) 0%,transparent 50%);pointer-events:none;z-index:0}
+  .landing-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:110px;background:linear-gradient(to bottom,transparent,#04000e);pointer-events:none;z-index:1}
+  .landing-hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:72px 32px 56px;text-align:center}
+  .landing-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(160,80,255,0.22);border:1px solid rgba(200,130,255,0.4);color:rgba(230,200,255,0.95);font-size:11px;font-weight:700;padding:7px 18px;border-radius:30px;margin-bottom:30px;letter-spacing:.09em;text-transform:uppercase;backdrop-filter:blur(12px)}
+  .landing-title{font-family:var(--font-display);font-size:52px;font-weight:900;line-height:1.1;color:#fff;margin-bottom:22px;letter-spacing:-.01em;text-shadow:0 0 80px rgba(160,80,255,0.45),0 0 30px rgba(100,50,200,0.2)}
+  .landing-title em{font-style:normal;background:linear-gradient(90deg,#ffd94d,#ff7eb3,#c97bff,#ffd94d);background-size:300% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 5s linear infinite;filter:drop-shadow(0 0 18px rgba(255,180,80,0.5))}
+  .landing-title-sub{display:block;font-size:.70em;color:rgba(200,170,255,0.92);-webkit-text-fill-color:rgba(200,170,255,0.92);background:none;animation:none;letter-spacing:0em;margin-top:6px;font-weight:700}
   @keyframes shimmer{to{background-position:200% center}}
-  .landing-desc{font-size:18px;color:rgba(255,255,255,0.55);line-height:1.7;max-width:560px;margin:0 auto 40px}
+  .landing-desc{font-size:17px;color:rgba(210,185,255,0.82);line-height:1.72;max-width:540px;margin:0 auto 40px}
   .landing-cta{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
   .cta-primary{padding:16px 36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border:none;border-radius:40px;color:#fff;font-family:var(--font-display);font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 14px 36px rgba(124,58,237,0.42);transition:all .28s;display:flex;align-items:center;gap:9px}
   .cta-primary:hover{transform:translateY(-3px);box-shadow:0 22px 50px rgba(124,58,237,0.56)}
@@ -151,12 +151,13 @@
   .cta-secondary:hover{background:rgba(255,255,255,0.18);border-color:rgba(255,255,255,0.35);transform:translateY(-2px)}
   /* Marquee */
   /* ─── 3D BOOK CAROUSEL ─── */
-  .bcar-scene{position:relative;height:430px;perspective:1100px;perspective-origin:50% 46%;overflow:visible;margin:0 auto}
+  .bcar-scene{position:relative;z-index:2;height:430px;perspective:1100px;perspective-origin:50% 46%;overflow:visible;margin:0 auto}
   .bcar-card{position:absolute;width:220px;height:324px;top:50%;left:50%;margin:-162px 0 0 -110px;border-radius:24px;overflow:hidden;cursor:pointer;will-change:transform;box-shadow:0 40px 100px rgba(0,0,0,0.78),0 0 0 1px rgba(255,255,255,0.08);-webkit-tap-highlight-color:transparent;transition:box-shadow .35s}
   .bcar-card:hover{box-shadow:0 50px 120px rgba(0,0,0,0.85),0 0 0 2px rgba(147,197,253,0.35)}
   .bcar-img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
   .bcar-info{position:absolute;bottom:0;left:0;right:0;padding:22px 18px 24px;background:linear-gradient(0deg,rgba(0,0,0,0.9) 0%,rgba(0,0,0,0.4) 55%,transparent 100%)}
   .bcar-title{color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;line-height:1.3;margin:0}
+  #galactic-canvas{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
   @keyframes marqueeScroll{to{transform:translateX(-50%)}}
   /* Stats + Features (on light bg) */
   .landing-below{padding:40px 0 0}
@@ -984,17 +985,17 @@
 
   function bcarCfg(off, mob) {
     var pts = mob ? [
-      {tx:-295, ry:64, s:0.61, op:0.28, zi:1},
-      {tx:-150, ry:40, s:0.79, op:0.68, zi:3},
-      {tx:   0, ry: 0, s:1.03, op:1.00, zi:5},
-      {tx: 150, ry:-40,s:0.79, op:0.68, zi:3},
-      {tx: 295, ry:-64,s:0.61, op:0.28, zi:1}
+      {tx:-265, ry:75, s:0.50, op:0.25, zi:1},
+      {tx:-140, ry:50, s:0.76, op:0.65, zi:3},
+      {tx:   0, ry: 0, s:1.04, op:1.00, zi:5},
+      {tx: 140, ry:-50,s:0.76, op:0.65, zi:3},
+      {tx: 265, ry:-75,s:0.50, op:0.25, zi:1}
     ] : [
-      {tx:-440, ry:66, s:0.61, op:0.28, zi:1},
-      {tx:-225, ry:43, s:0.79, op:0.70, zi:3},
+      {tx:-390, ry:78, s:0.50, op:0.26, zi:1},
+      {tx:-210, ry:52, s:0.78, op:0.70, zi:3},
       {tx:   0, ry: 0, s:1.08, op:1.00, zi:5},
-      {tx: 225, ry:-43,s:0.79, op:0.70, zi:3},
-      {tx: 440, ry:-66,s:0.61, op:0.28, zi:1}
+      {tx: 210, ry:-52,s:0.78, op:0.70, zi:3},
+      {tx: 390, ry:-78,s:0.50, op:0.26, zi:1}
     ];
     var cl = Math.max(-2, Math.min(2, off));
     var lo = Math.floor(cl), hi = Math.ceil(cl), t = cl - lo;
@@ -1009,6 +1010,74 @@
       zi: p1.zi + (p2.zi - p1.zi) * t
     };
   }
+
+  // ── GALACTIC CANVAS ──
+  function initGalactic() {
+    var hero = document.querySelector('.landing-hero');
+    if (!hero) return;
+    var canvas = document.createElement('canvas');
+    canvas.id = 'galactic-canvas';
+    hero.insertBefore(canvas, hero.firstChild);
+    var ctx = canvas.getContext('2d');
+    var stars = [], shooting = [], W = 0, H = 0;
+    function resize() {
+      W = canvas.width = hero.offsetWidth;
+      H = canvas.height = hero.offsetHeight || window.innerHeight;
+      buildStars();
+    }
+    function buildStars() {
+      stars = [];
+      var cols = ['#ffffff','#ffe0f5','#d0e0ff','#fff5c0','#c8f0ff'];
+      for (var i = 0; i < 230; i++) {
+        stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.6+0.2,a:Math.random()*0.55+0.3,tw:Math.random()*6.28,ts:Math.random()*0.018+0.004,col:cols[Math.floor(Math.random()*cols.length)],glow:false});
+      }
+      for (var j = 0; j < 28; j++) {
+        stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2.2+1.0,a:1,tw:Math.random()*6.28,ts:Math.random()*0.028+0.008,col:'#ffffff',glow:true});
+      }
+    }
+    function spawn() {
+      shooting.push({x:Math.random()*W*0.62+40,y:Math.random()*H*0.4,vx:5+Math.random()*7,vy:1.8+Math.random()*3,tail:90+Math.random()*140,life:1});
+    }
+    function draw() {
+      ctx.clearRect(0,0,W,H);
+      for (var i=0;i<stars.length;i++) {
+        var s=stars[i]; s.tw+=s.ts;
+        var a=s.a*(0.5+0.5*Math.sin(s.tw));
+        ctx.save();
+        if(s.glow){ctx.shadowBlur=12;ctx.shadowColor=s.col;}
+        ctx.globalAlpha=a; ctx.fillStyle=s.col;
+        ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,6.28); ctx.fill();
+        ctx.restore();
+      }
+      for (var k=shooting.length-1;k>=0;k--) {
+        var ss=shooting[k]; ss.x+=ss.vx; ss.y+=ss.vy; ss.life-=0.014;
+        if(ss.life<=0||ss.x>W+60||ss.y>H+60){shooting.splice(k,1);continue;}
+        var ang=Math.atan2(ss.vy,ss.vx);
+        var tx=ss.x-Math.cos(ang)*ss.tail, ty=ss.y-Math.sin(ang)*ss.tail;
+        ctx.save();
+        ctx.globalAlpha=ss.life*0.9;
+        var g=ctx.createLinearGradient(tx,ty,ss.x,ss.y);
+        g.addColorStop(0,'rgba(255,255,255,0)');
+        g.addColorStop(0.65,'rgba(210,190,255,0.45)');
+        g.addColorStop(1,'rgba(255,255,255,0.95)');
+        ctx.strokeStyle=g; ctx.lineWidth=1.8;
+        ctx.beginPath(); ctx.moveTo(tx,ty); ctx.lineTo(ss.x,ss.y); ctx.stroke();
+        ctx.shadowBlur=8; ctx.shadowColor='#fff';
+        ctx.fillStyle='#fff';
+        ctx.beginPath(); ctx.arc(ss.x,ss.y,2.4,0,6.28); ctx.fill();
+        ctx.restore();
+      }
+      requestAnimationFrame(draw);
+    }
+    resize();
+    window.addEventListener('resize',resize);
+    setInterval(function(){if(Math.random()<0.68)spawn();},2800);
+    setTimeout(spawn,1200);
+    setTimeout(spawn,3800);
+    setTimeout(spawn,6500);
+    draw();
+  }
+  initGalactic();
 
   // ── CARGAR EPISODIOS ──
   fetch('episodes.json?v=' + Date.now())
