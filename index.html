@@ -134,8 +134,8 @@
   .play-icon{width:28px;height:28px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(124,58,237,0.5);flex-shrink:0}
 
   /* LANDING HERO */
-  .landing-hero{background:radial-gradient(ellipse 70% 60% at 15% 30%,rgba(130,0,220,0.62) 0%,transparent 58%),radial-gradient(ellipse 55% 48% at 82% 12%,rgba(0,50,190,0.48) 0%,transparent 55%),radial-gradient(ellipse 50% 42% at 88% 68%,rgba(190,0,130,0.38) 0%,transparent 52%),radial-gradient(ellipse 65% 52% at 48% 92%,rgba(50,0,110,0.55) 0%,transparent 58%),radial-gradient(ellipse 38% 32% at 58% 50%,rgba(0,70,160,0.28) 0%,transparent 48%),radial-gradient(ellipse 45% 38% at 30% 70%,rgba(80,0,160,0.35) 0%,transparent 50%),linear-gradient(160deg,#04000e 0%,#060020 35%,#090038 65%,#030012 100%);position:relative;overflow:visible;padding-bottom:60px}
-  .landing-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 35% 25% at 72% 38%,rgba(255,180,80,0.06) 0%,transparent 55%),radial-gradient(ellipse 25% 18% at 22% 15%,rgba(100,200,255,0.07) 0%,transparent 50%);pointer-events:none;z-index:0}
+  .landing-hero{background:radial-gradient(ellipse 70% 60% at 15% 30%,rgba(130,0,220,0.62) 0%,transparent 58%),radial-gradient(ellipse 55% 48% at 82% 12%,rgba(0,50,190,0.48) 0%,transparent 55%),radial-gradient(ellipse 50% 42% at 88% 68%,rgba(190,0,130,0.38) 0%,transparent 52%),radial-gradient(ellipse 65% 52% at 48% 92%,rgba(50,0,110,0.55) 0%,transparent 58%),radial-gradient(ellipse 38% 32% at 58% 50%,rgba(0,70,160,0.28) 0%,transparent 48%),radial-gradient(ellipse 45% 38% at 30% 70%,rgba(80,0,160,0.35) 0%,transparent 50%),linear-gradient(160deg,#04000e 0%,#060020 35%,#090038 65%,#030012 100%);position:relative;overflow:visible;padding-bottom:60px;margin-top:-65px;padding-top:65px}
+  .landing-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse 30% 22% at 50% 8%,rgba(255,225,110,0.22) 0%,rgba(220,160,50,0.09) 50%,transparent 72%),radial-gradient(ellipse 35% 25% at 72% 38%,rgba(255,180,80,0.06) 0%,transparent 55%),radial-gradient(ellipse 25% 18% at 22% 15%,rgba(100,200,255,0.07) 0%,transparent 50%);pointer-events:none;z-index:0}
   .landing-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:110px;background:linear-gradient(to bottom,transparent,#04000e);pointer-events:none;z-index:1}
   .landing-hero-inner{position:relative;z-index:2;max-width:1400px;margin:0 auto;padding:72px 32px 56px;text-align:center}
   .landing-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(160,80,255,0.22);border:1px solid rgba(200,130,255,0.4);color:rgba(230,200,255,0.95);font-size:11px;font-weight:700;padding:7px 18px;border-radius:30px;margin-bottom:30px;letter-spacing:.09em;text-transform:uppercase;backdrop-filter:blur(12px)}
@@ -210,8 +210,8 @@
     .main{padding:16px 16px calc(90px + env(safe-area-inset-bottom))}
     #mini-player{bottom:calc(70px + env(safe-area-inset-bottom));min-width:calc(100vw - 28px);left:50%;border-radius:16px}
     /* Landing hero — native full screen */
-    .landing-hero{min-height:88svh;display:flex;flex-direction:column;justify-content:space-between;padding-bottom:40px;overflow:hidden}
-    .landing-hero-inner{padding:calc(52px + env(safe-area-inset-top)) 22px 28px;flex:1;display:flex;flex-direction:column;justify-content:center}
+    .landing-hero{min-height:88svh;display:flex;flex-direction:column;justify-content:space-between;padding-bottom:40px;overflow:hidden;margin-top:-60px;padding-top:60px}
+    .landing-hero-inner{padding:calc(20px + env(safe-area-inset-top)) 22px 28px;flex:1;display:flex;flex-direction:column;justify-content:center}
     .landing-badge{font-size:10px;padding:5px 14px;margin-bottom:20px}
     .landing-title{font-size:30px;letter-spacing:-.015em;line-height:1.12;margin-bottom:16px}
     .landing-desc{font-size:14px;line-height:1.6;margin-bottom:24px}
@@ -1019,7 +1019,7 @@
     canvas.id = 'galactic-canvas';
     hero.insertBefore(canvas, hero.firstChild);
     var ctx = canvas.getContext('2d');
-    var stars = [], shooting = [], W = 0, H = 0;
+    var stars = [], shooting = [], W = 0, H = 0, divPulse = 0;
     function resize() {
       W = canvas.width = hero.offsetWidth;
       H = canvas.height = hero.offsetHeight || window.innerHeight;
@@ -1038,8 +1038,58 @@
     function spawn() {
       shooting.push({x:Math.random()*W*0.62+40,y:Math.random()*H*0.4,vx:5+Math.random()*7,vy:1.8+Math.random()*3,tail:90+Math.random()*140,life:1});
     }
+    function drawDivineLight() {
+      var sx = W * 0.5, sy = H * 0.12;
+      divPulse += 0.011;
+      var pulse = 0.80 + 0.20 * Math.sin(divPulse);
+      // Outer warm halo
+      ctx.save();
+      var halo = ctx.createRadialGradient(sx,sy,0,sx,sy,130*pulse);
+      halo.addColorStop(0,'rgba(255,240,155,0.28)');
+      halo.addColorStop(0.35,'rgba(255,210,80,0.12)');
+      halo.addColorStop(0.7,'rgba(255,180,50,0.05)');
+      halo.addColorStop(1,'rgba(255,160,30,0)');
+      ctx.fillStyle=halo;
+      ctx.beginPath(); ctx.arc(sx,sy,130,0,6.28); ctx.fill();
+      ctx.restore();
+      // 4 main cross rays
+      ctx.save();
+      ctx.globalAlpha=0.60*pulse;
+      var rays=[[0,1],[Math.PI,1],[Math.PI/2,0.55],[Math.PI*1.5,0.55]];
+      for(var ri=0;ri<rays.length;ri++){
+        var ang=rays[ri][0], rl=90*pulse*rays[ri][1];
+        var rg=ctx.createLinearGradient(sx-Math.cos(ang)*rl,sy-Math.sin(ang)*rl,sx+Math.cos(ang)*rl,sy+Math.sin(ang)*rl);
+        rg.addColorStop(0,'rgba(255,245,190,0)');
+        rg.addColorStop(0.5,'rgba(255,240,170,0.75)');
+        rg.addColorStop(1,'rgba(255,245,190,0)');
+        ctx.strokeStyle=rg; ctx.lineWidth=1.6;
+        ctx.beginPath(); ctx.moveTo(sx-Math.cos(ang)*rl,sy-Math.sin(ang)*rl); ctx.lineTo(sx+Math.cos(ang)*rl,sy+Math.sin(ang)*rl); ctx.stroke();
+      }
+      ctx.restore();
+      // 4 diagonal rays (softer)
+      ctx.save();
+      ctx.globalAlpha=0.30*pulse;
+      for(var di=0;di<4;di++){
+        var da=di*Math.PI/2+Math.PI/4, dl=55*pulse;
+        var dg=ctx.createLinearGradient(sx-Math.cos(da)*dl,sy-Math.sin(da)*dl,sx+Math.cos(da)*dl,sy+Math.sin(da)*dl);
+        dg.addColorStop(0,'rgba(255,240,180,0)');
+        dg.addColorStop(0.5,'rgba(255,235,160,0.55)');
+        dg.addColorStop(1,'rgba(255,240,180,0)');
+        ctx.strokeStyle=dg; ctx.lineWidth=1;
+        ctx.beginPath(); ctx.moveTo(sx-Math.cos(da)*dl,sy-Math.sin(da)*dl); ctx.lineTo(sx+Math.cos(da)*dl,sy+Math.sin(da)*dl); ctx.stroke();
+      }
+      ctx.restore();
+      // Bright center dot
+      ctx.save();
+      ctx.shadowBlur=20; ctx.shadowColor='#fffae0';
+      ctx.globalAlpha=pulse;
+      ctx.fillStyle='#fff';
+      ctx.beginPath(); ctx.arc(sx,sy,2.8*pulse,0,6.28); ctx.fill();
+      ctx.restore();
+    }
     function draw() {
       ctx.clearRect(0,0,W,H);
+      drawDivineLight();
       for (var i=0;i<stars.length;i++) {
         var s=stars[i]; s.tw+=s.ts;
         var a=s.a*(0.5+0.5*Math.sin(s.tw));
