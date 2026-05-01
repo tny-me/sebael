@@ -69,6 +69,17 @@
   .login-footer{text-align:center;margin-top:18px;font-size:13px;color:var(--text-muted)}
   .login-footer a{color:var(--accent);cursor:pointer;font-weight:700}
 
+  /* SEARCH */
+  #search-overlay{position:fixed;inset:0;z-index:350;background:rgba(240,236,255,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);overflow-y:auto;padding-top:env(safe-area-inset-top);animation:fadeIn .18s ease}
+  .search-inner{max-width:1200px;margin:0 auto;padding:18px 24px 60px}
+  .search-bar-wrap{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px solid var(--border);border-radius:18px;padding:13px 18px;margin-bottom:18px;box-shadow:var(--shadow-md);color:var(--text-muted)}
+  #search-input{flex:1;border:none;outline:none;font-size:17px;font-family:var(--font-body);background:none;color:var(--text-primary);font-weight:500}
+  #search-input::placeholder{color:var(--text-muted)}
+  .search-close-btn{background:rgba(148,163,184,0.13);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);transition:all .2s;flex-shrink:0}
+  .search-close-btn:hover{background:rgba(124,58,237,0.1);color:var(--accent)}
+  .search-hint{color:var(--text-muted);font-size:14px;padding:6px 0 14px;text-align:center}
+  .sleep-timer-badge{font-size:11px;font-weight:700;color:var(--accent);background:rgba(124,58,237,0.1);padding:3px 9px;border-radius:12px;border:none;cursor:pointer;font-family:var(--font-body)}
+
   /* TOPBAR */
   .topbar{position:sticky;top:0;z-index:100;padding:12px 32px;display:flex;align-items:center;gap:20px;background:rgba(248,244,255,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(168,85,247,0.1);transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease}
   .topbar.nav-hero{background:transparent;border-bottom-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
@@ -432,6 +443,19 @@
 </defs>
 </svg>
 
+<!-- ─── SEARCH ─── -->
+<div id="search-overlay" style="display:none">
+  <div class="search-inner">
+    <div class="search-bar-wrap">
+      <svg width="18" height="18" style="flex-shrink:0"><use href="#i-search"/></svg>
+      <input type="text" id="search-input" placeholder="Buscar historias, música..." oninput="doSearch(this.value)">
+      <button class="search-close-btn" onclick="closeSearch()"><svg width="13" height="13"><use href="#i-x"/></svg></button>
+    </div>
+    <p class="search-hint" id="search-hint">Empieza a escribir para buscar...</p>
+    <div class="books-row" id="search-results"></div>
+  </div>
+</div>
+
 <!-- ─── LOGIN ─── -->
 <div id="login-overlay" style="display:none">
   <div class="login-card">
@@ -529,6 +553,7 @@
         <div class="chapter-info">Episodio <span id="ep-num">1</span></div>
         <div class="player-actions">
           <button class="speed-badge" onclick="cycleSpeed()">1.0×</button>
+          <button class="sleep-timer-badge" id="sleep-timer-btn" onclick="cycleSleepTimer()" title="Sleep timer">⏱ Off</button>
           <button class="action-btn"><svg width="15" height="15"><use href="#i-share"/></svg></button>
         </div>
       </div>
@@ -568,7 +593,7 @@
       <button onclick="setNav(this);filterCat('Próximamente')">Próximamente</button>
     </div>
     <div class="topbar-right">
-      <button class="icon-btn"><svg width="17" height="17"><use href="#i-search"/></svg></button>
+      <button class="icon-btn" onclick="openSearch()"><svg width="17" height="17"><use href="#i-search"/></svg></button>
       <div class="icon-btn"><svg width="17" height="17"><use href="#i-bell"/></svg><span class="notif-dot"></span></div>
       <div class="user-pill" onclick="openPlayer()">
         <div class="user-avatar"><svg width="15" height="15" style="color:#fff"><use href="#i-user"/></svg></div>
@@ -639,14 +664,12 @@
 
     <!-- CATEGORIES -->
     <div class="category-strip">
-      <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-fire"/></svg> Tendencias</button>
-      <button class="cat-chip active" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-sparkle"/></svg> Fantasía</button>
-      <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-cat"/></svg> Animales</button>
-      <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-rocket"/></svg> Aventura</button>
-      <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-moon"/></svg> Para Dormir</button>
+      <button class="cat-chip active" onclick="setCategory(this);filterCat('all')"><svg width="13" height="13"><use href="#i-sparkle"/></svg> Todos</button>
+      <button class="cat-chip" onclick="setCategory(this);filterCat('Cuentos para dormir')"><svg width="13" height="13"><use href="#i-moon"/></svg> Para Dormir</button>
+      <button class="cat-chip" onclick="setCategory(this);filterCat('Fe y valores')"><svg width="13" height="13"><use href="#i-heart"/></svg> Fe & Valores</button>
+      <button class="cat-chip" onclick="setCategory(this);filterCat('Aventura')"><svg width="13" height="13"><use href="#i-rocket"/></svg> Aventura</button>
+      <button class="cat-chip" onclick="setCategory(this);filterCat('Animales')"><svg width="13" height="13"><use href="#i-cat"/></svg> Animales</button>
       <button class="cat-chip" onclick="setCategory(this);scrollToSleep()"><svg width="13" height="13"><use href="#i-wave"/></svg> Sleep Music</button>
-      <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-graduation"/></svg> Educativo</button>
-      <button class="cat-chip" onclick="setCategory(this)"><svg width="13" height="13"><use href="#i-users"/></svg> Familia</button>
     </div>
 
     <!-- CATALOG -->
@@ -809,6 +832,7 @@
     var indices = [];
     for (var i = 0; i < books.length; i++) {
       var b = books[i];
+      if (b.type === 'music') continue;
       if (cat === 'all' && !b.soon) indices.push(i);
       else if (cat === 'Próximamente' && b.soon) indices.push(i);
       else if (b.cat === cat && !b.soon) indices.push(i);
@@ -829,6 +853,8 @@
     audioEl.src = b.audio;
     var saved = getPos(b.id);
     audioEl.addEventListener('loadedmetadata', function() { if (saved > 5) audioEl.currentTime = saved; }, {once:true});
+    localStorage.setItem('lastBookId', String(b.id));
+    closeSearch();
     audioEl.play().catch(function(){});
     isPlaying = true;
     document.getElementById('player-title').textContent  = b.title;
@@ -1184,10 +1210,128 @@
   }
   initGalactic();
 
+  // ── SEARCH ──
+  function openSearch() {
+    document.getElementById('search-overlay').style.display = 'block';
+    setTimeout(function(){ document.getElementById('search-input').focus(); }, 80);
+  }
+  function closeSearch() {
+    document.getElementById('search-overlay').style.display = 'none';
+    document.getElementById('search-input').value = '';
+    document.getElementById('search-results').innerHTML = '';
+    var hint = document.getElementById('search-hint');
+    if (hint) { hint.style.display = ''; hint.textContent = 'Empieza a escribir para buscar...'; }
+  }
+  function doSearch(q) {
+    var hint = document.getElementById('search-hint');
+    var results = document.getElementById('search-results');
+    q = (q || '').trim().toLowerCase();
+    if (!q) { results.innerHTML = ''; if(hint){hint.style.display='';} return; }
+    if (hint) hint.style.display = 'none';
+    var matched = [];
+    for (var i = 0; i < books.length; i++) {
+      var b = books[i];
+      if ((b.title && b.title.toLowerCase().indexOf(q) > -1) ||
+          (b.book  && b.book.toLowerCase().indexOf(q)  > -1) ||
+          (b.desc  && b.desc.toLowerCase().indexOf(q)  > -1)) matched.push(i);
+    }
+    if (!matched.length) {
+      results.innerHTML = '<p style="color:var(--text-muted);font-size:14px;text-align:center;padding:2rem 0;grid-column:1/-1;">Sin resultados para "'+q+'"</p>';
+      return;
+    }
+    var html = '';
+    for (var j = 0; j < matched.length; j++) html += cardHTML(books[matched[j]], matched[j]);
+    results.innerHTML = html;
+  }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeSearch(); });
+
+  // ── SLEEP TIMER ──
+  var sleepTimerOpts = [0,15,30,45,60];
+  var sleepTimerIdx  = 0;
+  var sleepTimerSec  = 0;
+  var sleepTimerInt  = null;
+  function cycleSleepTimer() {
+    sleepTimerIdx = (sleepTimerIdx + 1) % sleepTimerOpts.length;
+    if (sleepTimerInt) { clearInterval(sleepTimerInt); sleepTimerInt = null; }
+    var mins = sleepTimerOpts[sleepTimerIdx];
+    if (!mins) { updateSleepBtn('⏱ Off'); return; }
+    sleepTimerSec = mins * 60;
+    updateSleepBtn(fmtSleep(sleepTimerSec));
+    sleepTimerInt = setInterval(function() {
+      sleepTimerSec--;
+      updateSleepBtn(fmtSleep(sleepTimerSec));
+      if (sleepTimerSec <= 0) {
+        clearInterval(sleepTimerInt); sleepTimerInt = null;
+        sleepFadeOut();
+      }
+    }, 1000);
+  }
+  function fmtSleep(s) {
+    var m = Math.floor(s/60); var sc = s%60;
+    return '⏱ '+m+':'+(sc<10?'0':'')+sc;
+  }
+  function updateSleepBtn(text) {
+    var b = document.getElementById('sleep-timer-btn');
+    if (b) b.textContent = text;
+  }
+  function sleepFadeOut() {
+    var steps = 40, dec = audioEl.volume / steps;
+    var fi = setInterval(function() {
+      audioEl.volume = Math.max(0, audioEl.volume - dec);
+      if (audioEl.volume <= 0.001) {
+        clearInterval(fi);
+        audioEl.pause(); audioEl.volume = 1;
+        isPlaying = false; setIcon(false);
+        sleepTimerIdx = 0; updateSleepBtn('⏱ Off');
+      }
+    }, 80);
+  }
+
+  // ── RESTORE MINI PLAYER ──
+  function restoreMiniPlayer(idx) {
+    var b = books[idx];
+    if (!b || !b.audio) return;
+    currentBook = b;
+    audioEl.src = b.audio;
+    document.getElementById('player-title').textContent  = b.title;
+    document.getElementById('player-author').textContent = b.book || 'Sebael';
+    document.getElementById('mini-title').textContent    = b.title;
+    var grad = grads[idx % grads.length];
+    var miniCover = document.getElementById('mini-cover');
+    if (miniCover) miniCover.innerHTML = b.cover
+      ? '<img src="'+b.cover+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">'
+      : '<svg width="22" height="22" style="color:rgba(255,255,255,0.88)"><use href="#i-book"/></svg>';
+    var pcIcon = document.getElementById('player-cover-icon');
+    if (pcIcon) pcIcon.innerHTML = b.cover
+      ? '<img src="'+b.cover+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">'
+      : '<svg width="80" height="80"><use href="#i-book" style="stroke:rgba(255,255,255,0.72)"/></svg>';
+    var headerBg = document.getElementById('player-header-bg');
+    if (headerBg) headerBg.style.background = b.cover ? 'url("'+b.cover+'") center/cover no-repeat' : grad;
+    var coverGlow = document.getElementById('player-cover-glow');
+    if (coverGlow) coverGlow.style.background = grad;
+    var playerTag = document.getElementById('player-tag');
+    if (playerTag) playerTag.textContent = b.type === 'music' ? 'Sleep Music' : (b.cat || 'Historia');
+    setIcon(false);
+    document.getElementById('mini-player').classList.add('visible');
+  }
+
   // ── CARGAR EPISODIOS ──
   fetch('episodes.json?v=' + Date.now())
     .then(function(r){ return r.json(); })
-    .then(function(data){ books = data; renderAll(); initBcar(); })
+    .then(function(data){
+      books = data;
+      renderAll();
+      initBcar();
+      var lastId = localStorage.getItem('lastBookId');
+      if (lastId) {
+        for (var i = 0; i < books.length; i++) {
+          if (String(books[i].id) === lastId && !books[i].soon && books[i].audio) {
+            restoreMiniPlayer(i);
+            break;
+          }
+        }
+      }
+    })
     .catch(function(){ console.warn('No se pudo cargar episodes.json'); });
 
   // ── BOTTOM NAV ──
