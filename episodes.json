@@ -1,5 +1,47 @@
 [
   {
+    "id": 9,
+    "title": "Paz tibetana",
+    "book": "Sleep Music",
+    "cat": "Musica para dormir",
+    "type": "music",
+    "dur": "5 min",
+    "emoji": "🎵",
+    "color": "#c4b5fd",
+    "addedAt": "2026-05-01",
+    "audio": "https://ia903101.us.archive.org/2/items/grand_project-breath-of-life_5-minutes-320858/grand_project-breath-of-life_5-minutes-320858.mp3",
+    "cover": "images/Sleepmusic_paz%20tibetana.png",
+    "desc": "Cuencos tibetanos y sonidos del viento para encontrar la calma interior."
+  },
+  {
+    "id": 10,
+    "title": "Noche de lluvia",
+    "book": "Sleep Music",
+    "cat": "Musica para dormir",
+    "type": "music",
+    "dur": "",
+    "emoji": "🌧️",
+    "color": "#93c5fd",
+    "addedAt": "2026-05-01",
+    "audio": "https://ia802900.us.archive.org/19/items/pablogaez-deep-dreams-445970/pablogaez-deep-dreams-445970.mp3",
+    "cover": "images/sleepmusic_noche%20de%20lluvia.png",
+    "desc": "El sonido suave de la lluvia para acompañar los sueños más dulces."
+  },
+  {
+    "id": 11,
+    "title": "Sueños de luna",
+    "book": "Sleep Music",
+    "cat": "Musica para dormir",
+    "type": "music",
+    "dur": "",
+    "emoji": "🌙",
+    "color": "#a5b4fc",
+    "addedAt": "2026-05-01",
+    "audio": "https://ia800102.us.archive.org/14/items/pablogaez-quiet-sleep-2-263254/pablogaez-quiet-sleep-2-263254.mp3",
+    "cover": "images/sleepmusic_noche%20de%20calma.png",
+    "desc": "Melodías suaves bajo la luz de la luna para dormir en paz."
+  },
+  {
     "id": 8,
     "title": "El niño que aprendió a escuchar el bosque",
     "book": "Cuento original",
