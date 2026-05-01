@@ -328,9 +328,13 @@
   .player-card{width:420px;max-width:95vw;background:linear-gradient(160deg,#141f40 0%,#0c1528 55%,#101c38 100%);border:1px solid rgba(255,255,255,0.07);border-radius:36px;overflow:hidden;box-shadow:0 60px 140px rgba(0,0,0,0.7),0 0 0 1px rgba(255,255,255,0.04);transform:translateY(44px) scale(.91);transition:transform .55s cubic-bezier(.16,1,.3,1);position:relative}
   #player-modal.open .player-card{transform:translateY(0) scale(1)}
   .player-header-bg{position:absolute;inset:0;z-index:0;opacity:0.13;transition:background .7s;background-size:cover;background-position:center;filter:blur(2px)}
-  .player-close{position:absolute;top:18px;right:18px;width:34px;height:34px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.14);border-radius:50%;color:rgba(255,255,255,0.75);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;transition:all .22s;backdrop-filter:blur(10px)}
-  .player-close:hover{background:rgba(255,255,255,0.2);color:#fff;transform:scale(1.08)}
-  .player-inner{position:relative;z-index:1;padding:26px 28px 30px;display:flex;flex-direction:column;align-items:center}
+  .player-minimize-bar{position:absolute;top:0;left:0;right:0;display:flex;flex-direction:column;align-items:center;padding:10px 20px 6px;cursor:pointer;z-index:12;gap:4px}
+  .player-drag-pill{width:38px;height:3.5px;background:rgba(255,255,255,0.2);border-radius:4px;transition:background .2s}
+  .player-minimize-bar:hover .player-drag-pill{background:rgba(255,255,255,0.45)}
+  .player-minimize-label{font-size:9px;color:rgba(255,255,255,0.28);font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+  .player-close{position:absolute;top:14px;right:16px;width:30px;height:30px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:50%;color:rgba(255,255,255,0.45);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:13;transition:all .22s}
+  .player-close:hover{background:rgba(255,100,100,0.2);border-color:rgba(255,100,100,0.3);color:rgba(255,150,150,0.9)}
+  .player-inner{position:relative;z-index:1;padding:36px 28px 30px;display:flex;flex-direction:column;align-items:center}
   .player-top-tag{background:rgba(124,58,237,0.18);border:1px solid rgba(124,58,237,0.28);color:rgba(130,178,255,0.85);font-size:10px;font-weight:700;padding:4px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:24px;align-self:flex-start}
   .player-cover-wrap{position:relative;margin-bottom:24px;animation:float 4s ease-in-out infinite}
   .player-cover-icon{width:192px;height:192px;border-radius:26px;overflow:hidden;display:flex;align-items:center;justify-content:center;box-shadow:0 28px 70px rgba(0,0,0,0.55),0 0 0 1px rgba(255,255,255,0.07);animation:vinylSpin 22s linear infinite;animation-play-state:paused;background:linear-gradient(135deg,#1e4a8f,#4f8ef7)}
@@ -366,8 +370,9 @@
   .action-btn:hover{color:#fff;border-color:rgba(255,255,255,0.22)}
 
   /* MINI PLAYER */
-  #mini-player{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);z-index:400;background:rgba(255,255,255,0.93);border:1.5px solid rgba(148,163,184,0.22);border-radius:20px;padding:12px 18px;display:flex;align-items:center;gap:14px;box-shadow:0 20px 60px rgba(124,58,237,0.2);backdrop-filter:blur(24px);transition:transform .4s cubic-bezier(.16,1,.3,1);cursor:pointer;min-width:340px;position:fixed}
+  #mini-player{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(110px);z-index:400;background:rgba(255,255,255,0.95);border:1.5px solid rgba(148,163,184,0.22);border-radius:22px;padding:13px 16px 13px 13px;display:flex;align-items:center;gap:12px;box-shadow:0 20px 60px rgba(124,58,237,0.2);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);transition:transform .42s cubic-bezier(.16,1,.3,1),box-shadow .4s,border-color .4s;cursor:pointer;min-width:340px}
   #mini-player.visible{transform:translateX(-50%) translateY(0)}
+  #mini-player.playing{border-color:rgba(124,58,237,0.3);box-shadow:0 20px 60px rgba(124,58,237,0.28),0 0 0 1px rgba(124,58,237,0.1)}
   .mini-cover{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
   .mini-info{flex:1}
   .mini-title{font-family:var(--font-display);font-size:14px;font-weight:700;color:var(--text-primary)}
@@ -506,8 +511,12 @@
 <div id="player-modal">
   <div class="player-card">
     <div class="player-header-bg" id="player-header-bg"></div>
-    <button class="player-close" onclick="closePlayer()">
-      <svg width="11" height="11" style="color:#fff"><use href="#i-x"/></svg>
+    <div class="player-minimize-bar" onclick="closePlayer()" title="Minimizar">
+      <div class="player-drag-pill"></div>
+      <span class="player-minimize-label">Minimizar</span>
+    </div>
+    <button class="player-close" onclick="stopAndClose()" title="Cerrar y detener">
+      <svg width="10" height="10" style="color:inherit"><use href="#i-x"/></svg>
     </button>
     <div class="player-inner">
       <div class="player-top-tag" id="player-tag">Historia</div>
@@ -568,6 +577,7 @@
     <svg width="22" height="22" style="color:rgba(255,255,255,0.88)"><use href="#i-book"/></svg>
   </div>
   <div class="mini-info">
+    <div style="font-size:9px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1px">Reproduciendo</div>
     <div class="mini-title" id="mini-title">—</div>
     <div class="mini-author"><span class="sbar"></span><span class="sbar"></span><span class="sbar"></span></div>
   </div>
@@ -883,7 +893,16 @@
   }
 
   function openPlayer(){ document.getElementById('player-modal').classList.add('open'); }
-  function closePlayer(){ document.getElementById('player-modal').classList.remove('open'); }
+  function closePlayer(){
+    document.getElementById('player-modal').classList.remove('open');
+    if (currentBook) document.getElementById('mini-player').classList.add('visible');
+  }
+  function stopAndClose(){
+    audioEl.pause(); isPlaying = false; setIcon(false);
+    document.getElementById('player-modal').classList.remove('open');
+    document.getElementById('mini-player').classList.remove('visible');
+    currentBook = null;
+  }
 
   function setIcon(playing) {
     var h = playing ? '#i-pause' : '#i-play';
